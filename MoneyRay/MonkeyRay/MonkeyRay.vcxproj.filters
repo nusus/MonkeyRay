@@ -14,19 +14,19 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
     <Filter Include="core">
-      <UniqueIdentifier>{95e6079a-d350-4700-8873-366bbd2e65b3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="core\math">
-      <UniqueIdentifier>{6ed69a14-bc06-4c8a-aa74-52a92b340c2d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="core\memory">
-      <UniqueIdentifier>{71b1fb3d-bd13-4359-83a9-71e2b4cd2049}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="core\container">
-      <UniqueIdentifier>{1c58fb90-0ed4-42c8-b2cb-e1e4e330a220}</UniqueIdentifier>
+      <UniqueIdentifier>{a222f163-3886-45b0-9ec5-cf7896eed9b5}</UniqueIdentifier>
     </Filter>
     <Filter Include="render">
-      <UniqueIdentifier>{b8fc96e2-91e6-492a-8b84-4b2ff9ffda72}</UniqueIdentifier>
+      <UniqueIdentifier>{ddcfc461-5f32-4b21-b6c0-943294345271}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\memory">
+      <UniqueIdentifier>{0ac02db1-2d36-47a2-abf6-b014ed1e9c50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\containers">
+      <UniqueIdentifier>{d05ae743-315c-4109-899f-da419a73fb0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\math">
+      <UniqueIdentifier>{399c63e9-5d8d-423a-a7af-e8acde57430c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
