@@ -29,4 +29,9 @@
       <UniqueIdentifier>{399c63e9-5d8d-423a-a7af-e8acde57430c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CVectorTemplate.h">
+      <Filter>core\math</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>
