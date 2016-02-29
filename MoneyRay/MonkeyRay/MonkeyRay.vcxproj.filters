@@ -28,6 +28,9 @@
     <Filter Include="core\math">
       <UniqueIdentifier>{399c63e9-5d8d-423a-a7af-e8acde57430c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="core\IO">
+      <UniqueIdentifier>{1e5c9873-3c92-4c9c-8313-7e84cf286287}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CVectorTemplate.h">
