@@ -74,6 +74,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>TEST1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -110,7 +111,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CMRMemory.h" />
+    <ClInclude Include="CMRMemoryNedPooling.h" />
+    <ClInclude Include="CMRSTLAllocator.h" />
     <ClInclude Include="CVectorTemplate.h" />
+    <ClInclude Include="MRBoostConfig.h" />
+    <ClInclude Include="MRConfig.h" />
+    <ClInclude Include="MRPrerequisites.h" />
+    <ClInclude Include="MRStdConfig.h" />
+    <ClInclude Include="MRThirdPartyConfig.h" />
+    <ClInclude Include="nedmalloc.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="CMRMemoryNedPooling.cpp" />
+    <ClCompile Include="nedmalloc.c" />
+    <ClCompile Include="test1.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

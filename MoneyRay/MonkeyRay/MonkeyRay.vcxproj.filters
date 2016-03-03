@@ -28,10 +28,54 @@
     <Filter Include="core\math">
       <UniqueIdentifier>{399c63e9-5d8d-423a-a7af-e8acde57430c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="core\memory\nedmalloc">
+      <UniqueIdentifier>{967f3112-8e9b-4699-82e5-b81cf60df416}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\config">
+      <UniqueIdentifier>{85b0bc86-be1f-4b73-b207-ba5d88797066}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CVectorTemplate.h">
       <Filter>core\math</Filter>
     </ClInclude>
+    <ClInclude Include="nedmalloc.h">
+      <Filter>core\memory\nedmalloc</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRSTLAllocator.h">
+      <Filter>core\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRMemoryNedPooling.h">
+      <Filter>core\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRMemory.h">
+      <Filter>core\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="MRStdConfig.h">
+      <Filter>core\config</Filter>
+    </ClInclude>
+    <ClInclude Include="MRBoostConfig.h">
+      <Filter>core\config</Filter>
+    </ClInclude>
+    <ClInclude Include="MRThirdPartyConfig.h">
+      <Filter>core\config</Filter>
+    </ClInclude>
+    <ClInclude Include="MRPrerequisites.h">
+      <Filter>core\config</Filter>
+    </ClInclude>
+    <ClInclude Include="MRConfig.h">
+      <Filter>core\config</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="nedmalloc.c">
+      <Filter>core\memory\nedmalloc</Filter>
+    </ClCompile>
+    <ClCompile Include="CMRMemoryNedPooling.cpp">
+      <Filter>core\memory</Filter>
+    </ClCompile>
+    <ClCompile Include="test1.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

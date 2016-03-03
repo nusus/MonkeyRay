@@ -26,3 +26,11 @@
 *.exe
 *.out
 *.app
+
+*.idb
+*.pdb
+*.tlog
+*.suo
+MoneyRay/MoneyRay.sdf
+*.sdf
+MoneyRay/MoneyRay.sdf
