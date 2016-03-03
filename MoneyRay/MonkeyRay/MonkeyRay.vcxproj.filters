@@ -45,26 +45,29 @@
     <ClInclude Include="CMRMemoryNedPooling.h">
       <Filter>core\memory</Filter>
     </ClInclude>
-    <ClInclude Include="CMRMemory.h">
-      <Filter>core\memory</Filter>
-    </ClInclude>
     <ClInclude Include="nedmalloc.h">
       <Filter>core\memory\nedmalloc</Filter>
     </ClInclude>
-    <ClInclude Include="MRThirdPartyConfig.h">
+    <ClInclude Include="CMRPrerequisites.h">
       <Filter>core\config</Filter>
     </ClInclude>
-    <ClInclude Include="MRConfig.h">
+    <ClInclude Include="CMRStdConfig.h">
       <Filter>core\config</Filter>
     </ClInclude>
-    <ClInclude Include="MRPrerequisites.h">
+    <ClInclude Include="CMRConfig.h">
       <Filter>core\config</Filter>
     </ClInclude>
-    <ClInclude Include="MRStdConfig.h">
+    <ClInclude Include="CMRBoostConfig.h">
       <Filter>core\config</Filter>
     </ClInclude>
-    <ClInclude Include="MRBoostConfig.h">
+    <ClInclude Include="CMRThirdPartyConfig.h">
       <Filter>core\config</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRContainerConfig.h">
+      <Filter>core\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRMemoryAllocatorConfig.h">
+      <Filter>core\memory</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

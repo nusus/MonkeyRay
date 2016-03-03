@@ -1,5 +1,5 @@
-#ifndef MRStdConfig_h__
-#define MRStdConfig_h__
+#ifndef CMRStdConfig_h__
+#define CMRStdConfig_h__
 
 //C library
 #include <cassert>
@@ -44,7 +44,4 @@
 #include <iomanip>
 #include <sstream>
 
-//
-
-//STL algorithms and functions and 
-#endif // MRStdConfig_h__
+#endif // CMRStdConfig_h__

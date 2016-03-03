@@ -111,15 +111,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="CMRMemory.h" />
+    <ClInclude Include="CMRContainerConfig.h" />
+    <ClInclude Include="CMRMemoryAllocatorConfig.h" />
     <ClInclude Include="CMRMemoryNedPooling.h" />
     <ClInclude Include="CMRSTLAllocator.h" />
     <ClInclude Include="CVectorTemplate.h" />
-    <ClInclude Include="MRBoostConfig.h" />
-    <ClInclude Include="MRConfig.h" />
-    <ClInclude Include="MRPrerequisites.h" />
-    <ClInclude Include="MRStdConfig.h" />
-    <ClInclude Include="MRThirdPartyConfig.h" />
+    <ClInclude Include="CMRBoostConfig.h" />
+    <ClInclude Include="CMRConfig.h" />
+    <ClInclude Include="CMRPrerequisites.h" />
+    <ClInclude Include="CMRStdConfig.h" />
+    <ClInclude Include="CMRThirdPartyConfig.h" />
     <ClInclude Include="nedmalloc.h" />
   </ItemGroup>
   <ItemGroup>

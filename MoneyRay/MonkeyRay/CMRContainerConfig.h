@@ -1,5 +1,5 @@
-#ifndef CMRMemory_h__
-#define CMRMemory_h__
+#ifndef CMRContainerConfig_h__
+#define CMRContainerConfig_h__
 
 #include "CMRMemoryNedPooling.h"
 #include "CMRSTLAllocator.h"
@@ -16,12 +16,17 @@
 #include <stack>
 namespace MR
 {
+	template<
+		typename T,
+		typename Policy = CMRMemoryNedPoolingAlignedPolicy<16>
+	>
+		using STLAllocator = CMRSTLAllocator<T, Policy>;
 
-	template<typename T, typename Policy = CMRMemoryNedPoolingAlignedPolicy<16> >
-	using STLAllocator = CMRSTLAllocator<T, Policy>;
-
-	template <typename T, typename Alloc = STLAllocator<T> >
-	using vector = std::vector<T, Alloc>;
+	template <
+		typename T,
+		typename Alloc = STLAllocator<T>
+	>
+		using vector = std::vector<T, Alloc>;
 
 	template <
 		typename Key,
@@ -117,12 +122,5 @@ namespace MR
 		typename Container = deque<T>
 	>
 		using stack = std::stack<T, Container>;
-
-	template <
-		typename charT,
-		typename traits = char_traits<T>,
-		typename Alloc = STLAllocator<charT>,
-
-	>
 }
-#endif // CMonkeyRayMemory_h__
+#endif // CMRContainerConfig_h__
