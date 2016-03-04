@@ -1,8 +1,7 @@
 #ifndef CMRContainerConfig_h__
 #define CMRContainerConfig_h__
 
-#include "CMRMemoryNedPooling.h"
-#include "CMRSTLAllocator.h"
+#include "CMRMemoryAllocatorConfig.h"
 
 #include <vector>
 #include <unordered_map>
@@ -16,12 +15,6 @@
 #include <stack>
 namespace MR
 {
-	template<
-		typename T,
-		typename Policy = CMRMemoryNedPoolingAlignedPolicy<16>
-	>
-		using STLAllocator = CMRSTLAllocator<T, Policy>;
-
 	template <
 		typename T,
 		typename Alloc = STLAllocator<T>
