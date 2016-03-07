@@ -69,6 +69,9 @@
     <ClInclude Include="CMRMemoryAllocatorConfig.h">
       <Filter>core\memory</Filter>
     </ClInclude>
+    <ClInclude Include="malloc.c.h">
+      <Filter>core\memory\nedmalloc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CMRMemoryNedPooling.cpp">

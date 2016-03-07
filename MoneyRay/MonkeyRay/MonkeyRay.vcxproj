@@ -121,6 +121,7 @@
     <ClInclude Include="CMRPrerequisites.h" />
     <ClInclude Include="CMRStdConfig.h" />
     <ClInclude Include="CMRThirdPartyConfig.h" />
+    <ClInclude Include="malloc.c.h" />
     <ClInclude Include="nedmalloc.h" />
   </ItemGroup>
   <ItemGroup>
