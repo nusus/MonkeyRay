@@ -36,9 +36,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CVectorTemplate.h">
-      <Filter>core\math</Filter>
-    </ClInclude>
     <ClInclude Include="CMRSTLAllocator.h">
       <Filter>core\memory</Filter>
     </ClInclude>
@@ -72,6 +69,24 @@
     <ClInclude Include="malloc.c.h">
       <Filter>core\memory\nedmalloc</Filter>
     </ClInclude>
+    <ClInclude Include="CMRMathUtil.h">
+      <Filter>core\math</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRVector3.h">
+      <Filter>core\math</Filter>
+    </ClInclude>
+    <ClInclude Include="CMREulerAngles.h">
+      <Filter>core\math</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRQuaternion.h">
+      <Filter>core\math</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRRotationMatrix.h">
+      <Filter>core\math</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRMatrix4x3.h">
+      <Filter>core\math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CMRMemoryNedPooling.cpp">
@@ -82,6 +97,24 @@
     </ClCompile>
     <ClCompile Include="nedmalloc.c">
       <Filter>core\memory\nedmalloc</Filter>
+    </ClCompile>
+    <ClCompile Include="CMRMathUtil.cpp">
+      <Filter>core\math</Filter>
+    </ClCompile>
+    <ClCompile Include="CMREulerAngles.cpp">
+      <Filter>core\math</Filter>
+    </ClCompile>
+    <ClCompile Include="CMRQuaternion.cpp">
+      <Filter>core\math</Filter>
+    </ClCompile>
+    <ClCompile Include="CMRRotationMatrix.cpp">
+      <Filter>core\math</Filter>
+    </ClCompile>
+    <ClCompile Include="CMRMatrix4x3.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CMRMatrix4x3.cpp">
+      <Filter>core\math</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

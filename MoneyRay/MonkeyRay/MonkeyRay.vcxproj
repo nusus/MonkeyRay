@@ -112,10 +112,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="CMRContainerConfig.h" />
+    <ClInclude Include="CMREulerAngles.h" />
+    <ClInclude Include="CMRMathUtil.h" />
+    <ClInclude Include="CMRMatrix4x3.h" />
     <ClInclude Include="CMRMemoryAllocatorConfig.h" />
     <ClInclude Include="CMRMemoryNedPooling.h" />
+    <ClInclude Include="CMRQuaternion.h" />
+    <ClInclude Include="CMRRotationMatrix.h" />
     <ClInclude Include="CMRSTLAllocator.h" />
-    <ClInclude Include="CVectorTemplate.h" />
+    <ClInclude Include="CMRVector3.h" />
     <ClInclude Include="CMRBoostConfig.h" />
     <ClInclude Include="CMRConfig.h" />
     <ClInclude Include="CMRPrerequisites.h" />
@@ -125,7 +130,13 @@
     <ClInclude Include="nedmalloc.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CMREulerAngles.cpp" />
+    <ClCompile Include="CMRMathUtil.cpp" />
+    <ClCompile Include="CMRMatrix4x3.cpp" />
+    <ClCompile Include="CMRMatrix4x3.cpp" />
     <ClCompile Include="CMRMemoryNedPooling.cpp" />
+    <ClCompile Include="CMRQuaternion.cpp" />
+    <ClCompile Include="CMRRotationMatrix.cpp" />
     <ClCompile Include="nedmalloc.c" />
     <ClCompile Include="test1.cpp" />
   </ItemGroup>
