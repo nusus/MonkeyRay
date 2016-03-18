@@ -118,6 +118,7 @@
     <ClInclude Include="CMREulerAngles.h" />
     <ClInclude Include="CMRMathUtil.h" />
     <ClInclude Include="CMRMatrix4x3.h" />
+
     <ClInclude Include="CMRMemoryAllocatorConfig.h" />
     <ClInclude Include="CMRMemoryNedPooling.h" />
     <ClInclude Include="CMRObject.h" />
@@ -125,6 +126,7 @@
     <ClInclude Include="CMRRef.h" />
     <ClInclude Include="CMRQuaternion.h" />
     <ClInclude Include="CMRRotationMatrix.h" />
+
     <ClInclude Include="CMRSTLAllocator.h" />
     <ClInclude Include="CMRUserDataContainer.h" />
     <ClInclude Include="CMRVector3.h" />
@@ -142,9 +144,9 @@
     <ClCompile Include="CMREulerAngles.cpp" />
     <ClCompile Include="CMRMathUtil.cpp" />
     <ClCompile Include="CMRMatrix4x3.cpp" />
-    <ClCompile Include="CMRMatrix4x3.cpp" />
     <ClCompile Include="CMRCopyPolicy.cpp" />
     <ClCompile Include="CMRMemManager.cpp" />
+
     <ClCompile Include="CMRMemoryNedPooling.cpp" />
     <ClCompile Include="CMRObserver.cpp" />
     <ClCompile Include="CMRRef.cpp" />
