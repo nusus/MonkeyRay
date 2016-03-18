@@ -112,9 +112,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="CMRContainerConfig.h" />
+    <ClInclude Include="CMRCopyPolicy.h" />
+    <ClInclude Include="CMRMemManager.h" />
+    <ClInclude Include="CMRMemoryAllocatedObject.h" />
     <ClInclude Include="CMRMemoryAllocatorConfig.h" />
     <ClInclude Include="CMRMemoryNedPooling.h" />
+    <ClInclude Include="CMRObject.h" />
+    <ClInclude Include="CMRObserver.h" />
+    <ClInclude Include="CMRRef.h" />
     <ClInclude Include="CMRSTLAllocator.h" />
+    <ClInclude Include="CMRUserDataContainer.h" />
     <ClInclude Include="CVectorTemplate.h" />
     <ClInclude Include="CMRBoostConfig.h" />
     <ClInclude Include="CMRConfig.h" />
@@ -123,11 +130,22 @@
     <ClInclude Include="CMRThirdPartyConfig.h" />
     <ClInclude Include="malloc.c.h" />
     <ClInclude Include="nedmalloc.h" />
+    <ClInclude Include="SmartPtr.h" />
+    <ClInclude Include="WeakPtr.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CMRCopyPolicy.cpp" />
+    <ClCompile Include="CMRMemManager.cpp" />
     <ClCompile Include="CMRMemoryNedPooling.cpp" />
+    <ClCompile Include="CMRObserver.cpp" />
+    <ClCompile Include="CMRRef.cpp" />
+    <ClCompile Include="CMRObject.cpp" />
+    <ClCompile Include="CMRUserDataContainer.cpp" />
     <ClCompile Include="nedmalloc.c" />
     <ClCompile Include="test1.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

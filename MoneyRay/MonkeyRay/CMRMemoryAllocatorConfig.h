@@ -4,6 +4,7 @@
 #include "CMRConfig.h"
 #include "CMRMemoryNedPooling.h"
 #include "CMRSTLAllocator.h"
+#include "CMRMemoryAllocatedObject.h"
 namespace MR
 {
 	//define the real aligned memory policy for the STL component
@@ -26,6 +27,8 @@ namespace MR
 		typename Policy = CMRMemSTLAllocatorPolicy
 	>
 		using STLAllocator = CMRSTLAllocator<T, Policy>;
+
+	typedef CMRAllocatedObject<CMRObjAllocatorPolicy> CMRObjectBase;
 }
 
 namespace MR
@@ -95,5 +98,6 @@ namespace MR
 		}
 
 	};
+
 }
 #endif // CMonkeyRayMemoryAllocatorConfig_h__
