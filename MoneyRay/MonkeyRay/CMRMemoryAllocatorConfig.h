@@ -3,6 +3,8 @@
 
 #include "CMRConfig.h"
 #include "CMRMemoryNedPooling.h"
+#include "CMRSTLAllocator.h"
+#include "CMRMemoryAllocatedObject.h"
 namespace MR
 {
 	//define the real aligned memory policy for the STL component
@@ -26,9 +28,14 @@ namespace MR
 	>
 		using STLAllocator = CMRSTLAllocator<T, Policy>;
 
+	typedef CMRAllocatedObject<CMRObjAllocatorPolicy> CMRObjectBase;
+}
+
+namespace MR
+{
 	/************************************************************************/
 	/* we should always use CMRObjectFactory instead of new/delete to instantiation a object.
-		Note:using new and delete to allocate memory will lead to memory leaking. 
+	Note:using new and delete to allocate memory will lead to memory leaking.
 	*/
 	/************************************************************************/
 	template <typename AllocPolicy = CMRObjAllocatorPolicy>
@@ -55,20 +62,23 @@ namespace MR
 			}
 		};
 	public:
+		typedef CMRSharedPtrDeleter SharedPtrDeleter;
+		typedef CMRUniquePtrDeleter UniquePtrDeleter;
+	public:
 		template <typename T, typename... Args>
-		static shared_ptr<T> CreateSharedPtr(Args&&... args)
+		static std::shared_ptr<T> CreateSharedPtr(Args&&... args)
 		{
-			T* ptr= static_cast<T*>(AllocPolicy::Allocate(sizeof(T), MR_MEMORY_NED_POOLING_ALIGNMENT));
+			T* ptr = static_cast<T*>(AllocPolicy::Allocate(sizeof(T)));
 			::new(ptr) T(std::forward<Args>(args)...);
-			return shared_ptr(ptr, ::CMRSharedPtrDeleter(), STLAllocator<T>());
+			return std::shared_ptr<T>(ptr, SharedPtrDeleter(), STLAllocator<T>());
 		}
 
 		template <typename T, typename... Args>
-		static unique_ptr<T, CMRUniquePtrDeleter> CreateUniquePtr(Args&&... args)
+		static std::unique_ptr<T, UniquePtrDeleter> CreateUniquePtr(Args&&... args)
 		{
-			T* ptr = static_cast<T*>(AllocPolicy::Allocate(sizeof(T), MR_MEMORY_NED_POOLING_ALIGNMENT));
+			T* ptr = static_cast<T*>(AllocPolicy::Allocate(sizeof(T)));
 			::new(ptr) T(std::forward<Args>(args)...);
-			return unique_ptr(ptr);
+			return std::unique_ptr(ptr);
 		}
 
 		static void* Malloc(std::size_t bytes)
@@ -88,5 +98,6 @@ namespace MR
 		}
 
 	};
+
 }
 #endif // CMonkeyRayMemoryAllocatorConfig_h__

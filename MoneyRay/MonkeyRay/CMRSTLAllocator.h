@@ -39,7 +39,7 @@ namespace MR
 		template <typename U>
 		struct rebind 
 		{
-			typedef CMRSTLAllocator<U> other;
+			typedef CMRSTLAllocator<U, AllocPolicy> other;
 		};
 
 		inline explicit CMRSTLAllocator() {}
@@ -49,7 +49,7 @@ namespace MR
 		inline CMRSTLAllocator(const CMRSTLAllocator& allocator) {}
 
 		template <typename U>
-		inline CMRSTLAllocator(const CMRSTLAllocator<U, AlloPolicy>&) {}
+		inline CMRSTLAllocator(const CMRSTLAllocator<U, AllocPolicy>&) {}
 
 		template <typename U, typename P>
 		inline CMRSTLAllocator(const CMRSTLAllocator<U, P>&) {}

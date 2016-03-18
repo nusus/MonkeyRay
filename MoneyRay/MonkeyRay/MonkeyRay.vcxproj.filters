@@ -34,6 +34,12 @@
     <Filter Include="core\config">
       <UniqueIdentifier>{dd7e8a40-a6f3-4002-b877-9f8415fb6a02}</UniqueIdentifier>
     </Filter>
+    <Filter Include="core\base">
+      <UniqueIdentifier>{e2d11a10-06cc-4b54-a03b-51db09f7070a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\thread">
+      <UniqueIdentifier>{5aeb576e-4226-45d1-9793-4eb01c8ddc45}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMRSTLAllocator.h">
@@ -69,6 +75,33 @@
     <ClInclude Include="malloc.c.h">
       <Filter>core\memory\nedmalloc</Filter>
     </ClInclude>
+    <ClInclude Include="CMRObject.h">
+      <Filter>core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRMemoryAllocatedObject.h">
+      <Filter>core\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRRef.h">
+      <Filter>core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRObserver.h">
+      <Filter>core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRMemManager.h">
+      <Filter>core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="SmartPtr.h">
+      <Filter>core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="WeakPtr.h">
+      <Filter>core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRUserDataContainer.h">
+      <Filter>core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRCopyPolicy.h">
+      <Filter>core\base</Filter>
+    </ClInclude>
     <ClInclude Include="CMRMathUtil.h">
       <Filter>core\math</Filter>
     </ClInclude>
@@ -98,6 +131,27 @@
     <ClCompile Include="nedmalloc.c">
       <Filter>core\memory\nedmalloc</Filter>
     </ClCompile>
+    <ClCompile Include="CMRMemManager.cpp">
+      <Filter>core\base</Filter>
+    </ClCompile>
+    <ClCompile Include="CMRRef.cpp">
+      <Filter>core\base</Filter>
+    </ClCompile>
+    <ClCompile Include="CMRObserver.cpp">
+      <Filter>core\base</Filter>
+    </ClCompile>
+    <ClCompile Include="CMRObject.cpp">
+      <Filter>core\base</Filter>
+    </ClCompile>
+    <ClCompile Include="CMRUserDataContainer.cpp">
+      <Filter>core\base</Filter>
+    </ClCompile>
+    <ClCompile Include="CMRCopyPolicy.cpp">
+      <Filter>core\base</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
     <ClCompile Include="CMRMathUtil.cpp">
       <Filter>core\math</Filter>
     </ClCompile>
