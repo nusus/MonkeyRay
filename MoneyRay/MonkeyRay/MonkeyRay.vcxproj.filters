@@ -16,9 +16,6 @@
     <Filter Include="core">
       <UniqueIdentifier>{a222f163-3886-45b0-9ec5-cf7896eed9b5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="render">
-      <UniqueIdentifier>{ddcfc461-5f32-4b21-b6c0-943294345271}</UniqueIdentifier>
-    </Filter>
     <Filter Include="core\memory">
       <UniqueIdentifier>{0ac02db1-2d36-47a2-abf6-b014ed1e9c50}</UniqueIdentifier>
     </Filter>
@@ -39,6 +36,12 @@
     </Filter>
     <Filter Include="core\thread">
       <UniqueIdentifier>{5aeb576e-4226-45d1-9793-4eb01c8ddc45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\io">
+      <UniqueIdentifier>{8e609295-0eae-4461-b222-e249128bcb49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\render">
+      <UniqueIdentifier>{ddcfc461-5f32-4b21-b6c0-943294345271}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -120,6 +123,45 @@
     <ClInclude Include="CMRMatrix4x3.h">
       <Filter>core\math</Filter>
     </ClInclude>
+    <ClInclude Include="CMRDirector.h">
+      <Filter>core\render</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRStats.h">
+      <Filter>core\render</Filter>
+    </ClInclude>
+    <ClInclude Include="CMREventVisitor.h">
+      <Filter>core\io</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRUpdateVisitor.h">
+      <Filter>core\render</Filter>
+    </ClInclude>
+    <ClInclude Include="CMROperationThread.h">
+      <Filter>core\thread</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRIncrementalCompileOperation.h">
+      <Filter>core\render</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRCamera.h">
+      <Filter>core\render</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRGraphicsContext.h">
+      <Filter>core\render</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRGraphicsWindow.h">
+      <Filter>core\render</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRScene.h">
+      <Filter>core\render</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRView.h">
+      <Filter>core\render</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRFrameStamp.h">
+      <Filter>core\render</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRTimer.h">
+      <Filter>core\base</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CMRMemoryNedPooling.cpp">
@@ -152,9 +194,11 @@
     <ClCompile Include="CMRMatrix4x3.cpp">
       <Filter>core\math</Filter>
     </ClCompile>
+    <ClCompile Include="CMRDirector.cpp">
+      <Filter>core\render</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram.cd" />
     <ClCompile Include="CMRMathUtil.cpp">
       <Filter>core\math</Filter>
     </ClCompile>

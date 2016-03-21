@@ -26,7 +26,7 @@ namespace MR
 #define DEFAULT_OBJECT_CONSTRUCTORS(name) \
 		public: \
 			name (); \
-			name (const name & obj, const CMRCopyPolicy& policy); \
+			name (const name & obj, const CMRCopyPolicy& policy = CMRCopyPolicy::SHALLOW_COPY); \
 		protected: \
 			virtual ~##name (); \
 		public:
