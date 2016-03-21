@@ -112,6 +112,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="CMRContainerConfig.h" />
+    <ClInclude Include="CMRGUIEventAdapter.h" />
     <ClInclude Include="CMRMemoryAllocatorConfig.h" />
     <ClInclude Include="CMRMemoryNedPooling.h" />
     <ClInclude Include="CMRSTLAllocator.h" />
@@ -125,6 +126,7 @@
     <ClInclude Include="nedmalloc.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CMRGUIEventAdapter.cpp" />
     <ClCompile Include="CMRMemoryNedPooling.cpp" />
     <ClCompile Include="nedmalloc.c" />
     <ClCompile Include="test1.cpp" />
