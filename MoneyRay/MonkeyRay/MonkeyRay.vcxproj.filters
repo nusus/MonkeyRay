@@ -34,9 +34,6 @@
     <Filter Include="core\config">
       <UniqueIdentifier>{dd7e8a40-a6f3-4002-b877-9f8415fb6a02}</UniqueIdentifier>
     </Filter>
-    <Filter Include="core\IO">
-      <UniqueIdentifier>{54ba24bd-6d3c-4dbb-ba5f-67c3f61046d4}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CVectorTemplate.h">
@@ -75,9 +72,6 @@
     <ClInclude Include="malloc.c.h">
       <Filter>core\memory\nedmalloc</Filter>
     </ClInclude>
-    <ClInclude Include="CMRGUIEventAdapter.h">
-      <Filter>core\IO</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CMRMemoryNedPooling.cpp">
@@ -88,9 +82,6 @@
     </ClCompile>
     <ClCompile Include="nedmalloc.c">
       <Filter>core\memory\nedmalloc</Filter>
-    </ClCompile>
-    <ClCompile Include="CMRGUIEventAdapter.cpp">
-      <Filter>core\IO</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
