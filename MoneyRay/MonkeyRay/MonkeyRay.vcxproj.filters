@@ -16,9 +16,6 @@
     <Filter Include="core">
       <UniqueIdentifier>{a222f163-3886-45b0-9ec5-cf7896eed9b5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="render">
-      <UniqueIdentifier>{ddcfc461-5f32-4b21-b6c0-943294345271}</UniqueIdentifier>
-    </Filter>
     <Filter Include="core\memory">
       <UniqueIdentifier>{0ac02db1-2d36-47a2-abf6-b014ed1e9c50}</UniqueIdentifier>
     </Filter>
@@ -34,11 +31,20 @@
     <Filter Include="core\config">
       <UniqueIdentifier>{dd7e8a40-a6f3-4002-b877-9f8415fb6a02}</UniqueIdentifier>
     </Filter>
+    <Filter Include="core\base">
+      <UniqueIdentifier>{e2d11a10-06cc-4b54-a03b-51db09f7070a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\thread">
+      <UniqueIdentifier>{5aeb576e-4226-45d1-9793-4eb01c8ddc45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\io">
+      <UniqueIdentifier>{8e609295-0eae-4461-b222-e249128bcb49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\render">
+      <UniqueIdentifier>{ddcfc461-5f32-4b21-b6c0-943294345271}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CVectorTemplate.h">
-      <Filter>core\math</Filter>
-    </ClInclude>
     <ClInclude Include="CMRSTLAllocator.h">
       <Filter>core\memory</Filter>
     </ClInclude>
@@ -72,6 +78,90 @@
     <ClInclude Include="malloc.c.h">
       <Filter>core\memory\nedmalloc</Filter>
     </ClInclude>
+    <ClInclude Include="CMRObject.h">
+      <Filter>core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRMemoryAllocatedObject.h">
+      <Filter>core\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRRef.h">
+      <Filter>core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRObserver.h">
+      <Filter>core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRMemManager.h">
+      <Filter>core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="SmartPtr.h">
+      <Filter>core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="WeakPtr.h">
+      <Filter>core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRUserDataContainer.h">
+      <Filter>core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRCopyPolicy.h">
+      <Filter>core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRMathUtil.h">
+      <Filter>core\math</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRVector3.h">
+      <Filter>core\math</Filter>
+    </ClInclude>
+    <ClInclude Include="CMREulerAngles.h">
+      <Filter>core\math</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRQuaternion.h">
+      <Filter>core\math</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRRotationMatrix.h">
+      <Filter>core\math</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRMatrix4x3.h">
+      <Filter>core\math</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRDirector.h">
+      <Filter>core\render</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRStats.h">
+      <Filter>core\render</Filter>
+    </ClInclude>
+    <ClInclude Include="CMREventVisitor.h">
+      <Filter>core\io</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRUpdateVisitor.h">
+      <Filter>core\render</Filter>
+    </ClInclude>
+    <ClInclude Include="CMROperationThread.h">
+      <Filter>core\thread</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRIncrementalCompileOperation.h">
+      <Filter>core\render</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRCamera.h">
+      <Filter>core\render</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRGraphicsContext.h">
+      <Filter>core\render</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRGraphicsWindow.h">
+      <Filter>core\render</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRScene.h">
+      <Filter>core\render</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRView.h">
+      <Filter>core\render</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRFrameStamp.h">
+      <Filter>core\render</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRTimer.h">
+      <Filter>core\base</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CMRMemoryNedPooling.cpp">
@@ -82,6 +172,47 @@
     </ClCompile>
     <ClCompile Include="nedmalloc.c">
       <Filter>core\memory\nedmalloc</Filter>
+    </ClCompile>
+    <ClCompile Include="CMRMemManager.cpp">
+      <Filter>core\base</Filter>
+    </ClCompile>
+    <ClCompile Include="CMRRef.cpp">
+      <Filter>core\base</Filter>
+    </ClCompile>
+    <ClCompile Include="CMRObserver.cpp">
+      <Filter>core\base</Filter>
+    </ClCompile>
+    <ClCompile Include="CMRObject.cpp">
+      <Filter>core\base</Filter>
+    </ClCompile>
+    <ClCompile Include="CMRUserDataContainer.cpp">
+      <Filter>core\base</Filter>
+    </ClCompile>
+    <ClCompile Include="CMRCopyPolicy.cpp">
+      <Filter>core\base</Filter>
+    </ClCompile>
+    <ClCompile Include="CMRMatrix4x3.cpp">
+      <Filter>core\math</Filter>
+    </ClCompile>
+    <ClCompile Include="CMRDirector.cpp">
+      <Filter>core\render</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="CMRMathUtil.cpp">
+      <Filter>core\math</Filter>
+    </ClCompile>
+    <ClCompile Include="CMREulerAngles.cpp">
+      <Filter>core\math</Filter>
+    </ClCompile>
+    <ClCompile Include="CMRQuaternion.cpp">
+      <Filter>core\math</Filter>
+    </ClCompile>
+    <ClCompile Include="CMRRotationMatrix.cpp">
+      <Filter>core\math</Filter>
+    </ClCompile>
+    <ClCompile Include="CMRMatrix4x3.cpp">
+      <Filter>core\math</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
