@@ -5,10 +5,6 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="头文件">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
     <Filter Include="资源文件">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
@@ -42,6 +38,15 @@
     </Filter>
     <Filter Include="core\render">
       <UniqueIdentifier>{ddcfc461-5f32-4b21-b6c0-943294345271}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\db">
+      <UniqueIdentifier>{6563843a-5c0a-4165-8347-b8d60c899876}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\util">
+      <UniqueIdentifier>{2b2fe948-5c34-4c72-8ae2-744c6aa2bbea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\render\gl">
+      <UniqueIdentifier>{8e449049-ae49-478a-bcce-12c66300e8da}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -91,12 +96,6 @@
       <Filter>core\base</Filter>
     </ClInclude>
     <ClInclude Include="CMRMemManager.h">
-      <Filter>core\base</Filter>
-    </ClInclude>
-    <ClInclude Include="SmartPtr.h">
-      <Filter>core\base</Filter>
-    </ClInclude>
-    <ClInclude Include="WeakPtr.h">
       <Filter>core\base</Filter>
     </ClInclude>
     <ClInclude Include="CMRUserDataContainer.h">
@@ -162,6 +161,93 @@
     <ClInclude Include="CMRTimer.h">
       <Filter>core\base</Filter>
     </ClInclude>
+    <ClInclude Include="CMRDatabasePager.h">
+      <Filter>core\db</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRImagePager.h">
+      <Filter>core\db</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRNode.h">
+      <Filter>core\render</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRRenderInfo.h">
+      <Filter>core\render</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRBoundingSphere.h">
+      <Filter>core\render</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRNodeVisitor.h">
+      <Filter>core\render</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRRender.h">
+      <Filter>core\render</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRCameraManipulator.h">
+      <Filter>core\render</Filter>
+    </ClInclude>
+    <ClInclude Include="CMREventQueue.h">
+      <Filter>core\io</Filter>
+    </ClInclude>
+    <ClInclude Include="CMREvent.h">
+      <Filter>core\io</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRGraphicsThread.h">
+      <Filter>core\thread</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRDevice.h">
+      <Filter>core\render</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRDisplaySettings.h">
+      <Filter>core\render</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRState.h">
+      <Filter>core\render</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRGUIActionAdapter.h">
+      <Filter>core\io</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRViewBase.h">
+      <Filter>core\render</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRLight.h">
+      <Filter>core\render</Filter>
+    </ClInclude>
+    <ClInclude Include="CMREventHandlers.h">
+      <Filter>core\io</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRMacroUtil.h">
+      <Filter>core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRIntersectionVisitor.h">
+      <Filter>core\util</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRGUIEventAdapter.h">
+      <Filter>core\io</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRLineSegmentIntersector.h">
+      <Filter>core\util</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRGL.h">
+      <Filter>core\render\gl</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRGLExtensions.h">
+      <Filter>core\render\gl</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRGLDefines.h">
+      <Filter>core\render\gl</Filter>
+    </ClInclude>
+    <ClInclude Include="WeakPtr.h">
+      <Filter>core\util</Filter>
+    </ClInclude>
+    <ClInclude Include="SmartPtr.h">
+      <Filter>core\util</Filter>
+    </ClInclude>
+    <ClInclude Include="buffere_value.h">
+      <Filter>core\util</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRMath.h">
+      <Filter>core\math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CMRMemoryNedPooling.cpp">
@@ -196,6 +282,18 @@
     </ClCompile>
     <ClCompile Include="CMRDirector.cpp">
       <Filter>core\render</Filter>
+    </ClCompile>
+    <ClCompile Include="CMRView.cpp">
+      <Filter>core\render</Filter>
+    </ClCompile>
+    <ClCompile Include="CMRViewBase.cpp">
+      <Filter>core\render</Filter>
+    </ClCompile>
+    <ClCompile Include="CMRDisplaySettings.cpp">
+      <Filter>core\render</Filter>
+    </ClCompile>
+    <ClCompile Include="CMRGLExtensions.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

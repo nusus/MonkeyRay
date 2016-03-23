@@ -27,7 +27,9 @@
 
 //STL thread
 #include <thread>
+#if MR_USE_MULTITHREAD
 #include <mutex>
+#endif
 #include <atomic>
 #include <condition_variable>
 #include <future>

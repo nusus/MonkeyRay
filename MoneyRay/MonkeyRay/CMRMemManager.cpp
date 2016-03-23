@@ -18,7 +18,9 @@ void MR::CMRMemManager::Flush()
 	ObjectToDeleteList object_to_delete_list;
 
 	{
+#if MR_USE_MULTITHREAD
 		std::lock_guard<std::mutex> lck(m_mutex);
+#endif
 		unsigned int nFrameNumberToClearTo = m_nCurrentFrameNumber - m_nNumberFramesToRetainObjects;
 
 		for (auto itr = m_ObejectsToDelete.begin(); itr != m_ObejectsToDelete.end(); ++itr)
@@ -50,7 +52,9 @@ void MR::CMRMemManager::FlushAll()
 	ObjectToDeleteList object_to_delete_list;
 
 	{
-		std::lock_guard<std::mutex> lck(m_mutex);
+		#if MR_USE_MULTITHREAD
+std::lock_guard<std::mutex> lck(m_mutex);
+#endif
 
 		for (auto itr = m_ObejectsToDelete.begin(); itr != m_ObejectsToDelete.end(); ++itr)
 		{
@@ -77,7 +81,9 @@ void MR::CMRMemManager::RequestDelete(const CMRRef* obj)
 	}
 	else
 	{
-		std::lock_guard<std::mutex> lck(m_mutex);
+		#if MR_USE_MULTITHREAD
+std::lock_guard<std::mutex> lck(m_mutex);
+#endif
 		m_ObejectsToDelete.push_back(FrameNumberObjectPair(m_nCurrentFrameNumber, obj));
 	}
 }

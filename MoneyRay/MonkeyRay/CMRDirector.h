@@ -24,10 +24,14 @@ namespace MR
 	class CMRDirector : public CMRObject 
 	{
 	public:
-		CMRDirector();
-		CMRDirector(const  CMRDirector& dir, const CMRCopyPolicy& policy = CMRCopyPolicy::SHALLOW_COPY);
 
-		META_OBJECT(MonkeyRay, CMRDirector);
+		static CMRDirector& InstanceWithView(CMRView* pView)
+		{
+			static CMRDirector ret(pView);
+			return ret;
+		}
+
+		virtual const char* ClassName() const override;
 
 		virtual ~CMRDirector();
 
@@ -43,21 +47,18 @@ namespace MR
 		virtual bool IsRealized();
 		virtual void Realize();
 
-		virtual void 
+#if MR_USE_MULTITHREAD
+		virtual bool AreThreadsRunning();
 		virtual void StartThreading();
 		virtual void StopThrading();
-
-		virtual void SetStartTick(Timer_t tick);
+#endif
 
 		bool Done() const;
-		void SetDone();
+		void SetDone(bool bDone);
 
 		void SetEventVisitor(const CMREventVisitor* ev);
 		CMREventVisitor* GetEventVisitor();
 		const CMREventVisitor* GetEventVisitor() const;
-
-		void SetQuitEventSetsDone(bool bFlag);
-		bool GetQuitEventSetsDone() const;
 
 		void SetUpdateVisitor(const CMRUpdateVisitor* uv);
 		CMRUpdateVisitor* GetUpdateVisitor();
@@ -79,7 +80,7 @@ namespace MR
 		void SetMaxFrameRate(double dFrameRate);
 		double GetMaxFrameRate() const;
 
-		virtual int run();
+		virtual int Run();
 
 		virtual bool CheckEvents();
 
@@ -97,11 +98,19 @@ namespace MR
 
 		virtual CMRGraphicsWindow* GetWindow() const;
 
+
+		virtual CMRFrameStamp* GetFrameStamp() const;
+
+		virtual Timer_t GetStartTick() const;
+#if MR_USE_MULTITHREAD
 		typedef vector<std::thread*> Threads;
 		virtual void GetThreads(Threads& threads, bool bOnlyActive = true);
+#endif
 
+#if MR_USE_MULTITHREAD
 		typedef vector<CMROperationThread*> OperationThreads;
 		virtual void GetOperationThreads(OperationThreads& threads, bool bOnlyActive = true);
+#endif
 
 		virtual CMRScene* GetScene() const;
 
@@ -113,10 +122,8 @@ namespace MR
 
 		virtual double ElapsedTime();
 
-		virtual CMRFrameStamp* GetDirectorFrameStamp();
-		virtual const CMRFrameStamp* GetDirectorFrameStamp() const;
-
 	protected:
+		CMRDirector(CMRView* pView);
 		void DirectorConstructorInit();
 
 		friend class CMRView;
@@ -126,32 +133,38 @@ namespace MR
 
 		virtual void  DirectorInit();
 
+		virtual CMRObject* Clone() const override;
+
+		virtual CMRObject* Copy(const CMRCopyPolicy& policy) const override;
+		//META_OBJECT(MonkeyRay, CMRDirector);
+
 	protected:
 		bool m_bFirstFrame;
 		bool m_bDone;
+#if MR_USE_MULTITHREAD
 		bool m_bThreadsRunning;
-		bool m_bPadding;
+#endif
+		char m_bPadding[2];
 		double m_dRunMaxFrameRate;
 		
 		SmartPtr<CMRView> m_spView;
-		
-		SmartPtr<CMROperationQueue> m_spUpdateOperations;
-		SmartPtr<CMRUpdateVisitor> m_spUpdateVisitor;
+
+		SmartPtr<CMROperation> m_spRealizeOperation;
 		
 		SmartPtr<CMREventVisitor> m_spEventVisitor;
-		
-		SmartPtr<CMROperation> m_spRealizeOperation;
 
+		SmartPtr<CMROperationQueue> m_spUpdateOperations;
+		SmartPtr<CMRUpdateVisitor> m_spUpdateVisitor;
+			
 		SmartPtr<CMRIncrementalCompileOperation> m_spIncrementalCompileOperation;
 
 		WeakPtr<CMRGraphicsContext> m_wpCurrentContext;
 
 		SmartPtr<CMRStats> m_spStates;
-		Timer_t m_startTick;
-		SmartPtr<CMRFrameStamp> m_spFrameStamp;
 
 	private:
 		CMRDirector& operator = (const CMRDirector&) { return *this; }
+		CMRDirector(const CMRDirector&) {}
 	};
 }
 #endif // CMRDirector_h__

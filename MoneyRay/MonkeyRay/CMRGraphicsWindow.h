@@ -6,8 +6,12 @@ namespace MR
 	class CMRGraphicsWindow
 	{
 	public:
-	protected:
-	private:
+		void GrabFocusIfPoniterInWindow()
+		{
+			//TODO:  is not implemented
+			throw std::logic_error("The method or operation is not implemented.");
+		}
+
 	};
 }
 #endif // CMRGraphicsWindow_h__
