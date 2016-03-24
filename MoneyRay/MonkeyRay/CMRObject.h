@@ -4,7 +4,7 @@
 #include "CMRRef.h"
 #include "SmartPtr.h"
 #include "CMRCopyPolicy.h"
-
+#include "CMRMacroUtil.h"
 namespace MR
 {
 	//forward declare
@@ -14,23 +14,6 @@ namespace MR
 	class CMRStateAttribute;
 	class CMRUniform;
 	class CMRUserDataContainer;
-
-
-#define META_OBJECT(library,name) \
-        virtual MR::CMRObject* Clone() const override{ return new name (); } \
-        virtual MR::CMRObject* Copy(const CMRCopyPolicy& policy) const override{ return new name (*this, policy); } \
-        virtual bool IsSameKindAs(const MR::CMRObject* obj) const override{ return dynamic_cast<const name *>(obj) != nullptr; } \
-        virtual const char* LibraryName() const override{ return #library; }\
-        virtual const char* ClassName() const override{ return #name; }
-
-#define DEFAULT_OBJECT_CONSTRUCTORS(name) \
-		public: \
-			name (); \
-			name (const name & obj, const CMRCopyPolicy& policy); \
-		protected: \
-			virtual ~##name (); \
-		public:
-
 
 	class CMRObject : public CMRRef
 	{
@@ -56,7 +39,7 @@ namespace MR
 
 		virtual bool IsSameKindAs(const CMRObject*) const { return true; }
 
-		virtual const char* LibraryName() const = 0;
+		virtual const char* LibraryName() const{return "MonkeyRay"};
 		virtual const char* ClassName() const = 0;
 
 		string GetCompoundClassName() const { return string(LibraryName()) + string("::") + string(ClassName()); }

@@ -3,7 +3,9 @@
 
 #include "CMRMemoryAllocatorConfig.h"
 #include <thread>
+#if MR_USE_MULTITHREAD
 #include <mutex>
+#endif
 
 namespace MR
 {
@@ -17,12 +19,16 @@ namespace MR
 		CMRRef();
 
 		CMRRef(const CMRRef& obj) :
+#if MR_USE_MULTITHREAD
 			m_RefMutex(),
+#endif
 			m_nRefCount(0),
 			m_pSubsciption(0) {}
 		inline CMRRef& operator = (const CMRRef&) { return *this; }
 
+#if MR_USE_MULTITHREAD
 		static std::mutex* GetGlobalReferenceMutex();
+#endif
 
 		inline int Retain() const;
 
@@ -56,8 +62,10 @@ namespace MR
 		void SignalObserversToDelete() const;
 		void MemManagerDelete() const;
 	protected:
+#if MR_USE_MULTITHREAD
 		//TODO: 注意，这里的mutex可以考虑使用自定义的内存分配器进行内存分配
 		mutable std::mutex			m_RefMutex;
+#endif
 		mutable int					m_nRefCount;
 		mutable void*				m_pSubsciption;
 	};

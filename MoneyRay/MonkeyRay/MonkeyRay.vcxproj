@@ -111,9 +111,35 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="buffere_value.h" />
+    <ClInclude Include="CMRBoundingSphere.h" />
+    <ClInclude Include="CMRCamera.h" />
+    <ClInclude Include="CMRCameraManipulator.h" />
     <ClInclude Include="CMRContainerConfig.h" />
     <ClInclude Include="CMRCopyPolicy.h" />
-    <ClInclude Include="CMRMatrix.h" />
+    <ClInclude Include="CMRDatabasePager.h" />
+    <ClInclude Include="CMRDevice.h" />
+    <ClInclude Include="CMRDirector.h" />
+    <ClInclude Include="CMRDisplaySettings.h" />
+    <ClInclude Include="CMREvent.h" />
+    <ClInclude Include="CMREventHandlers.h" />
+    <ClInclude Include="CMREventQueue.h" />
+    <ClInclude Include="CMREventVisitor.h" />
+    <ClInclude Include="CMRFrameStamp.h" />
+    <ClInclude Include="CMRGLDefines.h" />
+    <ClInclude Include="CMRGLExtensions.h" />
+    <ClInclude Include="CMRGraphicsContext.h" />
+    <ClInclude Include="CMRGraphicsThread.h" />
+    <ClInclude Include="CMRGraphicsWindow.h" />
+    <ClInclude Include="CMRGUIActionAdapter.h" />
+    <ClInclude Include="CMRGUIEventAdapter.h" />
+    <ClInclude Include="CMRImagePager.h" />
+    <ClInclude Include="CMRIncrementalCompileOperation.h" />
+    <ClInclude Include="CMRIntersectionVisitor.h" />
+    <ClInclude Include="CMRLight.h" />
+    <ClInclude Include="CMRLineSegmentIntersector.h" />
+    <ClInclude Include="CMRMacroUtil.h" />
+    <ClInclude Include="CMRMath.h" />
     <ClInclude Include="CMRMemManager.h" />
     <ClInclude Include="CMRMemoryAllocatedObject.h" />
     <ClInclude Include="CMREulerAngles.h" />
@@ -121,12 +147,22 @@
     <ClInclude Include="CMRMatrix4x3.h" />
     <ClInclude Include="CMRMemoryAllocatorConfig.h" />
     <ClInclude Include="CMRMemoryNedPooling.h" />
+    <ClInclude Include="CMRNode.h" />
+    <ClInclude Include="CMRNodeVisitor.h" />
     <ClInclude Include="CMRObject.h" />
     <ClInclude Include="CMRObserver.h" />
+    <ClInclude Include="CMROperationThread.h" />
     <ClInclude Include="CMRRef.h" />
     <ClInclude Include="CMRQuaternion.h" />
+    <ClInclude Include="CMRRender.h" />
+    <ClInclude Include="CMRRenderInfo.h" />
     <ClInclude Include="CMRRotationMatrix.h" />
+    <ClInclude Include="CMRScene.h" />
+    <ClInclude Include="CMRState.h" />
+    <ClInclude Include="CMRStats.h" />
     <ClInclude Include="CMRSTLAllocator.h" />
+    <ClInclude Include="CMRTimer.h" />
+    <ClInclude Include="CMRUpdateVisitor.h" />
     <ClInclude Include="CMRUserDataContainer.h" />
     <ClInclude Include="CMRVector3.h" />
     <ClInclude Include="CMRBoostConfig.h" />
@@ -134,13 +170,19 @@
     <ClInclude Include="CMRPrerequisites.h" />
     <ClInclude Include="CMRStdConfig.h" />
     <ClInclude Include="CMRThirdPartyConfig.h" />
+    <ClInclude Include="CMRView.h" />
+    <ClInclude Include="CMRViewBase.h" />
+    <ClInclude Include="CMRGL.h" />
     <ClInclude Include="malloc.c.h" />
     <ClInclude Include="nedmalloc.h" />
     <ClInclude Include="SmartPtr.h" />
     <ClInclude Include="WeakPtr.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CMRDirector.cpp" />
+    <ClCompile Include="CMRDisplaySettings.cpp" />
     <ClCompile Include="CMREulerAngles.cpp" />
+    <ClCompile Include="CMRGLExtensions.cpp" />
     <ClCompile Include="CMRMathUtil.cpp" />
     <ClCompile Include="CMRMatrix4x3.cpp" />
     <ClCompile Include="CMRCopyPolicy.cpp" />
@@ -152,11 +194,10 @@
     <ClCompile Include="CMRUserDataContainer.cpp" />
     <ClCompile Include="CMRQuaternion.cpp" />
     <ClCompile Include="CMRRotationMatrix.cpp" />
+    <ClCompile Include="CMRView.cpp" />
+    <ClCompile Include="CMRViewBase.cpp" />
     <ClCompile Include="nedmalloc.c" />
     <ClCompile Include="test1.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
