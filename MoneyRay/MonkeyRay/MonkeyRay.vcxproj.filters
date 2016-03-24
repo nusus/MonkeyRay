@@ -120,6 +120,9 @@
     <ClInclude Include="CMRMatrix4x3.h">
       <Filter>core\math</Filter>
     </ClInclude>
+    <ClInclude Include="CMRMatrix.h">
+      <Filter>core\math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CMRMemoryNedPooling.cpp">
