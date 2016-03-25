@@ -33,7 +33,9 @@ namespace MR
 			return m_pPublisher;
 		}
 
+#if MR_USE_MULTITHREAD
 		inline std::mutex* GetSubscriptionMutex() { return &m_mutex; }
+#endif
 		void AddSubscriber(CMRSubsciber* obj);
 		void RemoveSubscriber(CMRSubsciber* obj);
 
@@ -49,7 +51,9 @@ namespace MR
 		virtual ~CMRSubsciption();
 
 	protected:
+#if MR_USE_MULTITHREAD
 		std::mutex m_mutex;
+#endif
 		CMRRef* m_pPublisher;
 		Subscribers m_Subscibers;
 	private:

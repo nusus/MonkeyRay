@@ -40,7 +40,9 @@ namespace MR
 
 		unsigned int m_nNumberFramesToRetainObjects;
 		unsigned int m_nCurrentFrameNumber;
-		std::mutex m_mutex;
+		#if MR_USE_MULTITHREAD
+std::mutex m_mutex;
+#endif
 		ObjectToDeleteList m_ObejectsToDelete;
 	};
 }
