@@ -162,6 +162,21 @@
     <ClInclude Include="CMRTimer.h">
       <Filter>core\base</Filter>
     </ClInclude>
+    <ClInclude Include="CMRGUIEventAdapter.h">
+      <Filter>core\io</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRGUIActionAdapter.h">
+      <Filter>core\io</Filter>
+    </ClInclude>
+    <ClInclude Include="CMREvent.h">
+      <Filter>core\io</Filter>
+    </ClInclude>
+    <ClInclude Include="CMREventQueue.h">
+      <Filter>core\io</Filter>
+    </ClInclude>
+    <ClInclude Include="CMREventHandler.h">
+      <Filter>core\io</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CMRMemoryNedPooling.cpp">
@@ -196,6 +211,15 @@
     </ClCompile>
     <ClCompile Include="CMRDirector.cpp">
       <Filter>core\render</Filter>
+    </ClCompile>
+    <ClCompile Include="CMRGUIEventAdapter.cpp">
+      <Filter>core\io</Filter>
+    </ClCompile>
+    <ClCompile Include="CMREvent.cpp">
+      <Filter>core\io</Filter>
+    </ClCompile>
+    <ClCompile Include="CMREventQueue.cpp">
+      <Filter>core\io</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
