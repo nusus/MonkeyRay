@@ -1,7 +1,7 @@
 #ifndef CMRMemoryAllocatorConfig_h__
 #define CMRMemoryAllocatorConfig_h__
 
-#include "CMRConfig.h"
+#include "CMRConfigMacros.h"
 #include "CMRMemoryNedPooling.h"
 #include "CMRSTLAllocator.h"
 #include "CMRMemoryAllocatedObject.h"

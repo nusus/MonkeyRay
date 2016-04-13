@@ -1,6 +1,7 @@
 #ifndef CMRGraphicsContext_h__
 #define CMRGraphicsContext_h__
 #include "CMRObject.h"
+#include "..\Test\glfw3.h"
 namespace MR
 {
 	class CMRCamera;
@@ -9,82 +10,58 @@ namespace MR
 	{
 
 	public:
-		struct Traits : public CMRRef
+		struct Traits
 		{
-			Traits(CMRDisplaySettings* ds = 0);
+			static Traits GetFullScreenTraits(string strName = "MonkeyRay")
+			{
+				GLFWmonitor* monitor = glfwGetPrimaryMonitor();
+				const GLFWvidmode* mode = glfwGetVideoMode(monitor);
+				return Traits(true, strName, mode->width, mode->height, mode->redBits, mode->greenBits, mode->blueBits, mode->refreshRate, monitor);
+			}
+			static Traits GetSpecifiedTraits(bool bScreen, string strWindowName, int nWidth, int nHeight)
+			{
+				GLFWmonitor* monitor = glfwGetPrimaryMonitor();
+				const GLFWvidmode* mode = glfwGetVideoMode(monitor);
+				GLFWmonitor* ret_monitor = bScreen ? monitor : nullptr;
+				return Traits(bScreen, strWindowName, nWidth, nHeight, mode->redBits, mode->greenBits, mode->blueBits, mode->refreshRate, ret_monitor);
+			}
 
-			int x;
-			int y;
 			int width;
 			int height;
 
-			string windowName;
-			bool        windowDecoration;
-			bool        supportsResize;
+			string		windowName;
+			bool        fullScreen;
 
-			unsigned int red;
-			unsigned int blue;
-			unsigned int green;
-			unsigned int alpha;
-			unsigned int depth;
-			unsigned int stencil;
+			int rebBits;
+			int greenBits;
+			int blueBits;
+			int refreshRate;
 
-			unsigned int sampleBuffers;
-			unsigned int samples;
-
-			// buffer configuration
-			bool pbuffer;
-			bool doubleBuffer;
-
-
-			// V-sync
-			bool            vsync;
-
-			// Swap Group
-			bool            swapGroupEnabled;
-			GLuint          swapGroup;
-			GLuint          swapBarrier;
-
-			// enable cursor
-			bool            useCursor;
-
-			// settings used in set up of graphics context, only presently used by GL3 build of OSG.
-			std::string     glContextVersion;
-			unsigned int    glContextFlags;
-			unsigned int    glContextProfileMask;
-
-			/** return true if glContextVersion is set in the form major.minor, and assign the appropriate major and minor values to the associated parameters.*/
-			bool getContextVersion(unsigned int& major, unsigned int& minor) const;
-
-			// shared context
-			WeakPtr<CMRGraphicsContext> sharedContext;
-
-			WeakPtr<CMRRef> inheritedWindowData;
-
-			// ask the GraphicsWindow implementation to set the pixel format of an inherited window
-			bool setInheritedWindowPixelFormat;
-
-			CMRDisplaySettings::SwapMethod swapMethod;
-		};
-
-
-		class CMRWindowingSystemInterface
-		{
-		public:
-			CMRDisplaySettings* GetDisplaySettings() const;
-			void SetDisplaySettings(CMRDisplaySettings* ds);
+			GLFWmonitor* m_pMonitor;
 		protected:
-		private:
+			Traits(bool bFullScreen, string strWindowName, int nWidth, int nHeight, int red, int green, int blue, int rate, GLFWmonitor* pMonitor):
+				width(nWidth),
+				height(nHeight),
+				windowName(strWindowName),
+				fullScreen(bFullScreen),
+				rebBits(red),
+				greenBits(green),
+				blueBits(blue),
+				refreshRate(rate),
+				m_pMonitor(pMonitor)
+			{
+			}
 		};
 
-		class CMRSwapCallback : public CMRRef
+
+		typedef list< SmartPtr<CMROperation> > GraphicsOperationQueue;
+	public:
+		static CMRGraphicsContext* CreateDefaultGraphicsContext()
 		{
-		public:
+			static CMRGraphicsContext context(Traits::GetFullScreenTraits());
+			return &context;
+		}
 
-			virtual void SwapBuffersImplemention(CMRGraphicsContext* gc) = 0;
-		protected:
-		private:
-		};
 
 	public:
 		void RunOperations()
@@ -95,26 +72,13 @@ namespace MR
 
 		void SwapBuffers()
 		{
-			//TODO: CMRGraphicsContext is not implemented
-			throw std::logic_error("The method or operation is not implemented.");
+			glfwSwapBuffers(m_pWindow);
 		}
 
 			bool IsRealized() const
 		{
-			return IsRealizedImplemention();
+			return m_bRealized;
 		}
-
-			static CMRGraphicsContext::CMRWindowingSystemInterface* GetWindowingSystemInterface()
-			{
-				//TODO: CMRGraphicsContext is not implemented
-				throw std::logic_error("The method or operation is not implemented.");
-			}
-
-			void SetSwapCallback(const CMRSyncSwapBuffersCallback* ssbc)
-			{
-				//TODO: CMRGraphicsContext is not implemented
-				throw std::logic_error("The method or operation is not implemented.");
-			}
 
 			CMRState* GetState() const
 			{
@@ -124,14 +88,26 @@ namespace MR
 
 			void Realize()
 			{
-				//TODO: CMRGraphicsContext is not implemented
-				throw std::logic_error("The method or operation is not implemented.");
-			}
+				if (!glfwInit())
+				{
+					m_bRealized = false;
+					return;
+				}
+				glfwWindowHint(GLFW_RED_BITS, m_traits.rebBits);
+				glfwWindowHint(GLFW_GREEN_BITS, m_traits.greenBits);
+				glfwWindowHint(GLFW_BLUE_BITS, m_traits.blueBits);
+				glfwWindowHint(GLFW_REFRESH_RATE, m_traits.refreshRate);
+				m_pWindow = glfwCreateWindow(m_traits.width, m_traits.height, m_traits.windowName.c_str(), m_traits.m_pMonitor, NULL);
+				if (!m_pWindow)
+				{
+					m_bRealized = false;
+					DestroyWindow();
+					return;
+				}
 
-			bool Valid()
-			{
-				//TODO: CMRGraphicsContext is not implemented
-				throw std::logic_error("The method or operation is not implemented.");
+				glfwMakeContextCurrent(m_pWindow);
+
+				//event settings;
 			}
 
 			CMRNode* GetSceneData()
@@ -140,30 +116,49 @@ namespace MR
 				throw std::logic_error("The method or operation is not implemented.");
 			}
 
-			virtual bool IsRealizedImplemention() const = 0;
+			void DestroyWindow()
+			{
+				glfwTerminate();
+				m_pWindow = nullptr;
+			}
+			virtual const char* ClassName() const override
+			{
+				return "CMRGraphicsContext";
+			}
 
-
-
-
-
-
-
-
-
-
-	};
-
-	class CMRSyncSwapBuffersCallback : public CMRGraphicsContext::CMRSwapCallback
-	{
-	public:
-		virtual void SwapBuffersImplemention(CMRGraphicsContext* gc) override
-		{
-			//TODO: SyncSwapBuffersCallback is not implemented
-			throw std::logic_error("The method or operation is not implemented.");
-		}
 	protected:
-	private:
+		CMRGraphicsContext(Traits traits) :
+			m_bRealized(false),
+			m_traits(traits),
+			m_pWindow(false)
+		{
 
+		}
+
+		~CMRGraphicsContext() 
+		{
+			DestroyWindow();
+		}
+
+
+
+		virtual CMRObject* Clone() const override
+		{
+			return NULL;
+		}
+
+		virtual CMRObject* Copy(const CMRCopyPolicy& policy) const override
+		{
+			return NULL;
+		}
+
+	protected:
+		bool m_bRealized;
+		Traits m_traits;
+		GLFWwindow* m_pWindow;
+
+		GraphicsOperationQueue m_operations;
+		SmartPtr<CMROperation> m_currentOperation;
 	};
 }
 #endif // CMRGraphicsContext_h__

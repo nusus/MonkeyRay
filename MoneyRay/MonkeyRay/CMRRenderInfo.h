@@ -5,8 +5,10 @@ namespace MR
 {
 	class CMRRenderInfo
 	{
-		public:
+	public:
 			
+	protected:
+		vmath::mat4 m_matModelView
 	};
 }
 

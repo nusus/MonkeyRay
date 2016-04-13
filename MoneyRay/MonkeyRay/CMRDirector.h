@@ -122,6 +122,11 @@ namespace MR
 
 		virtual double ElapsedTime();
 
+		CMRFrameStamp* GetDirectorFrameStamp()
+		{
+			return m_spView->GetFrameStamp();
+		}
+
 	protected:
 		CMRDirector(CMRView* pView);
 		void DirectorConstructorInit();
@@ -164,7 +169,7 @@ namespace MR
 
 	private:
 		CMRDirector& operator = (const CMRDirector&) { return *this; }
-		CMRDirector(const CMRDirector&) {}
+		
 	};
 }
 #endif // CMRDirector_h__

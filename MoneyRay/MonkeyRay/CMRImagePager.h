@@ -1,17 +1,23 @@
 #ifndef CMRImagePager_h__
 #define CMRImagePager_h__
-
+#include "CMRPrerequisites.h"
+#include "CMRFrameStamp.h"
+#include "CMRImage.h"
 namespace MR
 {
 	class CMRImagePager
 	{
 	public:
-		void SignalBeginFrame(CMRFrameStamp* pFrameStamp)
-		{
-			//TODO: SignalBeginFrame is not implemented;
-			throw std::logic_error("The method or operation is not implemented.");
-		}
+		typedef unordered_map<string, SmartPtr<CMRImage::ImageEntity> > ImageCacheMap;
+	public:
+		static CMRImagePager* Instance();
+
+		void SignalBeginFrame(CMRFrameStamp* pFrameStamp);
+
+		CMRImage::ImageEntity* GetImageEntity(const string& strFileName);
+
 	protected:
+		ImageCacheMap m_map;
 	private:
 
 	};

@@ -15,12 +15,6 @@
     <Filter Include="core\memory">
       <UniqueIdentifier>{0ac02db1-2d36-47a2-abf6-b014ed1e9c50}</UniqueIdentifier>
     </Filter>
-    <Filter Include="core\containers">
-      <UniqueIdentifier>{d05ae743-315c-4109-899f-da419a73fb0c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="core\math">
-      <UniqueIdentifier>{399c63e9-5d8d-423a-a7af-e8acde57430c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="core\memory\nedmalloc">
       <UniqueIdentifier>{9bac412b-0171-4825-aff1-99edcd56238b}</UniqueIdentifier>
     </Filter>
@@ -33,9 +27,6 @@
     <Filter Include="core\thread">
       <UniqueIdentifier>{5aeb576e-4226-45d1-9793-4eb01c8ddc45}</UniqueIdentifier>
     </Filter>
-    <Filter Include="core\io">
-      <UniqueIdentifier>{8e609295-0eae-4461-b222-e249128bcb49}</UniqueIdentifier>
-    </Filter>
     <Filter Include="core\render">
       <UniqueIdentifier>{ddcfc461-5f32-4b21-b6c0-943294345271}</UniqueIdentifier>
     </Filter>
@@ -45,8 +36,26 @@
     <Filter Include="core\util">
       <UniqueIdentifier>{2b2fe948-5c34-4c72-8ae2-744c6aa2bbea}</UniqueIdentifier>
     </Filter>
-    <Filter Include="core\render\gl">
-      <UniqueIdentifier>{8e449049-ae49-478a-bcce-12c66300e8da}</UniqueIdentifier>
+    <Filter Include="core\log">
+      <UniqueIdentifier>{fdc25c02-286c-4689-bdc7-486177ff211a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\event">
+      <UniqueIdentifier>{8e609295-0eae-4461-b222-e249128bcb49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\io">
+      <UniqueIdentifier>{9805e4ac-6f8a-479d-8333-1b7ca1fb79eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\containers">
+      <UniqueIdentifier>{d05ae743-315c-4109-899f-da419a73fb0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\GL">
+      <UniqueIdentifier>{ffadd912-8b4b-4120-a8cd-56cb70fbfb6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\thirdparty">
+      <UniqueIdentifier>{3d7f6b10-f022-4f72-847e-18a6cfdbc34e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\math">
+      <UniqueIdentifier>{399c63e9-5d8d-423a-a7af-e8acde57430c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -58,27 +67,6 @@
     </ClInclude>
     <ClInclude Include="nedmalloc.h">
       <Filter>core\memory\nedmalloc</Filter>
-    </ClInclude>
-    <ClInclude Include="CMRPrerequisites.h">
-      <Filter>core\config</Filter>
-    </ClInclude>
-    <ClInclude Include="CMRStdConfig.h">
-      <Filter>core\config</Filter>
-    </ClInclude>
-    <ClInclude Include="CMRConfig.h">
-      <Filter>core\config</Filter>
-    </ClInclude>
-    <ClInclude Include="CMRBoostConfig.h">
-      <Filter>core\config</Filter>
-    </ClInclude>
-    <ClInclude Include="CMRThirdPartyConfig.h">
-      <Filter>core\config</Filter>
-    </ClInclude>
-    <ClInclude Include="CMRContainerConfig.h">
-      <Filter>core\containers</Filter>
-    </ClInclude>
-    <ClInclude Include="CMRMemoryAllocatorConfig.h">
-      <Filter>core\memory</Filter>
     </ClInclude>
     <ClInclude Include="malloc.c.h">
       <Filter>core\memory\nedmalloc</Filter>
@@ -129,7 +117,7 @@
       <Filter>core\render</Filter>
     </ClInclude>
     <ClInclude Include="CMREventVisitor.h">
-      <Filter>core\io</Filter>
+      <Filter>core\event</Filter>
     </ClInclude>
     <ClInclude Include="CMRUpdateVisitor.h">
       <Filter>core\render</Filter>
@@ -158,9 +146,6 @@
     <ClInclude Include="CMRFrameStamp.h">
       <Filter>core\render</Filter>
     </ClInclude>
-    <ClInclude Include="CMRTimer.h">
-      <Filter>core\base</Filter>
-    </ClInclude>
     <ClInclude Include="CMRDatabasePager.h">
       <Filter>core\db</Filter>
     </ClInclude>
@@ -186,10 +171,10 @@
       <Filter>core\render</Filter>
     </ClInclude>
     <ClInclude Include="CMREventQueue.h">
-      <Filter>core\io</Filter>
+      <Filter>core\event</Filter>
     </ClInclude>
     <ClInclude Include="CMREvent.h">
-      <Filter>core\io</Filter>
+      <Filter>core\event</Filter>
     </ClInclude>
     <ClInclude Include="CMRGraphicsThread.h">
       <Filter>core\thread</Filter>
@@ -204,7 +189,7 @@
       <Filter>core\render</Filter>
     </ClInclude>
     <ClInclude Include="CMRGUIActionAdapter.h">
-      <Filter>core\io</Filter>
+      <Filter>core\event</Filter>
     </ClInclude>
     <ClInclude Include="CMRViewBase.h">
       <Filter>core\render</Filter>
@@ -213,28 +198,16 @@
       <Filter>core\render</Filter>
     </ClInclude>
     <ClInclude Include="CMREventHandlers.h">
-      <Filter>core\io</Filter>
-    </ClInclude>
-    <ClInclude Include="CMRMacroUtil.h">
-      <Filter>core\base</Filter>
+      <Filter>core\event</Filter>
     </ClInclude>
     <ClInclude Include="CMRIntersectionVisitor.h">
       <Filter>core\util</Filter>
     </ClInclude>
     <ClInclude Include="CMRGUIEventAdapter.h">
-      <Filter>core\io</Filter>
+      <Filter>core\event</Filter>
     </ClInclude>
     <ClInclude Include="CMRLineSegmentIntersector.h">
       <Filter>core\util</Filter>
-    </ClInclude>
-    <ClInclude Include="CMRGL.h">
-      <Filter>core\render\gl</Filter>
-    </ClInclude>
-    <ClInclude Include="CMRGLExtensions.h">
-      <Filter>core\render\gl</Filter>
-    </ClInclude>
-    <ClInclude Include="CMRGLDefines.h">
-      <Filter>core\render\gl</Filter>
     </ClInclude>
     <ClInclude Include="WeakPtr.h">
       <Filter>core\util</Filter>
@@ -247,6 +220,147 @@
     </ClInclude>
     <ClInclude Include="CMRMath.h">
       <Filter>core\math</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRMatrix.h">
+      <Filter>core\math</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRMacroUtil.h">
+      <Filter>core\util</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRTerrain.h">
+      <Filter>core\render</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRCallback.h">
+      <Filter>core\render</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRStateSet.h">
+      <Filter>core\render</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRGroup.h">
+      <Filter>core\render</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRTransform.h">
+      <Filter>core\render</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRPositionAttitudeTransform.h">
+      <Filter>core\render</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRMatrixTransform.h">
+      <Filter>core\render</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRCullSettings.h">
+      <Filter>core\render</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRVec4.h">
+      <Filter>core\math</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRColorMask.h">
+      <Filter>core\render</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRViewport.h">
+      <Filter>core\render</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRVec3d.h">
+      <Filter>core\math</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRMatrixf.h">
+      <Filter>core\math</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRMatrixd.h">
+      <Filter>core\math</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRImage.h">
+      <Filter>core\render</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRConfigMacros.h">
+      <Filter>core\config</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRConfig.h">
+      <Filter>core\config</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRVec3f.h">
+      <Filter>core\math</Filter>
+    </ClInclude>
+    <ClInclude Include="vmath.h">
+      <Filter>core\math</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRImageLoader.h">
+      <Filter>core\util</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRFile.h">
+      <Filter>core\io</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRTGAImageLoader.h">
+      <Filter>core\util</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRLog.h">
+      <Filter>core\log</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRTimer.h">
+      <Filter>core\util</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRPrerequisites.h">
+      <Filter>core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRThirdPartyConfig.h">
+      <Filter>core\config</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRStdConfig.h">
+      <Filter>core\config</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRBoostConfig.h">
+      <Filter>core\config</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRLogConfig.h">
+      <Filter>core\config</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRMemoryAllocatorConfig.h">
+      <Filter>core\config</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRGLConfig.h">
+      <Filter>core\config</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRContainerConfig.h">
+      <Filter>core\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRTexture.h">
+      <Filter>core\render</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRDrawable.h">
+      <Filter>core\render</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRShader.h">
+      <Filter>core\render</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRProgram.h">
+      <Filter>core\render</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRShaderGraphNode.h">
+      <Filter>core\render</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRGeode.h">
+      <Filter>core\render</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRRenderLeaf.h">
+      <Filter>core\render</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRShaderGraph.h">
+      <Filter>core\render</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRRenderOperation.h">
+      <Filter>core\render</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRImpotedModel.h">
+      <Filter>core\render</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRRenderStage.h">
+      <Filter>core\render</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRRenderBin.h">
+      <Filter>core\render</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRUniform.h">
+      <Filter>core\render</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -292,8 +406,26 @@
     <ClCompile Include="CMRDisplaySettings.cpp">
       <Filter>core\render</Filter>
     </ClCompile>
-    <ClCompile Include="CMRGLExtensions.cpp">
-      <Filter>源文件</Filter>
+    <ClCompile Include="CMRNode.cpp">
+      <Filter>core\render</Filter>
+    </ClCompile>
+    <ClCompile Include="CMRCamera.cpp">
+      <Filter>core\render</Filter>
+    </ClCompile>
+    <ClCompile Include="CMRImageLoader.cpp">
+      <Filter>core\util</Filter>
+    </ClCompile>
+    <ClCompile Include="CMRImagePager.cpp">
+      <Filter>core\db</Filter>
+    </ClCompile>
+    <ClCompile Include="CMRTexture.cpp">
+      <Filter>core\render</Filter>
+    </ClCompile>
+    <ClCompile Include="CMRTGAImageLoader.cpp">
+      <Filter>core\util</Filter>
+    </ClCompile>
+    <ClCompile Include="CMRImage.cpp">
+      <Filter>core\render</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

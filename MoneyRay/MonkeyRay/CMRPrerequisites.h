@@ -1,28 +1,20 @@
 #ifndef CMRPrerequisites_h__
 #define CMRPrerequisites_h__
 
-#include "CMRConfig.h"
+#include "CMRConfigMacros.h"
 #include <string>
 #ifdef MR_DEBUG_MODE
 
 #endif
 
 #include "CMRStdConfig.h"
-#include "CMRContainerConfig.h"
+#include "CMRBoostConfig.h"
+#include "CMRThirdPartyConfig.h"
 #include "CMRMemoryAllocatorConfig.h"
+#include "CMRContainerConfig.h"
+#include "CMRGLConfig.h"
 
-namespace MR
-{
-#if MR_REAL_PRECISION == MR_SINGLE_PRECISION
-	typedef float real;
-#else
-	typedef double real;
-#endif
+#include "CMRLogConfig.h"
 
-#if MR_REAL_STRING_TYPE == MR_USE_STRING
-	typedef std::string string;
-#else
-	typedef std::wstring string;
-#endif
-}
+#include "CMRConfig.h"
 #endif // CMRPrerequisites_h__

@@ -21,7 +21,7 @@ namespace MR
 
 		virtual void ReleaseOperation() {}
 
-		virtual void operator = (CMRObject* obj) = 0;
+		virtual void operator()(CMRObject* obj) = 0;
 	protected:
 		CMROperation() :m_bKeep(false) {}
 		CMROperation(const CMROperation& op)

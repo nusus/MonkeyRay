@@ -38,4 +38,20 @@ CMR##name* Get##name (); \
 const CMR##name* Get##name () const
 
 
+#define META_NODE(name) \
+virtual CMRObject* Clone() const override{return new name () ;} \
+virtual CMRObject* Copy(const CMRCopyPolicy& policy) const override {return  new name (*this, policy);} \
+virtual bool IsSameKindAs(const CMRObject* obj) const override {return dynamic_cast<const name *> (obj) != nullptr;} \
+virtual const char* ClassName() const override {return #name ;} \
+virtual void Accept(CMRNodeVisitor& nv) \
+{ \
+	if (nv.ValidNodeMask(*this)) \
+	{ \
+		nv.PushOntoNodePath(*this); \
+		nv.Apply(*this); \
+		nv.PopFromNodePath(); \
+	} \
+}
+
+
 #endif // CMRMacroUtil_h__
