@@ -269,3 +269,99 @@ void CMRMatrix4x3::SetupReflect(const CMRVector3 & v)
 
 	tx = ty = tz = 0.0f;
 }
+
+CMRVector3 operator*(const CMRVector3 & v, const CMRMatrix4x3 & m)
+{
+	return CMRVector3(
+		v.x*m.m11+v.y*m.m21+v.z*m.m31+m.tx,
+		v.x*m.m12+v.y*m.m22+v.z*m.m32+m.ty,
+		v.x*m.m13+v.y*m.m23+v.z*m.m33+m.tz
+		);
+}
+
+CMRMatrix4x3 operator*(const CMRMatrix4x3 & n, const CMRMatrix4x3 & m)
+{
+	CMRMatrix4x3 r;
+	r.m11 = n.m11*m.m11 + n.m12*m.m21 + n.m13*m.m31;
+	r.m12 = n.m11*m.m21 + n.m12*m.m22 + n.m13*m.m23;
+	r.m13 = n.m11*m.m31 + n.m12*m.m32 + n.m13*m.m33;
+
+	r.m21 = n.m21*m.m11 + n.m22*m.m21 + n.m23*m.m31;
+	r.m22 = n.m21*m.m21 + n.m22*m.m22 + n.m23*m.m23;
+	r.m23 = n.m21*m.m31 + n.m22*m.m32 + n.m23*m.m33;
+
+	r.m31 = n.m31*m.m11 + n.m32*m.m21 + n.m33*m.m31;
+	r.m32 = n.m31*m.m21 + n.m32*m.m22 + n.m33*m.m23;
+	r.m33 = n.m31*m.m31 + n.m32*m.m32 + n.m33*m.m33;
+
+	r.tx = n.tx*m.m11 + n.ty*m.m21 + n.tz*m.m31 + m.tx;
+	r.ty = n.tx*m.m21 + n.ty*m.m22 + n.tz*m.m23 + m.ty;
+	r.tz = n.tx*m.m31 + n.ty*m.m32 + n.tz*m.m33 + m.tz;
+
+	return r;
+}
+
+CMRVector3 & operator*=(CMRVector3 & v, const CMRMatrix4x3 & m)
+{
+	// TODO: 在此处插入 return 语句
+	v = v*m;
+	return v;
+}
+
+CMRMatrix4x3 & operator*=(CMRMatrix4x3 & n, const CMRMatrix4x3 & m)
+{
+	// TODO: 在此处插入 return 语句
+	n = n*m;
+	return n;
+}
+
+float Determinant(const CMRMatrix4x3 & m)
+{
+	return m.m11*(m.m22*m.m33-m.m23*m.m32)
+		   +m.m12*(m.m21*m.m33-m.m23*m.m31)
+		   +m.m13*(m.m21*m.m32-m.m22*m.m31);
+}
+
+CMRMatrix4x3 Inverse(const CMRMatrix4x3 & m)
+{
+	float det = Determinant(m);
+	assert(fabs(det) > 0.000001f);
+	float oneOverDet = 1.0f / det;
+
+	CMRMatrix4x3 res;
+	res.m11 = (m.m22*m.m33 - m.m23*m.m32)*oneOverDet;
+	res.m12 = (m.m13*m.m32 - m.m12*m.m33)*oneOverDet;
+	res.m13 = (m.m12*m.m23 - m.m13*m.m22)*oneOverDet;
+
+	res.m21 = (m.m23*m.m31 - m.m21*m.m33)*oneOverDet;
+	res.m22 = (m.m11*m.m33 - m.m13*m.m31)*oneOverDet;
+	res.m23 = (m.m13*m.m21 - m.m11*m.m23)*oneOverDet;
+
+	res.m31 = (m.m21*m.m32 - m.m22*m.m31)*oneOverDet;
+	res.m32 = (m.m12*m.m31 - m.m11*m.m32)*oneOverDet;
+	res.m33 = (m.m11*m.m22 - m.m12*m.m21)*oneOverDet;
+
+	res.tx = -(m.tx*res.m11 + m.ty*res.m21 + m.tz*res.m31);
+	res.ty = -(m.tx*res.m12 + m.ty*res.m22 + m.tz*res.m32);
+	res.tz = -(m.tx*res.m13 + m.ty*res.m23 + m.tz*res.m33);
+	return res;
+}
+
+CMRVector3 GetTranslation(const CMRMatrix4x3 & m)
+{
+	return CMRVector3(m.tx,m.ty,m.tz);
+}
+
+CMRVector3 GetPositionFromParentToLocalMatrix(const CMRMatrix4x3 & m)
+{
+	return CMRVector3(
+		-(m.tx*res.m11 + m.ty*res.m21 + m.tz*res.m31),
+	    -(m.tx*res.m12 + m.ty*res.m22 + m.tz*res.m32),
+		-(m.tx*res.m13 + m.ty*res.m23 + m.tz*res.m33)
+		);
+}
+
+CMRVector3 GetPositionFromLocalToParentMatrix(const CMRMatrix4x3 & m)
+{
+	return CMRVector3(m.tx, m.ty, m.tz);
+}
