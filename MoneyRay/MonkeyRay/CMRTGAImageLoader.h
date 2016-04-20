@@ -1,7 +1,6 @@
 #ifndef CMRTGAImageLoader_h__
 #define CMRTGAImageLoader_h__
 #include "CMRImageLoader.h"
-#include "CMRFile.h"
 #include "CMRImage.h"
 namespace MR
 {

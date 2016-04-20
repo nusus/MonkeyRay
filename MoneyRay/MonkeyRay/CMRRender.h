@@ -1,31 +1,32 @@
 #ifndef CMRRender_h__
 #define CMRRender_h__
+#include "CMROperationThread.h"
+#include "SmartPtr.h"
+#include "CMRObject.h"
 
 namespace MR
 {
-	class CMRRender
+	class CMRCamera;
+	class CMRRenderStage;
+	class CMRStateGraph;
+	class CMRRender : public CMROperation
 	{
 	public:
-		void Cull()
-		{
-			//TODO: CMRRender is not implemented
-			throw std::logic_error("The method or operation is not implemented.");
-		}
+		CMRRender(CMRCamera* pCamera);
 
-		void CullDraw()
-		{
-			//TODO:  is not implemented
-			throw std::logic_error("The method or operation is not implemented.");
-		}
+		void Cull();
 
-		void Draw()
-		{
+		void CullDraw();
 
-		}
+		void Draw();
+
+		virtual void operator()(CMRObject* obj) override;
 
 	protected:
+		CMRCamera* m_wpCamera;
 
-
+		SmartPtr<CMRStateGraph> m_spStateGraph;
+		SmartPtr<CMRRenderStage> m_spRenderStage;
 	};
 }
 

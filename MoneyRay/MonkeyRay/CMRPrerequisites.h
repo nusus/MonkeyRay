@@ -13,8 +13,6 @@
 #include "CMRMemoryAllocatorConfig.h"
 #include "CMRContainerConfig.h"
 #include "CMRGLConfig.h"
-
 #include "CMRLogConfig.h"
-
 #include "CMRConfig.h"
 #endif // CMRPrerequisites_h__

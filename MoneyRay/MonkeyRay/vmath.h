@@ -938,6 +938,55 @@ namespace vmath
 			base::data[2] = v2;
 			base::data[3] = v3;
 		}
+
+		bool GetProjectionMatrixAsFrustum(double& left, double& right, double& bottom, double& top, double& zNear, double& zFar) const
+		{
+			if (data[3][0] != 0.0 || data[3][1] != 0.0 || data[3][2] != -1.0 || data[3][3] != 0.0)
+			{
+				return false;
+			}
+
+			zNear = data[2][3] / (data[2][2] - 1.0);
+			zFar = data[2][3] / (data[2][2] + 1.0);
+
+			left = zNear * (data[0][2] - 1.0) / data[0][0];
+			right = zNear * (1.0 + data[0][2]) / data[0][0];
+
+			top = zNear * (1.0 + data[1][2]) / data[1][1];
+			bottom = zNear * (data[1][2] - 1.0) / data[1][1];
+			return true;
+		}
+
+		bool GetProjectionMatrixAsPerspective(double& fovy, double& aspectRatio, double& zNear, double& zFar) const
+		{
+			double left, right, bottom, top, n, f;
+			if (GetProjectionMatrixAsFrustum(left, right, bottom, top, n, f))
+			{
+				zNear = n;
+				zFar = f;
+				fovy = vmath::degrees(atan(top / zNear) - atan(bottom / zNear));
+				aspectRatio = (right - left) / (top - bottom);
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		//TODO: To be corrected.
+		bool GetViewMatrixAsLookAt(vmath::vec3& eye, vmath::vec3& center, vmath::vec3& up, double lookDistance /*= 1.0*/) const
+		{
+			vmath::vec3 u(data[0][0], data[1][0], data[2][0]);
+			vmath::vec3 v(data[0][1], data[1][1], data[2][1]);
+			vmath::vec3 n(data[0][2], data[1][2], data[2][2]);
+			vmath::vec3 e(data[3][0], data[3][1], data[3][2]);
+			e *= -1;
+
+			eye = e;
+			up = vmath::cross(n, u);
+			center = eye - n * lookDistance;
+		}
 	};
 
 	typedef Tmat4<float> mat4;

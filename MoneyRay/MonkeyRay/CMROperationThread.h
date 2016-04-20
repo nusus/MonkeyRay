@@ -1,6 +1,6 @@
 #ifndef CMROperationThread_h__
 #define CMROperationThread_h__
-
+#include "CMRRef.h"
 namespace MR
 {
 	class CMROperation : virtual public CMRRef
@@ -31,39 +31,6 @@ namespace MR
 	protected:
 		string m_strName;
 		bool m_bKeep;
-	private:
-	};
-
-	class CMROperationQueue
-	{
-	public:
-		void RunOperations(MR::CMRObject* callingObject = (MR::CMRObject*) 0)
-		{
-			//TODO:  is not implemented
-			throw std::logic_error("The method or operation is not implemented.");
-		}
-
-		void Add(const CMROperation* op)
-		{
-			//TODO:  is not implemented
-			throw std::logic_error("The method or operation is not implemented.");
-		}
-
-		void Remove(const CMROperation* op)
-		{
-			//TODO:  is not implemented
-			throw std::logic_error("The method or operation is not implemented.");
-		}
-
-
-
-	};
-
-	class CMROperationThread
-	{
-	public:
-	protected:
-	private:
 	};
 }
 #endif // CMROperationThread_h__

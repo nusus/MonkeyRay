@@ -12,8 +12,6 @@ namespace MR
 	public:
 		static CMRImagePager* Instance();
 
-		void SignalBeginFrame(CMRFrameStamp* pFrameStamp);
-
 		CMRImage::ImageEntity* GetImageEntity(const string& strFileName);
 
 	protected:

@@ -3,6 +3,8 @@
 #include "CMRMemManager.h"
 #include "CMRObserver.h"
 
+using namespace MR;
+
 #if MR_USE_MULTITHREAD
 std::mutex* MR::CMRRef::GetGlobalReferenceMutex()
 {
@@ -31,28 +33,26 @@ struct SMRInit
 };
 
 static SMRInit s_initGlobalMutex;
-static bool s_bUseThreadSafeReferenceCounting = true;
 
 
 MR::CMRRef::CMRRef():
 #if MR_USE_MULTITHREAD
 	m_RefMutex(),
 #endif
-	m_nRefCount(0),
-	m_pSubsciption(nullptr)
+	m_nRefCount(0)
 {
 
 }
 
 
 
+CMRRef& MR::CMRRef::operator=(const CMRRef&)
+{
+	return *this;
+}
+
 MR::CMRRef::~CMRRef()
 {
-	SignalObserversToDelete();
-	if (m_pSubsciption)
-	{
-		static_cast<CMRSubsciption*>(m_pSubsciption)->Release();
-	}
 
 }
 
@@ -93,21 +93,6 @@ int MR::CMRRef::Release() const
 	return new_ref_count;
 }
 
-MR::CMRSubsciption* MR::CMRRef::GetOrCreateSubscription() const
-{
-	{
-#if MR_USE_MULTITHREAD
-		std::lock_guard<std::mutex> lck(m_RefMutex);
-#endif
-		if (!m_pSubsciption)
-		{
-			m_pSubsciption = new CMRSubsciption(this);
-			static_cast<CMRSubsciption*>(m_pSubsciption)->Retain();
-		}
-		return static_cast<CMRSubsciption*>(m_pSubsciption);
-	}
-}
-
 int MR::CMRRef::ReleaseNoDelete() const
 {
 	unsigned int new_ref_count;
@@ -125,25 +110,11 @@ int MR::CMRRef::ReleaseNoDelete() const
 	return new_ref_count;
 }
 
-void MR::CMRRef::AddSubcriber(CMRSubsciber* subsciber) const
+int MR::CMRRef::ReferenceCount() const
 {
-	GetOrCreateSubscription()->AddSubscriber(subsciber);
+	return m_nRefCount;
 }
 
-void MR::CMRRef::RemoveSubsciber(CMRSubsciber* subscriber) const
-{
-	GetOrCreateSubscription()->RemoveSubscriber(subscriber);
-}
-
-
-
-void MR::CMRRef::SignalObserversToDelete() const
-{
-	if (m_pSubsciption)
-	{
-		static_cast<CMRSubsciption*>(m_pSubsciption)->SignalObjectDeleted(const_cast<CMRRef*>(this));
-	}
-}
 
 void MR::CMRRef::MemManagerDelete() const
 {
@@ -162,6 +133,17 @@ MR::CMRRef::CMRRef(bool bThreadSafeRefUnref) :
 
 	}
 }
+
+MR::CMRRef::CMRRef(const CMRRef& obj) :
+#if MR_USE_MULTITHREAD
+	m_RefMutex(),
+#endif
+	m_nRefCount(0)
+{
+	//TODO: MR::CMRRef::CMRRef is not implemented
+
+}
+
 void MR::CMRRef::SetThreadSafeRefUnref(bool bThreadSafe)
 {
 	if (bThreadSafe)
@@ -180,6 +162,13 @@ void MR::CMRRef::SetThreadSafeRefUnref(bool bThreadSafe)
 		}
 	}
 }
+
+bool MR::CMRRef::GetThreadSafeRefUnref() const
+{
+	//TODO: MR::CMRRef::GetThreadSafeRefUnref is not implemented
+	return ((bool)m_RefMutex);
+}
+
 void MR::CMRRef::SetThreadSafeReferenceCounting(bool bEnableThreadSafeReferenceCounting)
 {
 	s_bUseThreadSafeReferenceCounting = bEnableThreadSafeReferenceCounting;

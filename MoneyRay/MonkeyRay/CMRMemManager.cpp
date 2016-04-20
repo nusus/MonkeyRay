@@ -1,5 +1,7 @@
 #include "CMRMemManager.h"
-#include "CMRContainerConfig.h"
+
+using namespace MR;
+
 MR::CMRMemManager::CMRMemManager(unsigned int nNumFramesToRetainObjects /*= 0*/):
 	m_nNumberFramesToRetainObjects(nNumFramesToRetainObjects),
 	m_nCurrentFrameNumber(0)
@@ -7,9 +9,39 @@ MR::CMRMemManager::CMRMemManager(unsigned int nNumFramesToRetainObjects /*= 0*/)
 
 }
 
+CMRMemManager& MR::CMRMemManager::operator=(const CMRMemManager&)
+{
+	return *this;
+}
+
 MR::CMRMemManager::~CMRMemManager()
 {
 
+}
+
+void MR::CMRMemManager::SetNumberFramesToRetainObjects(unsigned int nNumFramesToRetainObjects)
+{
+	m_nNumberFramesToRetainObjects = nNumFramesToRetainObjects;
+}
+
+unsigned int MR::CMRMemManager::GetNumberFramesToRetainObjects() const
+{
+	return m_nNumberFramesToRetainObjects;
+}
+
+void MR::CMRMemManager::SetCurrentFrameNumber(unsigned int nCurrentFrame)
+{
+	m_nCurrentFrameNumber = nCurrentFrame;
+}
+
+unsigned int MR::CMRMemManager::GetCurrentFrameNumber() const
+{
+	return m_nCurrentFrameNumber;
+}
+
+void MR::CMRMemManager::DeleteAux(const CMRRef* obj)
+{
+	delete obj;
 }
 
 void MR::CMRMemManager::Flush()
@@ -86,5 +118,12 @@ std::lock_guard<std::mutex> lck(m_mutex);
 #endif
 		m_ObejectsToDelete.push_back(FrameNumberObjectPair(m_nCurrentFrameNumber, obj));
 	}
+}
+
+MR::CMRMemManager::CMRMemManager(const CMRMemManager&) :
+	m_nNumberFramesToRetainObjects(0),
+	m_nCurrentFrameNumber(0)
+{
+
 }
 

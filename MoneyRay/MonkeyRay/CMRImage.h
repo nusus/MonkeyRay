@@ -1,10 +1,6 @@
 #ifndef CMRImage_h__
 #define CMRImage_h__
-
-#include "CMRPrerequisites.h"
-#include "CMRImageLoader.h"
 #include "CMRRef.h"
-#include "CMRFile.h"
 #include "SmartPtr.h"
 namespace MR
 {

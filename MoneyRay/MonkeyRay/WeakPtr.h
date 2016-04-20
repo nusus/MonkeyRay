@@ -1,5 +1,5 @@
 #ifndef WeakPtr_h__
-#define WeakPtr_h__
+#define WeakPtr_h__ 
 #include "SmartPtr.h"
 #include "CMRObserver.h"
 

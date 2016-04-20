@@ -80,61 +80,19 @@
     <ClInclude Include="CMRRef.h">
       <Filter>core\base</Filter>
     </ClInclude>
-    <ClInclude Include="CMRObserver.h">
-      <Filter>core\base</Filter>
-    </ClInclude>
     <ClInclude Include="CMRMemManager.h">
       <Filter>core\base</Filter>
     </ClInclude>
-    <ClInclude Include="CMRUserDataContainer.h">
-      <Filter>core\base</Filter>
-    </ClInclude>
-    <ClInclude Include="CMRCopyPolicy.h">
-      <Filter>core\base</Filter>
-    </ClInclude>
-    <ClInclude Include="CMRMathUtil.h">
-      <Filter>core\math</Filter>
-    </ClInclude>
-    <ClInclude Include="CMRVector3.h">
-      <Filter>core\math</Filter>
-    </ClInclude>
-    <ClInclude Include="CMREulerAngles.h">
-      <Filter>core\math</Filter>
-    </ClInclude>
-    <ClInclude Include="CMRQuaternion.h">
-      <Filter>core\math</Filter>
-    </ClInclude>
-    <ClInclude Include="CMRRotationMatrix.h">
-      <Filter>core\math</Filter>
-    </ClInclude>
-    <ClInclude Include="CMRMatrix4x3.h">
-      <Filter>core\math</Filter>
-    </ClInclude>
     <ClInclude Include="CMRDirector.h">
-      <Filter>core\render</Filter>
-    </ClInclude>
-    <ClInclude Include="CMRStats.h">
-      <Filter>core\render</Filter>
-    </ClInclude>
-    <ClInclude Include="CMREventVisitor.h">
-      <Filter>core\event</Filter>
-    </ClInclude>
-    <ClInclude Include="CMRUpdateVisitor.h">
       <Filter>core\render</Filter>
     </ClInclude>
     <ClInclude Include="CMROperationThread.h">
       <Filter>core\thread</Filter>
     </ClInclude>
-    <ClInclude Include="CMRIncrementalCompileOperation.h">
-      <Filter>core\render</Filter>
-    </ClInclude>
     <ClInclude Include="CMRCamera.h">
       <Filter>core\render</Filter>
     </ClInclude>
     <ClInclude Include="CMRGraphicsContext.h">
-      <Filter>core\render</Filter>
-    </ClInclude>
-    <ClInclude Include="CMRGraphicsWindow.h">
       <Filter>core\render</Filter>
     </ClInclude>
     <ClInclude Include="CMRScene.h">
@@ -155,59 +113,11 @@
     <ClInclude Include="CMRNode.h">
       <Filter>core\render</Filter>
     </ClInclude>
-    <ClInclude Include="CMRRenderInfo.h">
-      <Filter>core\render</Filter>
-    </ClInclude>
-    <ClInclude Include="CMRBoundingSphere.h">
-      <Filter>core\render</Filter>
-    </ClInclude>
-    <ClInclude Include="CMRNodeVisitor.h">
-      <Filter>core\render</Filter>
-    </ClInclude>
     <ClInclude Include="CMRRender.h">
       <Filter>core\render</Filter>
     </ClInclude>
-    <ClInclude Include="CMRCameraManipulator.h">
-      <Filter>core\render</Filter>
-    </ClInclude>
-    <ClInclude Include="CMREventQueue.h">
-      <Filter>core\event</Filter>
-    </ClInclude>
-    <ClInclude Include="CMREvent.h">
-      <Filter>core\event</Filter>
-    </ClInclude>
-    <ClInclude Include="CMRGraphicsThread.h">
-      <Filter>core\thread</Filter>
-    </ClInclude>
-    <ClInclude Include="CMRDevice.h">
-      <Filter>core\render</Filter>
-    </ClInclude>
-    <ClInclude Include="CMRDisplaySettings.h">
-      <Filter>core\render</Filter>
-    </ClInclude>
-    <ClInclude Include="CMRState.h">
-      <Filter>core\render</Filter>
-    </ClInclude>
-    <ClInclude Include="CMRGUIActionAdapter.h">
-      <Filter>core\event</Filter>
-    </ClInclude>
     <ClInclude Include="CMRViewBase.h">
       <Filter>core\render</Filter>
-    </ClInclude>
-    <ClInclude Include="CMRLight.h">
-      <Filter>core\render</Filter>
-    </ClInclude>
-    <ClInclude Include="CMREventHandlers.h">
-      <Filter>core\event</Filter>
-    </ClInclude>
-    <ClInclude Include="CMRIntersectionVisitor.h">
-      <Filter>core\util</Filter>
-    </ClInclude>
-    <ClInclude Include="CMRGUIEventAdapter.h">
-      <Filter>core\event</Filter>
-    </ClInclude>
-    <ClInclude Include="CMRLineSegmentIntersector.h">
-      <Filter>core\util</Filter>
     </ClInclude>
     <ClInclude Include="WeakPtr.h">
       <Filter>core\util</Filter>
@@ -215,59 +125,14 @@
     <ClInclude Include="SmartPtr.h">
       <Filter>core\util</Filter>
     </ClInclude>
-    <ClInclude Include="buffere_value.h">
-      <Filter>core\util</Filter>
-    </ClInclude>
-    <ClInclude Include="CMRMath.h">
-      <Filter>core\math</Filter>
-    </ClInclude>
-    <ClInclude Include="CMRMatrix.h">
-      <Filter>core\math</Filter>
-    </ClInclude>
     <ClInclude Include="CMRMacroUtil.h">
       <Filter>core\util</Filter>
-    </ClInclude>
-    <ClInclude Include="CMRTerrain.h">
-      <Filter>core\render</Filter>
     </ClInclude>
     <ClInclude Include="CMRCallback.h">
       <Filter>core\render</Filter>
     </ClInclude>
-    <ClInclude Include="CMRStateSet.h">
-      <Filter>core\render</Filter>
-    </ClInclude>
-    <ClInclude Include="CMRGroup.h">
-      <Filter>core\render</Filter>
-    </ClInclude>
-    <ClInclude Include="CMRTransform.h">
-      <Filter>core\render</Filter>
-    </ClInclude>
-    <ClInclude Include="CMRPositionAttitudeTransform.h">
-      <Filter>core\render</Filter>
-    </ClInclude>
-    <ClInclude Include="CMRMatrixTransform.h">
-      <Filter>core\render</Filter>
-    </ClInclude>
-    <ClInclude Include="CMRCullSettings.h">
-      <Filter>core\render</Filter>
-    </ClInclude>
-    <ClInclude Include="CMRVec4.h">
-      <Filter>core\math</Filter>
-    </ClInclude>
-    <ClInclude Include="CMRColorMask.h">
-      <Filter>core\render</Filter>
-    </ClInclude>
     <ClInclude Include="CMRViewport.h">
       <Filter>core\render</Filter>
-    </ClInclude>
-    <ClInclude Include="CMRVec3d.h">
-      <Filter>core\math</Filter>
-    </ClInclude>
-    <ClInclude Include="CMRMatrixf.h">
-      <Filter>core\math</Filter>
-    </ClInclude>
-    <ClInclude Include="CMRMatrixd.h">
-      <Filter>core\math</Filter>
     </ClInclude>
     <ClInclude Include="CMRImage.h">
       <Filter>core\render</Filter>
@@ -277,9 +142,6 @@
     </ClInclude>
     <ClInclude Include="CMRConfig.h">
       <Filter>core\config</Filter>
-    </ClInclude>
-    <ClInclude Include="CMRVec3f.h">
-      <Filter>core\math</Filter>
     </ClInclude>
     <ClInclude Include="vmath.h">
       <Filter>core\math</Filter>
@@ -335,19 +197,7 @@
     <ClInclude Include="CMRProgram.h">
       <Filter>core\render</Filter>
     </ClInclude>
-    <ClInclude Include="CMRShaderGraphNode.h">
-      <Filter>core\render</Filter>
-    </ClInclude>
-    <ClInclude Include="CMRGeode.h">
-      <Filter>core\render</Filter>
-    </ClInclude>
     <ClInclude Include="CMRRenderLeaf.h">
-      <Filter>core\render</Filter>
-    </ClInclude>
-    <ClInclude Include="CMRShaderGraph.h">
-      <Filter>core\render</Filter>
-    </ClInclude>
-    <ClInclude Include="CMRRenderOperation.h">
       <Filter>core\render</Filter>
     </ClInclude>
     <ClInclude Include="CMRImpotedModel.h">
@@ -360,6 +210,15 @@
       <Filter>core\render</Filter>
     </ClInclude>
     <ClInclude Include="CMRUniform.h">
+      <Filter>core\render</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRStateGraph.h">
+      <Filter>core\render</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRStateGraphNode.h">
+      <Filter>core\render</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRSingleton.h">
       <Filter>core\render</Filter>
     </ClInclude>
   </ItemGroup>
@@ -379,20 +238,8 @@
     <ClCompile Include="CMRRef.cpp">
       <Filter>core\base</Filter>
     </ClCompile>
-    <ClCompile Include="CMRObserver.cpp">
-      <Filter>core\base</Filter>
-    </ClCompile>
     <ClCompile Include="CMRObject.cpp">
       <Filter>core\base</Filter>
-    </ClCompile>
-    <ClCompile Include="CMRUserDataContainer.cpp">
-      <Filter>core\base</Filter>
-    </ClCompile>
-    <ClCompile Include="CMRCopyPolicy.cpp">
-      <Filter>core\base</Filter>
-    </ClCompile>
-    <ClCompile Include="CMRMatrix4x3.cpp">
-      <Filter>core\math</Filter>
     </ClCompile>
     <ClCompile Include="CMRDirector.cpp">
       <Filter>core\render</Filter>
@@ -401,9 +248,6 @@
       <Filter>core\render</Filter>
     </ClCompile>
     <ClCompile Include="CMRViewBase.cpp">
-      <Filter>core\render</Filter>
-    </ClCompile>
-    <ClCompile Include="CMRDisplaySettings.cpp">
       <Filter>core\render</Filter>
     </ClCompile>
     <ClCompile Include="CMRNode.cpp">
@@ -427,22 +271,56 @@
     <ClCompile Include="CMRImage.cpp">
       <Filter>core\render</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="CMRMathUtil.cpp">
-      <Filter>core\math</Filter>
+    <ClCompile Include="CMRCallback.cpp">
+      <Filter>core\render</Filter>
     </ClCompile>
-    <ClCompile Include="CMREulerAngles.cpp">
-      <Filter>core\math</Filter>
+    <ClCompile Include="CMRImpotedModel.cpp">
+      <Filter>core\render</Filter>
     </ClCompile>
-    <ClCompile Include="CMRQuaternion.cpp">
-      <Filter>core\math</Filter>
+    <ClCompile Include="CMRDrawable.cpp">
+      <Filter>core\render</Filter>
     </ClCompile>
-    <ClCompile Include="CMRRotationMatrix.cpp">
-      <Filter>core\math</Filter>
+    <ClCompile Include="CMRFrameStamp.cpp">
+      <Filter>core\render</Filter>
     </ClCompile>
-    <ClCompile Include="CMRMatrix4x3.cpp">
-      <Filter>core\math</Filter>
+    <ClCompile Include="CMRShader.cpp">
+      <Filter>core\render</Filter>
+    </ClCompile>
+    <ClCompile Include="CMRGraphicsContext.cpp">
+      <Filter>core\render</Filter>
+    </ClCompile>
+    <ClCompile Include="CMRFile.cpp">
+      <Filter>core\io</Filter>
+    </ClCompile>
+    <ClCompile Include="CMRProgram.cpp">
+      <Filter>core\render</Filter>
+    </ClCompile>
+    <ClCompile Include="CMRRender.cpp">
+      <Filter>core\render</Filter>
+    </ClCompile>
+    <ClCompile Include="CMRViewport.cpp">
+      <Filter>core\render</Filter>
+    </ClCompile>
+    <ClCompile Include="CMRRenderBin.cpp">
+      <Filter>core\render</Filter>
+    </ClCompile>
+    <ClCompile Include="CMRRenderLeaf.cpp">
+      <Filter>core\render</Filter>
+    </ClCompile>
+    <ClCompile Include="CMRRenderStage.cpp">
+      <Filter>core\render</Filter>
+    </ClCompile>
+    <ClCompile Include="CMRStateGraphNode.cpp">
+      <Filter>core\render</Filter>
+    </ClCompile>
+    <ClCompile Include="CMRUniform.cpp">
+      <Filter>core\render</Filter>
+    </ClCompile>
+    <ClCompile Include="CMRTimer.cpp">
+      <Filter>core\util</Filter>
+    </ClCompile>
+    <ClCompile Include="CMRScene.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

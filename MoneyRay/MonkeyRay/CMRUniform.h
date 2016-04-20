@@ -1,60 +1,59 @@
 #ifndef CMRUniform_h__
 #define CMRUniform_h__
-#include "CMRPrerequisites.h"
+
 #include "CMRRef.h"
 #include "CMRProgram.h"
 namespace MR
 {
-
-	class CMRUniformBase : public CMRRef
+	class CMRUniformRef : public CMRRef
 	{
-		virtual void Apply(CMRProgram* pProgram) = 0;
+	public:
+		void Apply(const CMRProgram* pProgram);
+
+		virtual void ApplyImpl(GLint uniformLocation) = 0;
+	protected:
+		string m_strUniformName;
 	};
 
-	template<typename T, const size_t N, void M(GLint, GLsizei, const T*), const size_t count = 1 >
-	class CMRUniformfi : public CMRUniformBase
+	template<typename T, const size_t N, const size_t count = 1 >
+	class CMRUniformBase : public CMRUniformRef
 	{
 	public:
 		typedef T value_type[N * count];
 	public:
-		CMRUniformfi(const string& strName, value_type val) :
-			m_strUniformName(strName)
-		{
-			memcpy(m_val, val, sizeof(T) * N * count);
-		}
+		explicit CMRUniformBase(const string& strName);
+		CMRUniformBase(const string& strName, value_type val);
 
-		virtual void Apply(CMRProgram* pProgram) override
-		{
-			GLint uni_loc = glGetUniformLocation(pProgram->GetProgramObject(), m_strUniformName.c_str());
-			M(uni_loc, count, m_val);
-		}
+		void SetData(value_type val);
+
+		T* GetData() const;
 	protected:
-		string m_strUniformName;
+		
 		value_type m_val;
+	};
+
+	template<typename T, const size_t N, void M(GLint, GLsizei, const T*), const size_t count = 1 >
+	class CMRUniformfi : public CMRUniformBase<T, N, count>
+	{
+
+	public:
+
+		CMRUniformfi(const string& strName);
+
+		CMRUniformfi(const string& strName, value_type val);
+		virtual void ApplyImpl(GLint uni_loc) override;
 	};
 
 
 	template<typename T, const size_t N, void M(GLint, GLsizei, GLboolean, const T*), const size_t count = 1 >
-	class CMRUniformMatrix : public CMRUniformBase
+	class CMRUniformMatrix : public CMRUniformBase<T, N, count>
 	{
 	public:
-		typedef T value_type[N * N * count];
-	public:
-		CMRUniformMatrix(const string& strName, value_type val) :
-			m_strUniformName(strName)
-		{
-			memcpy(m_val, val, sizeof(T) * N * N * count);
-		}
+		CMRUniformMatrix(const string& strName);
 
-		virtual void Apply(CMRProgram* pProgram) override
-		{
-			//here we send the uniform matrix data to the OpenGL program without transpose.  
-			GLint uni_loc = glGetUniformLocation(pProgram->GetProgramObject(), m_strUniformName.c_str());
-			M(uni_loc, count, false, m_val);
-		}
-	protected:
-		string m_strUniformName;
-		value_type m_val;
+		CMRUniformMatrix(const string& strName, value_type val);
+
+		virtual void ApplyImpl(GLint uni_loc) override;
 	};
 
 
@@ -86,6 +85,6 @@ namespace MR
 	{
 		glUniformMatrix4fv(location, count, transpose, value);
 	}
-	typedef CMRUniformMatrix<GLfloat, 4, aux_glUniformMatrix4fv> CMRUniformMatrix4fv;
+	typedef CMRUniformMatrix<GLfloat, 16, aux_glUniformMatrix4fv> CMRUniformMatrix4fv;
 }
 #endif // CMRUniform_h__

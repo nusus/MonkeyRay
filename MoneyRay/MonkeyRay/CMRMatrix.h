@@ -5,6 +5,8 @@ namespace MR
 {
 	class CMRMatrix
 	{
+	public:
+		typedef double value_type;
 		public:
 			
 

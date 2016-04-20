@@ -1,13 +1,6 @@
 #include "CMRDirector.h"
-#include "CMRGraphicsContext.h"
-#include "CMRRender.h"
-#include "CMRView.h"
-#include "CMRNodeVisitor.h"
-#include "CMRCameraManipulator.h"
 #include "CMRMemManager.h"
-#include "CMRDisplaySettings.h"
-#include "CMRState.h"
-#include "CMRNode.h"
+#include "CMRRender.h"
 
 using namespace MR;
 
@@ -20,19 +13,15 @@ MR::CMRDirector::CMRDirector(CMRView* pView)
 
 }
 
-const char* MR::CMRDirector::ClassName() const
+CMRDirector* MR::CMRDirector::Instance(CMRView* pView)
 {
-	return "CMRDirector";
+	static CMRDirector ret(pView);
+	return &ret;
 }
 
-CMRObject* MR::CMRDirector::Clone() const
+CMRDirector& MR::CMRDirector::operator=(const CMRDirector&)
 {
-	return nullptr;
-}
-
-CMRObject* MR::CMRDirector::Copy(const CMRCopyPolicy& policy) const
-{
-	return nullptr;
+	return *this;
 }
 
 MR::CMRDirector::~CMRDirector()
@@ -40,20 +29,17 @@ MR::CMRDirector::~CMRDirector()
 
 }
 
-void MR::CMRDirector::SetDirectorStats(CMRStats* stats)
-{
-
-}
-
-CMRStats* MR::CMRDirector::GetDirectorStats()
-{
-
-}
 
 void MR::CMRDirector::AddView(const CMRView* view)
 {
 	if (view == nullptr) return;
 	m_spView = const_cast<CMRView*>(view);
+}
+
+template<typename T>
+void MR::CMRDirector::AddView(const SmartPtr<T>& view)
+{
+	AddView(view.Get());
 }
 
 bool MR::CMRDirector::IsRealized()
@@ -74,12 +60,6 @@ void MR::CMRDirector::Realize()
 		m_bDone = true;
 		return;
 	}
-	int maxBufferObjectPoolSize = 2;
-	int maxBufferObjectPoolSize = 4;
-
-	CMRState* pState = pContext->GetState();
-	pState->SetMaxTexturePoolSize(maxBufferObjectPoolSize);
-	pState->SetMaxBufferObjectPoolSize(maxBufferObjectPoolSize);
 
 	pContext->Realize();
 
@@ -91,21 +71,7 @@ void MR::CMRDirector::Realize()
 
 	m_spView->SetStartTick(CMRTimer::Instance()->GetStartTick());
 
-	CMRNode* pNode = GetScene()->GetSceneData();
-	pNode->ResizeGLObjectBuffers(CMRDisplaySettings::Instance()->GetMaxNumberOfGraphicsContexts());
 }
-
-#if MR_USE_MULTITHREAD
-void MR::CMRDirector::StartThreading()
-{
-
-}
-
-void MR::CMRDirector::StopThrading()
-{
-
-}
-#endif
 
 bool MR::CMRDirector::Done() const
 {
@@ -117,61 +83,6 @@ void MR::CMRDirector::SetDone( bool bDone )
 	m_bDone = bDone;
 }
 
-void MR::CMRDirector::SetEventVisitor(const CMREventVisitor* ev)
-{
-	m_spEventVisitor = const_cast<CMREventVisitor*>(ev);
-}
-
-CMREventVisitor* MR::CMRDirector::GetEventVisitor()
-{
-	return m_spEventVisitor.Get();
-}
-
-void MR::CMRDirector::SetUpdateVisitor(const CMRUpdateVisitor* uv)
-{
-	m_spUpdateVisitor = const_cast<CMRUpdateVisitor*>(uv);
-}
-
-CMRUpdateVisitor* MR::CMRDirector::GetUpdateVisitor()
-{
-	return m_spUpdateVisitor.Get();
-}
-
-void MR::CMRDirector::SetUpdateOperations(const CMROperationQueue* uo)
-{
-	m_spUpdateOperations = const_cast<CMROperationQueue*> (uo);
-}
-
-CMROperationQueue* MR::CMRDirector::GetUpdateOperations()
-{
-	return m_spUpdateOperations.Get();
-}
-
-void MR::CMRDirector::AddUpdateOperation(const CMROperation* op)
-{
-	if (!op)
-	{
-		return;
-	}
-	if (!m_spUpdateOperations.Valid())
-	{
-		m_spUpdateOperations = new CMROperationQueue;
-	}
-	m_spUpdateOperations->Add(op);
-}
-
-void MR::CMRDirector::RemoveUpdateOperation(const CMROperation* op)
-{
-	if (!op)
-	{
-		return;
-	}
-	if (m_spUpdateOperations.Valid())
-	{
-		m_spUpdateOperations->Remove(op);
-	}
-}
-
 void MR::CMRDirector::SetRealizeOperation(const CMROperation* op)
 {
 	m_spRealizeOperation = const_cast<CMROperation*>(op);
@@ -180,16 +91,6 @@ void MR::CMRDirector::SetRealizeOperation(const CMROperation* op)
 CMROperation* MR::CMRDirector::GetRealizeOperation() const
 {
 	return m_spRealizeOperation.Get();
-}
-
-void MR::CMRDirector::SetIncrementalCompileOperation(const CMRIncrementalCompileOperation* op)
-{
-
-}
-
-CMRIncrementalCompileOperation* MR::CMRDirector::GetIncrementalCompileOperation() const
-{
-
 }
 
 void MR::CMRDirector::SetMaxFrameRate(double dFrameRate)
@@ -229,7 +130,7 @@ void MR::CMRDirector::Frame()
 
 	if (m_bFirstFrame)
 	{
-		DirectorInit();
+		_DirectorInit();
 		if (!IsRealized())
 		{
 			Realize();
@@ -275,63 +176,7 @@ void MR::CMRDirector::EventTraversal()
 
 void MR::CMRDirector::UpdateTraversal()
 {
-	if (m_bDone)
-	{
-		return;
-	}
-
-	if (!m_spUpdateVisitor.Valid())
-	{
-		return;
-	}
-
-	m_spUpdateVisitor->Reset();
-	m_spUpdateVisitor->SetFrameStamp(GetDirectorFrameStamp());
-	unsigned int uiFrameNumber = GetDirectorFrameStamp()->GetFrameNumber();
-	m_spUpdateVisitor->SetTraversalNumber(GetDirectorFrameStamp()->GetFrameNumber());
-
-	CMRScene* pScene = m_spView->GetScene();
-	pScene->UpdateSceneGraph();
-
-	/*
-	// if we have a shared state manager prune any unused entries
-	if (osgDB::Registry::instance()->getSharedStateManager())
-		osgDB::Registry::instance()->getSharedStateManager()->prune();
-
-	// update the Registry object cache.
-	osgDB::Registry::instance()->updateTimeStampOfObjectsInCacheWithExternalReferences(*getFrameStamp());
-	osgDB::Registry::instance()->removeExpiredObjectsInCache(*getFrameStamp());
-	*/
-
-	if (m_spUpdateOperations.Valid())
-	{
-		m_spUpdateOperations->RunOperations(this);
-	}
-
-	if (m_spIncrementalCompileOperation.Valid())
-	{
-		m_spIncrementalCompileOperation->MergeCompiledSubgraphs(GetDirectorFrameStamp());
-	}
-
-	{
-		CMRNodeVisitor::TraversalMode tm = m_spUpdateVisitor->GetTraversalMode();
-		m_spUpdateVisitor->SetTraversalMode(CMRNodeVisitor::TraversalMode::TRAVERSE_NONE);
-		CMRCamera* pCamera = GetCamera();
-		if (pCamera && pCamera->GetUpdateCallback())
-		{
-			CMRUpdateVisitor* pUpdateVisitor = m_spUpdateVisitor.Get();
-			pCamera->Accept(*pUpdateVisitor);
-		}
-
-		m_spUpdateVisitor->SetTraversalMode(tm);
-	}
-
-	CMRCameraManipulator* cm = m_spView->GetManipulator();
-	if (cm)
-	{
-		CMRCamera* pCamera = GetCamera();
-		cm->UpdateCamera(*pCamera);
-	}
+	
 }
 
 void MR::CMRDirector::RenderingTraversal()
@@ -362,12 +207,6 @@ void MR::CMRDirector::RenderingTraversal()
 			ip->SignalBeginFrame(pFrameStamp);
 		}
 #endif
-		//TODO: scene data update is to be done.
-		pScene->UpdateSceneData();
-		if (pScene->GetSceneData())
-		{
-			pScene->GetSceneData()->GetBound();
-		}
 	}
 	else
 	{
@@ -414,12 +253,6 @@ CMRGraphicsContext* MR::CMRDirector::GetContext() const
 		return nullptr;
 	}
 	return pCamera->GetGraphicsContext();
-}
-
-CMRGraphicsWindow* MR::CMRDirector::GetWindow() const
-{
-	CMRGraphicsWindow* gw = dynamic_cast<CMRGraphicsWindow*>(GetContext());
-	return gw;
 }
 
 CMRFrameStamp* MR::CMRDirector::GetFrameStamp() const
@@ -477,52 +310,21 @@ void MR::CMRDirector::CheckWindowStatus(const CMRGraphicsContext* ptr)
 
 double MR::CMRDirector::ElapsedTime()
 {
-
+	return CMRTimer::Instance()->DeltaS(GetStartTick(), CMRTimer::Instance()->Tick());
 }
 
-void MR::CMRDirector::DirectorConstructorInit()
+CMRFrameStamp* MR::CMRDirector::GetDirectorFrameStamp()
 {
-	m_spEventVisitor = new CMREventVisitor;
-	m_spEventVisitor->SetActionAdapter(m_spView.Get());
-	m_spEventVisitor->SetFrameStamp(GetFrameStamp());
-
-	m_spUpdateVisitor = new CMRUpdateVisitor;
-	m_spUpdateVisitor->SetFrameStamp(GetFrameStamp());
-
+	return m_spView->GetFrameStamp();
 }
 
-void MR::CMRDirector::MakeCurrent(CMRGraphicsContext* gc)
+void MR::CMRDirector::_DirectorConstructorInit()
 {
 
 }
 
-void MR::CMRDirector::ReleaseContext()
-{
-
-}
-
-void MR::CMRDirector::DirectorInit()
+void MR::CMRDirector::_DirectorInit()
 {
 	m_spView->Init();
-}
-
-const CMROperationQueue* MR::CMRDirector::GetUpdateOperations() const
-{
-	return m_spUpdateOperations.Get();
-}
-
-const CMRUpdateVisitor* MR::CMRDirector::GetUpdateVisitor() const
-{
-	return m_spUpdateVisitor.Get();
-}
-
-const CMREventVisitor* MR::CMRDirector::GetEventVisitor() const
-{
-	return m_spEventVisitor.Get();
-}
-
-const CMRStats* MR::CMRDirector::GetDirectorStats() const
-{
-
 }
 
