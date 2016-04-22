@@ -1,7 +1,6 @@
 #ifndef CMRImageLoader_h__
 #define CMRImageLoader_h__
 
-#include "CMRPrerequisites.h"
 #include "CMRImage.h"
 #include "CMRRef.h"
 namespace MR

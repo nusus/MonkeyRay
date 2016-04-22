@@ -1,8 +1,7 @@
 #ifndef CMRRef_h__
 #define CMRRef_h__
 
-#include "CMRMemoryAllocatorConfig.h"
-#include <thread>
+#include "CMRPrerequisites.h"
 #if MR_USE_MULTITHREAD
 #include <mutex>
 #endif
@@ -10,21 +9,15 @@
 namespace MR
 {
 	class CMRMemManager;
-	class CMRSubsciber;
-	class CMRSubsciption;
+
 	class CMRRef : public CMRObjectBase
 	{
 	public:
 
 		CMRRef();
 
-		CMRRef(const CMRRef& obj) :
-#if MR_USE_MULTITHREAD
-			m_RefMutex(),
-#endif
-			m_nRefCount(0),
-			m_pSubsciption(0) {}
-		inline CMRRef& operator = (const CMRRef&) { return *this; }
+		CMRRef(const CMRRef& obj);
+		CMRRef& operator = (const CMRRef&);
 
 #if MR_USE_MULTITHREAD
 		static std::mutex* GetGlobalReferenceMutex();
@@ -36,20 +29,12 @@ namespace MR
 
 		int ReleaseNoDelete() const;
 
-		inline int ReferenceCount() const { return m_nRefCount; }
-
-		CMRSubsciption* GetSubscription() const { return static_cast<CMRSubsciption*>(m_pSubsciption); }
-
-		CMRSubsciption* GetOrCreateSubscription() const;
-
-		void AddSubcriber(CMRSubsciber* subsciber) const;
-
-		void RemoveSubsciber(CMRSubsciber* subscriber) const;
+		int ReferenceCount() const;
 
 #ifdef NOT_FORCE_USE_THREAD_SAFE_IN_OBJECT
 		explicit CMRRef(bool bThreadSafeRefUnref);
 		virtual void SetThreadSafeRefUnref(bool bThreadSafe);
-		bool GetThreadSafeRefUnref() const { return ((bool)m_RefMutex); }
+		bool GetThreadSafeRefUnref() const;
 		static void SetThreadSafeReferenceCounting(bool bEnableThreadSafeReferenceCounting);
 		static bool GetThreadSafeReferenceCounting();
 #endif // NOT_FORCE_USE_THREAD_SAFE_IN_OBJECT	
@@ -59,7 +44,6 @@ namespace MR
 		static CMRMemManager* GetMemManager();
 	protected:
 		virtual ~CMRRef();
-		void SignalObserversToDelete() const;
 		void MemManagerDelete() const;
 	protected:
 #if MR_USE_MULTITHREAD
@@ -67,7 +51,6 @@ namespace MR
 		mutable std::mutex			m_RefMutex;
 #endif
 		mutable int					m_nRefCount;
-		mutable void*				m_pSubsciption;
 	};
 }
 #endif // CMRRef_h__

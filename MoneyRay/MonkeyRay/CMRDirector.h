@@ -2,82 +2,45 @@
 #define CMRDirector_h__
 
 #include "CMRObject.h"
-#include "CMRStats.h"
-#include "CMREventVisitor.h"
-#include "CMRUpdateVisitor.h"
 #include "CMROperationThread.h"
-#include "CMRIncrementalCompileOperation.h"
 #include "CMRCamera.h"
-#include "CMRGraphicsContext.h"
-#include "CMRGraphicsWindow.h"
 #include "CMRScene.h"
 #include "CMRFrameStamp.h"
 #include "CMRTimer.h"
 #include "SmartPtr.h"
-#include "WeakPtr.h"
+#include "CMRGraphicsContext.h"
 
 namespace MR
 {
 	class CMRView;
 
-
 	class CMRDirector : public CMRObject 
 	{
 	public:
-
-		static CMRDirector& InstanceWithView(CMRView* pView)
-		{
-			static CMRDirector ret(pView);
-			return ret;
-		}
-
-		virtual const char* ClassName() const override;
+		static CMRDirector* Instance(CMRView* pView);
 
 		virtual ~CMRDirector();
 
-		virtual void SetDirectorStats(CMRStats* stats);
-		virtual CMRStats* GetDirectorStats();
-		virtual const CMRStats* GetDirectorStats() const;
 
+	public:
 		void AddView(const CMRView* view);
 
 		template<typename T>
-		void AddView(const SmartPtr<T>& view) { AddView(view.Get()); }
+		void AddView(const SmartPtr<T>& view);
 
 		virtual bool IsRealized();
-		virtual void Realize();
 
-#if MR_USE_MULTITHREAD
-		virtual bool AreThreadsRunning();
-		virtual void StartThreading();
-		virtual void StopThrading();
-#endif
+		virtual void Realize();
 
 		bool Done() const;
 		void SetDone(bool bDone);
 
-		void SetEventVisitor(const CMREventVisitor* ev);
-		CMREventVisitor* GetEventVisitor();
-		const CMREventVisitor* GetEventVisitor() const;
-
-		void SetUpdateVisitor(const CMRUpdateVisitor* uv);
-		CMRUpdateVisitor* GetUpdateVisitor();
-		const CMRUpdateVisitor* GetUpdateVisitor() const;
-
-		void SetUpdateOperations(const CMROperationQueue* uo);
-		CMROperationQueue* GetUpdateOperations();
-		const CMROperationQueue* GetUpdateOperations() const;
-
-		void AddUpdateOperation(const CMROperation* op);
-		void RemoveUpdateOperation(const CMROperation* op);
-
 		void SetRealizeOperation(const CMROperation* op);
+
 		CMROperation* GetRealizeOperation() const;
 
-		void SetIncrementalCompileOperation(const CMRIncrementalCompileOperation* op);
-		CMRIncrementalCompileOperation* GetIncrementalCompileOperation() const;
-
 		void SetMaxFrameRate(double dFrameRate);
+
 		double GetMaxFrameRate() const;
 
 		virtual int Run();
@@ -89,28 +52,18 @@ namespace MR
 		virtual void Advance();
 
 		virtual void EventTraversal();
+
 		virtual void UpdateTraversal();
+
 		virtual void RenderingTraversal();
 
 		virtual CMRCamera* GetCamera() const;
 
 		virtual CMRGraphicsContext* GetContext() const;
 
-		virtual CMRGraphicsWindow* GetWindow() const;
-
-
 		virtual CMRFrameStamp* GetFrameStamp() const;
 
 		virtual Timer_t GetStartTick() const;
-#if MR_USE_MULTITHREAD
-		typedef vector<std::thread*> Threads;
-		virtual void GetThreads(Threads& threads, bool bOnlyActive = true);
-#endif
-
-#if MR_USE_MULTITHREAD
-		typedef vector<CMROperationThread*> OperationThreads;
-		virtual void GetOperationThreads(OperationThreads& threads, bool bOnlyActive = true);
-#endif
 
 		virtual CMRScene* GetScene() const;
 
@@ -122,54 +75,37 @@ namespace MR
 
 		virtual double ElapsedTime();
 
-		CMRFrameStamp* GetDirectorFrameStamp()
-		{
-			return m_spView->GetFrameStamp();
-		}
+		CMRFrameStamp* GetDirectorFrameStamp();
+
+
+	protected:
+		friend class CMRView;
+
 
 	protected:
 		CMRDirector(CMRView* pView);
-		void DirectorConstructorInit();
+		CMRDirector(const CMRDirector& rhs) {}
+		CMRDirector& operator=(const CMRDirector& rhs) { return *this; }
 
-		friend class CMRView;
-
-		void MakeCurrent(CMRGraphicsContext* gc);
-		void ReleaseContext();
-
-		virtual void  DirectorInit();
-
-		virtual CMRObject* Clone() const override;
-
-		virtual CMRObject* Copy(const CMRCopyPolicy& policy) const override;
-		//META_OBJECT(MonkeyRay, CMRDirector);
 
 	protected:
-		bool m_bFirstFrame;
-		bool m_bDone;
-#if MR_USE_MULTITHREAD
-		bool m_bThreadsRunning;
-#endif
-		char m_bPadding[2];
-		double m_dRunMaxFrameRate;
-		
-		SmartPtr<CMRView> m_spView;
+		void _DirectorConstructorInit();
 
-		SmartPtr<CMROperation> m_spRealizeOperation;
-		
-		SmartPtr<CMREventVisitor> m_spEventVisitor;
+		virtual void  _DirectorInit();
 
-		SmartPtr<CMROperationQueue> m_spUpdateOperations;
-		SmartPtr<CMRUpdateVisitor> m_spUpdateVisitor;
-			
-		SmartPtr<CMRIncrementalCompileOperation> m_spIncrementalCompileOperation;
 
-		WeakPtr<CMRGraphicsContext> m_wpCurrentContext;
+	protected:
+		bool					m_bFirstFrame;
+		bool					m_bDone;
+		char					m_bPadding[2];
+		double					m_dRunMaxFrameRate;		
+		SmartPtr<CMRView>		m_spView;
+		SmartPtr<CMROperation>	m_spRealizeOperation;
+		CMRGraphicsContext*		m_wpCurrentContext;
 
-		SmartPtr<CMRStats> m_spStates;
 
 	private:
-		CMRDirector& operator = (const CMRDirector&) { return *this; }
-		
+		CMRDirector& operator = (const CMRDirector&);	
 	};
 }
 #endif // CMRDirector_h__

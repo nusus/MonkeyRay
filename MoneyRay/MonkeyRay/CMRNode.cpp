@@ -4,28 +4,15 @@ using namespace MR;
 
 MR::CMRNode::CMRNode()
 {
-	//TODO: MR::CMRNode::CMRNode is not implemented
+	m_spEventCallback = new CMRCallback();
+	m_spUpdateCallback = new CMRCallback();
 
 }
 
-CMRObject* MR::CMRNode::Clone() const
+CMRNode* MR::CMRNode::AsNode()
 {
-	return new CMRNode();
-}
+	return this;
 
-CMRObject* MR::CMRNode::Copy(const CMRCopyPolicy& policy) const
-{
-	return new CMRNode(*this, policy);
-}
-
-bool MR::CMRNode::IsSameKindAs(const CMRObject* obj) const
-{
-	return dynamic_cast<const CMRNode*>(obj) != NULL;
-}
-
-const char* MR::CMRNode::ClassName() const
-{
-	return "CMRNode";
 }
 
 const CMRNode* MR::CMRNode::AsNode() const
@@ -33,177 +20,34 @@ const CMRNode* MR::CMRNode::AsNode() const
 	return this;
 }
 
-CMRNode* MR::CMRNode::AsNode()
-{
-	return this;
-}
-
-const CMRDrawable* MR::CMRNode::AsDrawable() const
-{
-	return 0;
-}
-
-CMRDrawable* MR::CMRNode::AsDrawable()
-{
-	return 0;
-}
-
-const CMRGeometry* MR::CMRNode::AsGeometry() const
-{
-	return 0;
-}
-
-CMRGeometry* MR::CMRNode::AsGeometry()
-{
-	return 0;
-}
-
-const CMRGroup* MR::CMRNode::AsGroup() const
-{
-	return 0;
-}
-
-CMRGroup* MR::CMRNode::AsGroup()
-{
-	return 0;
-}
-
-const CMRTransform* MR::CMRNode::AsTransform() const
-{
-	return 0;
-}
-
-CMRTransform* MR::CMRNode::AsTransform()
-{
-	return 0;
-}
-
-const CMRCamera* MR::CMRNode::AsCamera() const
-{
-	return 0;
-}
-
-CMRCamera* MR::CMRNode::AsCamera()
-{
-	return 0;
-}
-
-const CMRSwitch* MR::CMRNode::AsSwitch() const
-{
-	return 0;
-}
-
-CMRSwitch* MR::CMRNode::AsSwitch()
-{
-	return 0;
-}
-
-const CMRGeode* MR::CMRNode::AsGeode() const
-{
-	return 0;
-}
-
-CMRGeode* MR::CMRNode::AsGeode()
-{
-	return 0;
-}
-
-const CMRTerrain* MR::CMRNode::AsTerrain() const
-{
-	return 0;
-}
-
-CMRTerrain* MR::CMRNode::AsTerrain()
-{
-	return 0;
-}
-
-void MR::CMRNode::Accept(CMRNodeVisitor& nv)
-{
-	//TODO: MR::CMRNode::Accept is not implemented
-
-}
-
-void MR::CMRNode::Ascend(CMRNodeVisitor& nv)
-{
-	//TODO: MR::CMRNode::Ascend is not implemented
-
-}
-
-void MR::CMRNode::Traverse(CMRNodeVisitor& nv)
-{
-	//TODO: MR::CMRNode::Traverse is not implemented
-
-}
-
-CMRNode::ParentList& MR::CMRNode::GetParents()
-{
-	return m_parents;
-}
-
-const CMRNode::ParentList& MR::CMRNode::GetParents() const
-{
-	return m_parents;
-}
-
-const CMRGroup* MR::CMRNode::GetParent(unsigned int index) const
-{
-	return m_parents[index];
-}
-
-CMRGroup* MR::CMRNode::GetParent(unsigned int index)
+CMRNode* MR::CMRNode::GetParent(unsigned int index)
 {
 	return m_parents[index];
 }
 
 unsigned int MR::CMRNode::GetNumParents() const
 {
-	return static_cast<unsigned int>(m_parents.size());
-}
-
-MR::CMRNodePathList MR::CMRNode::GetParentalNodePaths(CMRNode* haltTraversalAtNode /*= 0*/) const
-{
-	//TODO: MR::CMRNode::GetParentalNodePaths is not implemented
-
-}
-
-MR::CMRMatrixList MR::CMRNode::GetWorldMatrices(const CMRNode* haltTraversalAtNode /*= 0*/) const
-{
-	//TODO: MR::CMRNode::GetWorldMatrices is not implemented
-
+	return m_parents.size();
 }
 
 void MR::CMRNode::SetUpdateCallback(CMRCallback* pUC)
 {
-	//TODO: MR::CMRNode::SetUpdateCallback is not implemented
-
-}
-
-template <typename T>
-void MR::CMRNode::SetUpdateCallback(const SmartPtr<T>& spUC)
-{
-	SetUpdateCallback(spUC.Get());
-}
-
-const CMRCallback* MR::CMRNode::GetUpdateCallback() const
-{
-	return m_spUpdateCallback.Get();
+	if (m_spUpdateCallback == pUC)
+	{
+		return;
+	}
+	m_spUpdateCallback = pUC;
 }
 
 CMRCallback* MR::CMRNode::GetUpdateCallback()
 {
 	return m_spUpdateCallback.Get();
-}
 
-template<typename T>
-void MR::CMRNode::AddUpdateCallback(const SmartPtr<T>& spUC)
-{
-	AddUpdateCallback(spUC.Get());
 }
 
 void MR::CMRNode::AddUpdateCallback(CMRCallback* pc)
 {
-	if (pc != NULL)
+	if (pc)
 	{
 		if (m_spUpdateCallback.Valid())
 		{
@@ -216,49 +60,31 @@ void MR::CMRNode::AddUpdateCallback(CMRCallback* pc)
 	}
 }
 
-template<typename T>
-void MR::CMRNode::RemoveUpdateCallback(const SmartPtr<CMRCallback>& pCallback)
-{
-	RemoveUpdateCallback(pCallback.Get());
-}
-
 void MR::CMRNode::RemoveUpdateCallback(CMRCallback* pUC)
 {
-	if (pUC != NULL && m_spUpdateCallback.Valid())
+	if (pUC && m_spUpdateCallback.Valid())
 	{
-		if (m_spUpdateCallback == pUC)
+		if (pUC == m_spUpdateCallback)
 		{
-			SmartPtr<CMRCallback> newUpdateCallback = pUC->GetNestedCallback();
-			pUC->SetNestedCallback((CMRCallback*)(nullptr));
-			m_spUpdateCallback->SetUpdateCallback(newUpdateCallback.Get());
+			SmartPtr<CMRCallback> new_nested_callback = m_spUpdateCallback->GetNestedCallback();
+			pUC->SetNestedCallback(nullptr);
+			SetUpdateCallback(new_nested_callback);
 		}
 		else
 		{
 			m_spUpdateCallback->RemoveNestedCallback(pUC);
 		}
 	}
-}
 
-unsigned int MR::CMRNode::GetNumChildrenRequiringUpdateTraversal() const
-{
-	return m_uiNumChildrenRequiringUpdateTraversal;
 }
 
 void MR::CMRNode::SetEventCallback(CMRCallback* cb)
 {
-	//TODO: MR::CMRNode::SetEventCallback is not implemented
-
-}
-
-template<typename T>
-void MR::CMRNode::SetEventCallback(const SmartPtr<T>& cb)
-{
-	SetEventCallback(cb.Get());
-}
-
-const CMRCallback* MR::CMRNode::GetEventCallback() const
-{
-	return m_spEventCallback.Get();
+	if (m_spEventCallback == cb)
+	{
+		return;
+	}
+	m_spEventCallback = cb;
 }
 
 CMRCallback* MR::CMRNode::GetEventCallback()
@@ -266,15 +92,9 @@ CMRCallback* MR::CMRNode::GetEventCallback()
 	return m_spEventCallback.Get();
 }
 
-template<typename T>
-void MR::CMRNode::AddEventCallback(const SmartPtr<T>& cb)
-{
-	AddEventCallback(cb.Get());
-}
-
 void MR::CMRNode::AddEventCallback(CMRCallback* cb)
 {
-	if (cb != nullptr)
+	if (cb)
 	{
 		if (m_spEventCallback.Valid())
 		{
@@ -287,21 +107,48 @@ void MR::CMRNode::AddEventCallback(CMRCallback* cb)
 	}
 }
 
-template<typename T>
-void MR::CMRNode::RemoveEventCallback(const SmartPtr<T>& cb)
+const CMRCallback* MR::CMRNode::GetEventCallback() const
 {
-	RemoveEventCallback(cb.Get());
+	return m_spEventCallback.Get();
+
+}
+
+const CMRCallback* MR::CMRNode::GetUpdateCallback() const
+{
+	return m_spUpdateCallback.Get();
+
+}
+
+const CMRNode* MR::CMRNode::GetParent(unsigned int index) const
+{
+	if (index < GetNumParents())
+	{
+		return m_parents[index];
+	}
+
+}
+
+CMRNode::ParentList& MR::CMRNode::GetParents()
+{
+	return m_parents;
+
+}
+
+const CMRNode::ParentList& MR::CMRNode::GetParents() const
+{
+	return m_parents;
+
 }
 
 void MR::CMRNode::RemoveEventCallback(CMRCallback* cb)
 {
-	if (cb != nullptr && m_spEventCallback.Valid())
+	if (cb && m_spEventCallback.Valid())
 	{
 		if (m_spEventCallback == cb)
 		{
-			SmartPtr<CMRCallback> newEventCallback = cb->GetNestedCallback();
-			cb->SetNestedCallback(0);
-			SetEventCallback(newEventCallback.Get());
+			SmartPtr<CMRCallback> new_nested_callback = m_spEventCallback->GetNestedCallback();
+			cb->SetNestedCallback(nullptr);
+			SetEventCallback(new_nested_callback);
 		}
 		else
 		{
@@ -310,309 +157,235 @@ void MR::CMRNode::RemoveEventCallback(CMRCallback* cb)
 	}
 }
 
-unsigned int MR::CMRNode::GetNumChildrenRequiringEventTraversal() const
+void MR::CMRNode::AddTransform(const vmath::mat4& matrix)
 {
-	return m_uiNumChildrenRequiringEventTraversal;
+	m_matTransform *= matrix;
 }
 
-void MR::CMRNode::SetCullCallback(CMRCallback* cb)
+vmath::mat4 MR::CMRNode::GetTransform() const
 {
-	//TODO: MR::CMRNode::SetCullCallback is not implemented
-
-}
-
-template<typename T>
-void MR::CMRNode::SetCullCallback(const SmartPtr<T>& cb)
-{
-	SetCullCallback(cb.Get());
-}
-
-const CMRCallback* MR::CMRNode::GetCullCallback() const
-{
-	return m_spCullCallback.Get();
-}
-
-CMRCallback* MR::CMRNode::GetCullCallback()
-{
-	return m_spCullCallback.Get();
+	return m_matTransform;
 }
 
 template<typename T>
-void MR::CMRNode::AddCullCallback(const SmartPtr<T>& cb)
+bool MR::CMRNode::AddChild(const SmartPtr<T>& child)
 {
-	AddCullCallback(cb.Get());
+	return AddChild(child.Get());
 }
 
-void MR::CMRNode::AddCullCallback(CMRCallback* cb)
+bool MR::CMRNode::AddChild(CMRNode* child)
 {
-	if (cb != nullptr)
+	if (child)
 	{
-		if (m_spCullCallback.Valid())
+		m_children.push_back(child);
+		child->AddParent(this);
+	}
+
+}
+
+template<typename T>
+bool MR::CMRNode::InsertChild(unsigned int index, const SmartPtr<T>& child)
+{
+	return InsertChild(index, child.Get());
+}
+
+bool MR::CMRNode::InsertChild(unsigned int index, CMRNode* child)
+{
+	if (child)
+	{
+		if (index > m_children.size())
 		{
-			m_spCullCallback->AddNestedCallback(cb);
+			index = m_children.size();
+			m_children.insert(m_children.begin() + index, child);
 		}
 		else
 		{
-			SetCullCallback(cb);
+			m_children.insert(m_children.begin() + index, child);
 		}
 	}
 }
 
-template<typename T>
-void MR::CMRNode::RemoveCullCallback(const SmartPtr<T>& cb)
+bool MR::CMRNode::RemoveChild(unsigned int pos, unsigned int numChildrenToRemove /*= 1*/)
 {
-	RemoveCullCallback(cb.Get());
+	if (pos < m_children.size())
+	{
+		return RemoveChildren(pos, numChildrenToRemove);
+	}
+	return false;
 }
 
-void MR::CMRNode::RemoveCullCallback(CMRCallback* cb)
+bool MR::CMRNode::RemoveChildren(unsigned int pos, unsigned int numChildrenToRemove)
 {
-	if (cb != nullptr && m_spCullCallback.Valid())
+	if (pos < GetNumChildren() && numChildrenToRemove > 0)
 	{
-		if (m_spCullCallback == cb)
+		if (pos + numChildrenToRemove > GetNumChildren())
 		{
-			SmartPtr<CMRCallback> newCullCallback = cb->GetNestedCallback();
-			cb->SetNestedCallback(0);
-			SetCullCallback(newCullCallback.Get());
+			m_children.erase(m_children.begin() + pos, m_children.end());
 		}
 		else
 		{
-			m_spCullCallback->RemoveNestedCallback(cb);
+			m_children.erase(m_children.begin() + pos, m_children.begin() + pos + numChildrenToRemove);
 		}
 	}
 }
 
-void MR::CMRNode::SetCullActive(bool bActive)
+template<typename T, typename R>
+bool MR::CMRNode::ReplaceChild(const SmartPtr<T>& oriChild, const SmartPtr<R>& newChild)
 {
-	//TODO: MR::CMRNode::SetCullActive is not implemented
-
+	return ReplaceChild(oriChild.Get(), newChild.Get());
 }
 
-bool MR::CMRNode::GetCullActive() const
+unsigned int MR::CMRNode::GetNumChildren() const
 {
-	return m_bCullActive;
+	return m_children.size();
 }
 
-unsigned int MR::CMRNode::GetNumChildrenWithCullingDisabled() const
+bool MR::CMRNode::SetChild(unsigned int index, CMRNode* newChild)
 {
-	return m_uiNumChildrenWithCullingDisabled;
-}
-
-bool MR::CMRNode::IsCullingActive() const
-{
-	return m_uiNumChildrenWithCullingDisabled == 0 && m_bCullActive && GetBound().Valid();
-}
-
-unsigned int MR::CMRNode::GetNumChildrenWithOccluderNodes() const
-{
-	return m_uiNumChildrenWithOccluderNodes;
-}
-
-bool MR::CMRNode::ContainsOccluderNodes() const
-{
-	//TODO: MR::CMRNode::ContainsOccluderNodes is not implemented
-
-}
-
-void MR::CMRNode::SetNodeMask(NodeMask nm)
-{
-	m_nodeMask = nm;
-}
-
-MR::CMRNode::NodeMask MR::CMRNode::GetNodeMask() const
-{
-	return m_nodeMask;
-}
-
-void MR::CMRNode::SetStateSet(CMRStateSet* pStateSet)
-{
-	//TODO: MR::CMRNode::SetStateSet is not implemented
-
-}
-
-template<typename T>
-void MR::CMRNode::SetStateSet(const SmartPtr<CMRStateSet>& spStateSet)
-{
-	SetStateSet(spStateSet.Get());
-}
-
-CMRStateSet* MR::CMRNode::GetOrCreateStateSet()
-{
-	//TODO: MR::CMRNode::GetOrCreateStateSet is not implemented
-
-}
-
-const CMRStateSet* MR::CMRNode::GetStateSet() const
-{
-	return m_spStateSet.Get();
-}
-
-CMRStateSet* MR::CMRNode::GetStateSet()
-{
-	return m_spStateSet.Get();
-}
-
-void MR::CMRNode::SetDescriptions(const DescriptionList& descriptions)
-{
-	//TODO: MR::CMRNode::SetDescriptions is not implemented
-
-}
-
-DescriptionList& MR::CMRNode::GetDescriptions()
-{
-	//TODO: MR::CMRNode::GetDescriptions is not implemented
-
-}
-
-const string& MR::CMRNode::GetDescription(unsigned int index) const
-{
-	//TODO: MR::CMRNode::GetDescription is not implemented
-
-}
-
-unsigned int MR::CMRNode::GetNumDescriptions() const
-{
-	//TODO: MR::CMRNode::GetNumDescriptions is not implemented
-
-}
-
-void MR::CMRNode::AddDescription(const string& descrition)
-{
-	//TODO: MR::CMRNode::AddDescription is not implemented
-
-}
-
-void MR::CMRNode::SetInitialBound(const CMRBoundingSphere& bs)
-{
-	m_initialBound = bs;
-	DirtyBound();
-}
-
-void MR::CMRNode::DirtyBound()
-{
-	//TODO: MR::CMRNode::DirtyBound is not implemented
-
-}
-
-const CMRBoundingSphere& MR::CMRNode::GetInitialBound() const
-{
-	return m_initialBound;
-}
-
-const CMRBoundingSphere& MR::CMRNode::GetBound() const
-{
-	if (!m_bBoundingSphereComputed)
+	if (index < GetNumChildren() && newChild)
 	{
-		m_boundingSphere = m_initialBound;
-		if (m_spComputeBoundCallback.Valid())
-		{
-			m_boundingSphere.ExpandBy(m_spComputeBoundCallback->ComputeBound(*this));
-		}
-		else
-		{
-			m_boundingSphere.ExpandBy(ComputeBound());
-		}
-
-		m_bBoundingSphereComputed = true;
+		SmartPtr<CMRNode> origNode = m_children[index];
+		origNode->RemoveParent(this);
+		m_children[index] = newChild;
+		newChild->AddParent(this);
 	}
 
-	return m_boundingSphere;
 }
 
-MR::CMRBoundingSphere MR::CMRNode::ComputeBound() const
+bool MR::CMRNode::ReplaceChild(CMRNode* oriChild, CMRNode* newChild)
 {
-	//TODO: MR::CMRNode::ComputeBound is not implemented
-
-}
-
-template<typename T>
-void MR::CMRNode::SetComputeBoundingSphereCallback(const SmartPtr<T>& sp)
-{
-	SetComputeBoundingSphereCallback(sp.Get());
-}
-
-void MR::CMRNode::SetComputeBoundingSphereCallback(ComputeBoundingSphereCallback* callback)
-{
-	m_spComputeBoundCallback = callback;
-}
-
-const ComputeBoundingSphereCallback* MR::CMRNode::GetComputeBoundingSphereCallback() const
-{
-	return m_spComputeBoundCallback.Get();
-}
-
-ComputeBoundingSphereCallback* MR::CMRNode::GetComputeBoundingSphereCallback()
-{
-	return m_spComputeBoundCallback.Get();
-}
-
-void MR::CMRNode::ResizeGLObjectBuffers(unsigned int)
-{
-	//TODO: MR::CMRNode::ResizeGLObjectBuffers is not implemented
+	if (newChild == nullptr || oriChild == newChild)
+	{
+		return false;
+	}
+	unsigned int pos = GetChildIndex(oriChild);
+	if (pos < GetNumChildren())
+	{
+		return SetChild(pos, newChild);
+	}
+	return false;
 
 }
 
-void MR::CMRNode::ReleaseGLObjects(CMRState* pState /*= 0*/) const
+const CMRNode* MR::CMRNode::GetChild(unsigned int index) const
 {
-	//TODO: MR::CMRNode::ReleaseGLObjects is not implemented
+	if (index < GetNumChildren())
+	{
+		return m_children[index].Get();
+	}
+	return nullptr;
+}
+
+CMRNode* MR::CMRNode::GetChild(unsigned int index)
+{
+	if (index < GetNumChildren())
+	{
+		return m_children[index].Get();
+	}
+	return nullptr;
+}
+
+template <typename T>
+bool MR::CMRNode::ContainsNode(const SmartPtr<T>& spNode)
+{
+	return ContainsNode(spNode.Get());
+}
+
+bool MR::CMRNode::ContainsNode(const CMRNode* pNode) const
+{
+	for (
+		auto itr = m_children.begin();
+		itr != m_children.end();
+		++itr
+		)
+	{
+		if ((*itr).Get() == pNode)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+unsigned int MR::CMRNode::GetChildIndex(CMRNode* pNode) const
+{
+	for (int i = 0; i < m_children.size(); ++i)
+	{
+		if (m_children[i].Get() == pNode)
+		{
+			return i;
+		}
+	}
+	return static_cast<unsigned int> (m_children.size());
+}
+
+MR::CMRNode::CMRNode(const CMRNode& node)
+{
 
 }
 
 MR::CMRNode::~CMRNode()
 {
-	//TODO: MR::CMRNode::~CMRNode is not implemented
 
 }
 
-void MR::CMRNode::AddParent(CMRGroup* parent)
+void MR::CMRNode::AddParent(CMRNode* parent)
 {
-	//TODO: MR::CMRNode::AddParent is not implemented
+	if (parent)
+	{
+		m_parents.push_back(parent);
+	}
 
 }
 
-void MR::CMRNode::RemoveParent(CMRGroup* parent)
+void MR::CMRNode::RemoveParent(CMRNode* parent)
 {
-	//TODO: MR::CMRNode::RemoveParent is not implemented
+	CMRNode::ParentList::iterator pitr = std::find(m_parents.begin(), m_parents.end(), parent);
+	if (pitr != m_parents.end())
+	{
+		m_parents.erase(pitr);
+	}
 
 }
 
-void MR::CMRNode::SetNumChildrenRequiringUpdateTraversal(unsigned int num)
+template<typename T>
+void MR::CMRNode::RemoveEventCallback(const SmartPtr<T>& cb)
 {
-	//TODO: MR::CMRNode::SetNumChildrenRequiringUpdateTraversal is not implemented
+	RemoveEventCallback(cb.Get());
 
 }
 
-void MR::CMRNode::SetNumChildrenRequiringEventTraversal(unsigned int num)
+template<typename T>
+void MR::CMRNode::AddEventCallback(const SmartPtr<T>& cb)
 {
-	//TODO: MR::CMRNode::SetNumChildrenRequiringEventTraversal is not implemented
+	AddEventCallback(cb.Get());
 
 }
 
-void MR::CMRNode::SetNumChildrenWithCullingDisabled(unsigned int num)
+template<typename T>
+void MR::CMRNode::SetEventCallback(const SmartPtr<T>& cb)
 {
-	//TODO: MR::CMRNode::SetNumChildrenWithCullingDisabled is not implemented
+	SetEventCallback(cb->Get());
 
 }
 
-void MR::CMRNode::SetNumChildrenWithOccluderNodes(unsigned int num)
+template<typename T>
+void MR::CMRNode::RemoveUpdateCallback(const SmartPtr<CMRCallback>& pCallback)
 {
-	//TODO: MR::CMRNode::SetNumChildrenWithOccluderNodes is not implemented
+	RemoveUpdateCallback(pCallback.Get());
 
 }
 
-string& MR::CMRNode::GetDescription(unsigned int index)
+template<typename T>
+void MR::CMRNode::AddUpdateCallback(const SmartPtr<T>& spUC)
 {
-	//TODO: MR::CMRNode::GetDescription is not implemented
+	AddUpdateCallback(spUC.Get());
 
 }
 
-const DescriptionList& MR::CMRNode::GetDescriptions() const
+template <typename T>
+void MR::CMRNode::SetUpdateCallback(const SmartPtr<T>& spUC)
 {
-	//TODO: MR::CMRNode::GetDescriptions is not implemented
-
-}
-
-MR::CMRNode::CMRNode(const CMRNode& node, const CMRCopyPolicy& policy /*= CMRCopyPolicy::SHALLOW_COPY*/)
-{
-	//TODO: MR::CMRNode::CMRNode is not implemented
+	SetUpdateCallback(spUC.Get());
 
 }

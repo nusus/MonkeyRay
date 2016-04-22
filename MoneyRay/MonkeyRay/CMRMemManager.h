@@ -1,8 +1,7 @@
 #ifndef CMRMemManager_h__
 #define CMRMemManager_h__
-
+#include "CMRPrerequisites.h"
 #include "CMRRef.h"
-#include "CMRContainerConfig.h"
 namespace MR
 {
 	class CMRMemManager
@@ -11,19 +10,21 @@ namespace MR
 		typedef std::pair<unsigned int, const CMRRef*> FrameNumberObjectPair;
 		typedef MR::list<FrameNumberObjectPair> ObjectToDeleteList;
 
+	public:
 		CMRMemManager(unsigned int nNumFramesToRetainObjects = 0);
 
 		virtual ~CMRMemManager();
 
-		void SetNumberFramesToRetainObjects(unsigned int nNumFramesToRetainObjects) { m_nNumberFramesToRetainObjects = nNumFramesToRetainObjects; }
+	public:
+		void SetNumberFramesToRetainObjects(unsigned int nNumFramesToRetainObjects);
 
-		unsigned int GetNumberFramesToRetainObjects() const { return m_nNumberFramesToRetainObjects; }
+		unsigned int GetNumberFramesToRetainObjects() const;
 
-		void SetCurrentFrameNumber(unsigned int nCurrentFrame) { m_nCurrentFrameNumber = nCurrentFrame; }
+		void SetCurrentFrameNumber(unsigned int nCurrentFrame);
 
-		unsigned int GetCurrentFrameNumber() const { return m_nCurrentFrameNumber; }
+		unsigned int GetCurrentFrameNumber() const;
 
-		inline void DeleteAux(const CMRRef* obj) { delete obj; }
+		void DeleteAux(const CMRRef* obj);
 
 		virtual void Flush();
 
@@ -31,13 +32,11 @@ namespace MR
 
 		virtual void RequestDelete(const CMRRef* obj);
 	protected:
-		CMRMemManager(const CMRMemManager&):
-			m_nNumberFramesToRetainObjects(0),
-			m_nCurrentFrameNumber(0)
-		{}
+		CMRMemManager(const CMRMemManager&);
 
-		CMRMemManager& operator = (const CMRMemManager&) { return *this; }
+		CMRMemManager& operator = (const CMRMemManager&);
 
+	protected:
 		unsigned int m_nNumberFramesToRetainObjects;
 		unsigned int m_nCurrentFrameNumber;
 		#if MR_USE_MULTITHREAD

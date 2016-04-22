@@ -1,0 +1,6 @@
+﻿  test1.cpp
+  test2.cpp
+  test3.cpp
+  test4.cpp
+  test5.cpp
+f:\vsworkspace\vs2015workspace\monkeyray\moneyray\test\Magick++.h(9): fatal error C1083: 无法打开包括文件:“Magick++/Include.h”: No such file or directory

@@ -1,42 +1,35 @@
 #ifndef CMRScene_h__
 #define CMRScene_h__
-
-#include "CMRDatabasePager.h"
-#include "CMRImagePager.h"
-namespace MR
+#include "CMRRef.h"
+#include "SmartPtr.h"
+#include "CMRSingleton.h"
+#include "CMRNode.h"
+namespace MR 
 {
-	class CMRScene
+
+	struct CMRSceneSingletonCache : TMRSingletonCache<CMRScene> 
+	{
+		value_type* Get(CMRNode* node);
+	};
+
+	class CMRScene : public CMRRef
 	{
 	public:
+		void SetSceneData(CMRNode* pNode);
+		CMRNode* GetSceneData();
+		const CMRNode* GetSceneData() const;
+		
 
-		CMRDatabasePager* GetDataBasePager() const;
-		CMRImagePager* GetImagePager() const;
-
-		CMRNode* GetSceneData()
-		{
-			//TODO: CMRScene is not implemented
-			throw std::logic_error("The method or operation is not implemented.");
-		}
-
-		void UpdateSceneData()
-		{
-			//TODO:  is not implemented
-			throw std::logic_error("The method or operation is not implemented.");
-		}
-
-		void UpdateSceneGraph()
-		{
-			//TODO:  is not implemented
-			throw std::logic_error("The method or operation is not implemented.");
-		}
-
-
-
-
-
-
+		static CMRScene* GetScene(CMRNode* pNode);
 	protected:
-	private:
+		CMRScene();
+		virtual ~CMRScene();
+		static CMRScene* GetOrCreateScene(CMRNode* pNode);
+
+		friend class CMRView;
+
+		SmartPtr<CMRNode> m_spSceneData;
+
 	};
 }
 #endif // CMRScene_h__

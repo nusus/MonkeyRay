@@ -1,6 +1,6 @@
 #ifndef CMRTexture_h__
 #define CMRTexture_h__
-#include "CMRPrerequisites.h"
+
 #include "CMRRef.h"
 #include "CMRImage.h"
 namespace MR
@@ -16,7 +16,6 @@ namespace MR
 
 		void Bind(GLenum eTextureUnit);
 
-
 		const GLuint GetTextureObject() const;
 
 		void SetTarget(GLenum target);
@@ -27,18 +26,11 @@ namespace MR
 		
 		void SetBorder(GLint border);
 		const GLint GetBorder() const;
-
 		const GLsizei GetWidth() const;
-
 		const GLsizei GetHeight() const;
-
 		const GLint GetInternalFormat() const;
-
-
 		const GLenum GetFormat() const;
-
 		const GLenum GetType() const;
-
 		const void* GetData() const;
 
 		void SetMagFilter(GLint magFilter);
@@ -48,7 +40,6 @@ namespace MR
 		const GLint GetMinFilter() const;
 
 		void SetWrapS(GLint wrap_s);
-
 		void SetWrapT(GLint wrap_t);
 
 		const GLint GetWrapS() const;

@@ -9,12 +9,6 @@ CMRImagePager* MR::CMRImagePager::Instance()
 	return &s_imagePager;
 }
 
-void MR::CMRImagePager::SignalBeginFrame(CMRFrameStamp* pFrameStamp)
-{
-	//TODO: MR::CMRImagePager::SignalBeginFrame is not implemented
-
-}
-
 CMRImage::ImageEntity* MR::CMRImagePager::GetImageEntity(const string& strFileName)
 {
 	if (m_map.find(strFileName) != m_map.end() && m_map[strFileName].Valid())

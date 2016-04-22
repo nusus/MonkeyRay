@@ -8,41 +8,26 @@ namespace MR
 	class CMRCallback : public CMRObject
 	{
 	public:
+		CMRCallback();
+	public:
 
-		void AddNestedCallback(CMRCallback* pc)
-		{
-			//TODO:  is not implemented
-			throw std::logic_error("The method or operation is not implemented.");
-		}
+		virtual bool Run(CMRObject* pObject);
 
-		CMRCallback* GetNestedCallback()
-		{
-			//TODO: CMRCallback is not implemented
-			throw std::logic_error("The method or operation is not implemented.");
-		}
+		virtual void RunImpl(CMRObject* pObject);
 
-		void SetNestedCallback(CMRCallback* param1)
-		{
-			//TODO: CMRCallback is not implemented
-			throw std::logic_error("The method or operation is not implemented.");
-		}
+		bool Traverse(CMRObject* pObject);
 
-		void SetUpdateCallback(CMRCallback* newUpdateCallback)
-		{
-			//TODO: CMRCallback is not implemented
-			throw std::logic_error("The method or operation is not implemented.");
-		}
+		void AddNestedCallback(CMRCallback* pc);
 
-		void RemoveNestedCallback(CMRCallback* pUC)
-		{
-			//TODO: CMRCallback is not implemented
-			throw std::logic_error("The method or operation is not implemented.");
-		}
+		void RemoveNestedCallback(CMRCallback* pUC);
 
+		void SetNestedCallback(CMRCallback* param1);
+		CMRCallback* GetNestedCallback();
+		const CMRCallback* GetNestedCallback() const;
 
-
-
-
+	protected:
+		virtual ~CMRCallback();
+		SmartPtr<CMRCallback> m_spNestedCallback;
 	};
 }
 #endif // CMRCallback_h__
