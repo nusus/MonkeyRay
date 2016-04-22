@@ -218,11 +218,16 @@
     <ClInclude Include="CMRSingleton.h">
       <Filter>core\render</Filter>
     </ClInclude>
-    <ClInclude Include="MonkeyRay.h" />
     <ClInclude Include="CMRImpotedModelImp.h">
       <Filter>core\render</Filter>
     </ClInclude>
     <ClInclude Include="CMRImportedMesh.h">
+      <Filter>core\render</Filter>
+    </ClInclude>
+    <ClInclude Include="MonkeyRay.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="Reflection.h">
       <Filter>core\render</Filter>
     </ClInclude>
   </ItemGroup>

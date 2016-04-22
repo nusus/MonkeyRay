@@ -172,6 +172,7 @@
     <ClInclude Include="malloc.c.h" />
     <ClInclude Include="MonkeyRay.h" />
     <ClInclude Include="nedmalloc.h" />
+    <ClInclude Include="Reflection.h" />
     <ClInclude Include="SmartPtr.h" />
     <ClInclude Include="vmath.h" />
     <ClInclude Include="WeakPtr.h" />
