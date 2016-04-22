@@ -310,7 +310,7 @@ void MR::CMRDirector::CheckWindowStatus(const CMRGraphicsContext* ptr)
 
 double MR::CMRDirector::ElapsedTime()
 {
-
+	return CMRTimer::Instance()->DeltaS(GetStartTick(), CMRTimer::Instance()->Tick());
 }
 
 CMRFrameStamp* MR::CMRDirector::GetDirectorFrameStamp()

@@ -169,6 +169,7 @@
     <ClInclude Include="CMRViewBase.h" />
     <ClInclude Include="CMRViewport.h" />
     <ClInclude Include="malloc.c.h" />
+    <ClInclude Include="MonkeyRay.h" />
     <ClInclude Include="nedmalloc.h" />
     <ClInclude Include="SmartPtr.h" />
     <ClInclude Include="vmath.h" />
