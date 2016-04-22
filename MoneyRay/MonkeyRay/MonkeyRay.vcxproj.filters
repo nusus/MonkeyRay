@@ -200,9 +200,6 @@
     <ClInclude Include="CMRRenderLeaf.h">
       <Filter>core\render</Filter>
     </ClInclude>
-    <ClInclude Include="CMRImpotedModel.h">
-      <Filter>core\render</Filter>
-    </ClInclude>
     <ClInclude Include="CMRRenderStage.h">
       <Filter>core\render</Filter>
     </ClInclude>
@@ -219,6 +216,13 @@
       <Filter>core\render</Filter>
     </ClInclude>
     <ClInclude Include="CMRSingleton.h">
+      <Filter>core\render</Filter>
+    </ClInclude>
+    <ClInclude Include="MonkeyRay.h" />
+    <ClInclude Include="CMRImpotedModelImp.h">
+      <Filter>core\render</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRImportedMesh.h">
       <Filter>core\render</Filter>
     </ClInclude>
   </ItemGroup>
@@ -274,9 +278,6 @@
     <ClCompile Include="CMRCallback.cpp">
       <Filter>core\render</Filter>
     </ClCompile>
-    <ClCompile Include="CMRImpotedModel.cpp">
-      <Filter>core\render</Filter>
-    </ClCompile>
     <ClCompile Include="CMRDrawable.cpp">
       <Filter>core\render</Filter>
     </ClCompile>
@@ -320,6 +321,12 @@
       <Filter>core\util</Filter>
     </ClCompile>
     <ClCompile Include="CMRScene.cpp">
+      <Filter>core\render</Filter>
+    </ClCompile>
+    <ClCompile Include="CMRImpotedModelImp.cpp">
+      <Filter>core\render</Filter>
+    </ClCompile>
+    <ClCompile Include="CMRImportedMesh.cpp">
       <Filter>core\render</Filter>
     </ClCompile>
   </ItemGroup>

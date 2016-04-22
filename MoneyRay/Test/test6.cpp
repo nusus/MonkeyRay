@@ -1,60 +1,37 @@
 #include "CConfig.h"
 #if TEST6 == ON
-#include "vmath.h"
 #include <iostream>
 #include <vector>
+#include <string>
+#include <stdio.h>
 using namespace std;
 
-template<typename T>
-class CMRTemplateSingletonCache
+class A
 {
 public:
-	typedef T value_type;
-public:
-	CMRTemplateSingletonCache() {}
-	inline void Add(value_type* ptr)
+	A() :m_strName("def"), m_nA(0){}
+	A(string name, int n) :m_strName(name), m_nA(n) {}
+	A(const A& rhs) : m_strName(rhs.m_strName), m_nA(rhs.m_nA){}
+	A& operator=(const A& rhs) 
 	{
-		m_cache.push_back(ptr);
-	}
-
-	inline void Remove(value_type* ptr)
-	{
-		m_cache.erase(std::remove(m_cache.begin(), m_cache.end(), ptr), m_cache.end());
-	}
-
-	template<typename U>
-	inline value_type* Get(U* ptr)
-	{
-		static_assert(false, "Get Method must be specialized");
-		return nullptr;
+		return *this;
 	}
 public:
-	typedef vector<value_type*> Cache;
-	Cache m_cache;
-};
-
-struct A
-{
-	
-};
-
-class  ASingletonCache : public CMRTemplateSingletonCache<A>
-{
-public:
-	inline value_type* Get(A* ptr)
-	{
-		return nullptr;
-	}
-
-protected:
+	string m_strName;
+	int m_nA;
 private:
 };
 
 int main(void)
 {
-	ASingletonCache a;
-	A* ptr = new A;
-	a.Get(ptr);
+	A a("a", 3);
+	A b(a);
+	A c;
+	c = a;
+	cout << a.m_strName << endl;
+	cout << b.m_strName << endl;
+	cout << c.m_strName << endl;
+	getchar();
 	return 1;
 }
 #endif

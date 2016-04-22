@@ -7,6 +7,10 @@ namespace MR
 	class CMRDrawable : public CMRNode
 	{
 	public:
+		CMRDrawable();
+		CMRDrawable(const CMRDrawable& rhs);
+		CMRDrawable& operator=(const CMRDrawable& rhs);
+	public:
 		void Draw();
 
 		virtual void DrawImplemention();
@@ -18,6 +22,12 @@ namespace MR
 		CMRShader::ShaderSet GetShaderSet() const;
 
 		void AddShader(CMRShader* pShader);
+
+
+	protected:
+		virtual ~CMRDrawable();
+
+
 	protected:
 		vmath::mat4 m_mvpwMatrix;
 		CMRShader::ShaderSet m_shaderSet;

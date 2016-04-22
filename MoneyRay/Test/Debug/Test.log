@@ -1,2 +1,3 @@
 ﻿  test6.cpp
-f:\vsworkspace\vs2015workspace\monkeyray\moneyray\test\vmath.h(1017): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+  Test.vcxproj -> D:\VSWorkspace\VS2015Workspace\MonkeyRay\MoneyRay\Debug\Test.exe
+  Test.vcxproj -> D:\VSWorkspace\VS2015Workspace\MonkeyRay\MoneyRay\Debug\Test.pdb (Partial PDB)

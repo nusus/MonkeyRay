@@ -133,7 +133,8 @@
     <ClInclude Include="CMRImage.h" />
     <ClInclude Include="CMRImageLoader.h" />
     <ClInclude Include="CMRImagePager.h" />
-    <ClInclude Include="CMRImpotedModel.h" />
+    <ClInclude Include="CMRImportedMesh.h" />
+    <ClInclude Include="CMRImpotedModelImp.h" />
     <ClInclude Include="CMRLog.h" />
     <ClInclude Include="CMRLogConfig.h" />
     <ClInclude Include="CMRMacroUtil.h" />
@@ -186,7 +187,8 @@
     <ClCompile Include="CMRImage.cpp" />
     <ClCompile Include="CMRImageLoader.cpp" />
     <ClCompile Include="CMRImagePager.cpp" />
-    <ClCompile Include="CMRImpotedModel.cpp" />
+    <ClCompile Include="CMRImportedMesh.cpp" />
+    <ClCompile Include="CMRImpotedModelImp.cpp" />
     <ClCompile Include="CMRMemManager.cpp" />
     <ClCompile Include="CMRMemoryNedPooling.cpp" />
     <ClCompile Include="CMRNode.cpp" />
