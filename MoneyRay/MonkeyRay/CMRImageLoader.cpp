@@ -3,7 +3,7 @@
 
 using namespace MR;
 
-CMRImageLoader* MR::GetImageLoader(const string& strName)
+CMRImageLoader* MR::CMRImageLoader::GetImageLoader(const string& strName)
 {
 	if (strName.empty() || strName.size() == 0)
 	{

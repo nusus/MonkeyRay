@@ -14,7 +14,10 @@ MR::CMRRender::CMRRender(CMRCamera* pCamera) :
 
 void MR::CMRRender::Cull()
 {
-	m_spStateGraph->Init(m_wpCamera->GetView()->GetSceneData());
+	m_spStateGraph->Reset();
+	m_spRenderStage->Reset();
+
+	m_spStateGraph->Init(m_wpCamera);
 	m_spRenderStage->Init(m_spStateGraph.Get());
 }
 
@@ -29,7 +32,3 @@ void MR::CMRRender::Draw()
 	m_spRenderStage->Draw();
 }
 
-void MR::CMRRender::operator()(CMRObject* obj)
-{
-
-}

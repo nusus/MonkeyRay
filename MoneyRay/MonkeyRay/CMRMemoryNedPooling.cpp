@@ -1,9 +1,10 @@
 #include "CMRMemoryNedPooling.h"
 
-#include "nedmalloc.h"
 #include <algorithm>
 #include <thread>
 
+
+#include <nedmalloc/nedmalloc.c>
 namespace MR
 {
 	namespace NedPoolingImpl_OGRE
@@ -24,7 +25,7 @@ namespace MR
 				}
 				else
 				{
-					poolID = std::min<size_t>(((nSize - 1) >> 4 )+ 3, g_kPoolCount);
+					poolID = std::min<size_t>(((nSize - 1) >> 4) + 3, g_kPoolCount);
 				}
 			}
 			return poolID;
@@ -40,7 +41,7 @@ namespace MR
 				if (g_pPools[nPoolID] == 0)
 				{
 					size_t nThreads = std::thread::hardware_concurrency();
-					if (nThreads == 0 )
+					if (nThreads == 0)
 					{
 						nThreads = 4;
 					}
@@ -92,10 +93,6 @@ namespace MR
 			}
 		}
 	}
-	namespace NedPoolingImpl_MR
-	{
-
-	}
 
 	void* CMRMemoryNedPoolingAux::Allocate(size_t count)
 	{
@@ -126,5 +123,6 @@ namespace MR
 		}
 		NedPoolingImpl_OGRE::FreeImpl(ptr);
 	}
+
 
 }

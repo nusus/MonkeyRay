@@ -41,7 +41,7 @@ void MR::CMRShader::CreateShader()
 	if (0 == m_shaderObject)
 	{
 		CMR_STD_ERROR << "Error : Create " << m_strFullPath << " shader failed" << CMR_STD_ENDL;
-		exit(1);
+		assert(false);
 	}
 	m_bValid = true;
 }
@@ -77,6 +77,7 @@ void MR::CMRShader::CompileShader()
 			CMR_STD_ERROR << szLog << CMR_STD_ENDL;
 			free(szLog);
 		}
+		assert(false);
 	}
 	else
 	{
@@ -91,9 +92,13 @@ GLuint MR::CMRShader::GetShaderObject() const
 
 void MR::CMRShader::DestroyShader()
 {
-	glDeleteShader(m_shaderObject);
+	if (m_shaderObject != 0)
+	{
+		glDeleteShader(m_shaderObject);
+	}
 	m_shaderObject = 0;
 	m_bValid = false;
+	m_bIsCompiled = false;
 }
 
 int MR::CMRShader::GetShaderIndex() const
@@ -122,6 +127,7 @@ int MR::CMRShader::GetShaderIndex() const
 	{
 		return 5;
 	}
+	return -1;
 }
 
 bool MR::CMRShader::ShaderSort::operator()(const SmartPtr<CMRShader>& lhs, const SmartPtr<CMRShader> rhs)

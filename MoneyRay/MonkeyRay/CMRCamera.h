@@ -4,6 +4,8 @@
 #include "CMRView.h"
 #include "CMRViewport.h"
 #include "CMRGraphicsContext.h"
+#include "CMRScene.h"
+#include "CMRNodeVisitor.h"
 namespace MR
 {
 	class CMRView;
@@ -17,9 +19,9 @@ namespace MR
 		virtual CMRCamera* AsCamera();
 		virtual const CMRCamera* AsCamera() const;
 
-		void SetView(CMRViewBase* pView);
-		CMRViewBase* GetView();
-		const CMRViewBase* GetView() const;
+		void SetView(CMRView* pView);
+		CMRView* GetView();
+		const CMRView* GetView() const;
 
 		void SetViewport(CMRViewport* pViewport);
 		void SetViewport(int x, int y, int width, int height);
@@ -60,6 +62,8 @@ namespace MR
 		const CMROperation* GetRender() const;
 
 
+		virtual void Accept(CMRNodeVisitor& nv) override { nv.Apply(*this); }
+
 	protected:
 		CMRCamera(const CMRCamera&) {}
 		CMRCamera& operator=(const CMRCamera&) { return *this; }
@@ -67,7 +71,7 @@ namespace MR
 
 
 	protected:
-		CMRViewBase*					m_pView;
+		CMRView*						m_pView;
 		vmath::mat4						m_matProjectionMatrix;
 		vmath::mat4						m_matViewMatrix;
 		SmartPtr<CMRGraphicsContext>	m_spGraphicsContext;

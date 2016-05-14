@@ -38,7 +38,7 @@ namespace MR
 		const string s_strShaderDir;
 	protected:
 		CMRConfig() :
-			s_strResourceRoot("F:/VSWorkspace/VS2015Workspace/MonkeyRay/MoneyRay/Resource"),
+			s_strResourceRoot("D:/VSWorkspace/VS2015Workspace/MonkeyRay/MoneyRay/Resource"),
 			s_strLogDir(s_strResourceRoot + "/logs/"),
 			s_strModelDir(s_strResourceRoot + "/models/"),
 			s_strTextureDir(s_strResourceRoot + "/textures/"),

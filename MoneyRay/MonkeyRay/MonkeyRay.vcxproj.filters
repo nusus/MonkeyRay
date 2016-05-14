@@ -1,22 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="源文件">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="资源文件">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="core">
       <UniqueIdentifier>{a222f163-3886-45b0-9ec5-cf7896eed9b5}</UniqueIdentifier>
     </Filter>
     <Filter Include="core\memory">
       <UniqueIdentifier>{0ac02db1-2d36-47a2-abf6-b014ed1e9c50}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="core\memory\nedmalloc">
-      <UniqueIdentifier>{9bac412b-0171-4825-aff1-99edcd56238b}</UniqueIdentifier>
     </Filter>
     <Filter Include="core\config">
       <UniqueIdentifier>{dd7e8a40-a6f3-4002-b877-9f8415fb6a02}</UniqueIdentifier>
@@ -48,14 +37,33 @@
     <Filter Include="core\containers">
       <UniqueIdentifier>{d05ae743-315c-4109-899f-da419a73fb0c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="core\GL">
-      <UniqueIdentifier>{ffadd912-8b4b-4120-a8cd-56cb70fbfb6b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="core\thirdparty">
       <UniqueIdentifier>{3d7f6b10-f022-4f72-847e-18a6cfdbc34e}</UniqueIdentifier>
     </Filter>
     <Filter Include="core\math">
       <UniqueIdentifier>{399c63e9-5d8d-423a-a7af-e8acde57430c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{ee77a9e5-7d09-40c9-99d5-6c5c354ca72e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\logs">
+      <UniqueIdentifier>{b4dad25b-6c69-4a94-a405-f175551c3ce6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\models">
+      <UniqueIdentifier>{b0f52040-519d-49fa-86bc-84fe71d99b68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\shaders">
+      <UniqueIdentifier>{1ac1313a-b1a5-4838-a3cf-9c8e98196e3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\textures">
+      <UniqueIdentifier>{1d2a3ac3-85db-4148-bcd6-c610d12d70ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="core\nature">
+      <UniqueIdentifier>{ac633a8c-6cd3-4205-9e7d-dc21bd2ff21a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -64,12 +72,6 @@
     </ClInclude>
     <ClInclude Include="CMRMemoryNedPooling.h">
       <Filter>core\memory</Filter>
-    </ClInclude>
-    <ClInclude Include="nedmalloc.h">
-      <Filter>core\memory\nedmalloc</Filter>
-    </ClInclude>
-    <ClInclude Include="malloc.c.h">
-      <Filter>core\memory\nedmalloc</Filter>
     </ClInclude>
     <ClInclude Include="CMRObject.h">
       <Filter>core\base</Filter>
@@ -114,9 +116,6 @@
       <Filter>core\render</Filter>
     </ClInclude>
     <ClInclude Include="CMRRender.h">
-      <Filter>core\render</Filter>
-    </ClInclude>
-    <ClInclude Include="CMRViewBase.h">
       <Filter>core\render</Filter>
     </ClInclude>
     <ClInclude Include="WeakPtr.h">
@@ -230,16 +229,22 @@
     <ClInclude Include="Reflection.h">
       <Filter>core\render</Filter>
     </ClInclude>
+    <ClInclude Include="CMRGraphicsWindow.h">
+      <Filter>core\render</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRNodeVisitor.h">
+      <Filter>core\render</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRCloth.h">
+      <Filter>core\nature</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CMRMemoryNedPooling.cpp">
       <Filter>core\memory</Filter>
     </ClCompile>
     <ClCompile Include="test1.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="nedmalloc.c">
-      <Filter>core\memory\nedmalloc</Filter>
+      <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="CMRMemManager.cpp">
       <Filter>core\base</Filter>
@@ -254,9 +259,6 @@
       <Filter>core\render</Filter>
     </ClCompile>
     <ClCompile Include="CMRView.cpp">
-      <Filter>core\render</Filter>
-    </ClCompile>
-    <ClCompile Include="CMRViewBase.cpp">
       <Filter>core\render</Filter>
     </ClCompile>
     <ClCompile Include="CMRNode.cpp">
@@ -334,5 +336,42 @@
     <ClCompile Include="CMRImportedMesh.cpp">
       <Filter>core\render</Filter>
     </ClCompile>
+    <ClCompile Include="CMRNodeVisitor.cpp">
+      <Filter>core\render</Filter>
+    </ClCompile>
+    <ClCompile Include="CMRStateGraph.cpp">
+      <Filter>core\render</Filter>
+    </ClCompile>
+    <ClCompile Include="CMRCloth.cpp">
+      <Filter>core\nature</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\Resource\logs\mesh_info.txt">
+      <Filter>Resource\logs</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Resource\models\box.3DS">
+      <Filter>Resource\models</Filter>
+    </None>
+    <None Include="..\Resource\shaders\test1.fs">
+      <Filter>Resource\shaders</Filter>
+    </None>
+    <None Include="..\Resource\shaders\test1.vs">
+      <Filter>Resource\shaders</Filter>
+    </None>
+    <None Include="ocean.frag.vsspell" />
+    <None Include="..\Resource\shaders\ocean.frag">
+      <Filter>Resource\shaders</Filter>
+    </None>
+    <None Include="..\Resource\shaders\ocean.vert">
+      <Filter>Resource\shaders</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\Resource\textures\bricks.tga">
+      <Filter>Resource\textures</Filter>
+    </Image>
   </ItemGroup>
 </Project>

@@ -24,7 +24,7 @@ namespace MR
 
 
 	template<typename T>
-	class TMRSingletonCache : public TMRSingleton<TMRSingletonCache<T>>
+	class TMRSingletonCache
 	{
 	public:
 		typedef T value_type;
@@ -32,6 +32,7 @@ namespace MR
 
 
 	public:
+		TMRSingletonCache() : m_cache() {}
 		virtual ~TMRSingletonCache() {}
 
 
@@ -46,12 +47,12 @@ namespace MR
 			m_cache.erase(std::remove(m_cache.begin(), m_cache.end(), ptr), m_cache.end());
 		}
 
-		template<typename U>
-		inline value_type* Get(U* ptr)
-		{
-			static_assert(false, "Get Method must be specialized");
-			return nullptr;
-		}
+		//template<typename U>
+		//inline value_type* Get(U* ptr)
+		//{
+		//	static_assert(false, "Get Method must be specialized");
+		//	return nullptr;
+		//}
 
 
 	public:
@@ -59,7 +60,6 @@ namespace MR
 
 
 	protected:
-		TMRSingletonCache() {}
 		TMRSingletonCache(const TMRSingletonCache& rhs) {}
 		TMRSingletonCache& operator=(const TMRSingletonCache& rhs) { return *this; }
 	};

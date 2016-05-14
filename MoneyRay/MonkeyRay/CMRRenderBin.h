@@ -2,18 +2,22 @@
 #define CMRRenderBin_h__
 #include "CMRRef.h"
 #include "SmartPtr.h"
+#include "CMRProgram.h"
 namespace MR
 {
 	class CMRRenderLeaf;
 	class CMRShader;
-	class CMRProgram;
 	class CMRRenderBin : public CMRRef
 	{
 	public:
 		typedef vector<CMRRenderLeaf*> RenderLeafList;
 		typedef vector<SmartPtr<CMRRenderBin>> RenderBinList;
+
+
 	public:
 		CMRRenderBin();
+
+
 	public:
 		void AddRenderBin(CMRRenderBin* pBin);
 
@@ -30,8 +34,14 @@ namespace MR
 		virtual void Draw() const;
 
 		void AddShader(CMRShader* pShader);
-	protected:
 
+
+	protected:
+		CMRRenderBin(const CMRRenderBin& rhs) = delete;
+		CMRRenderBin& operator=(const CMRRenderBin&) = delete;
+		virtual ~CMRRenderBin() {}
+
+	protected:
 		RenderLeafList m_renderLeafList;
 		RenderBinList m_renderBinChildren;
 		SmartPtr<CMRProgram> m_spProgram;

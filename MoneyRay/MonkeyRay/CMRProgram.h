@@ -12,9 +12,13 @@ namespace MR
 	class CMRProgram : public CMRRef
 	{
 	public:
+		typedef CMRShader::ShaderSet  Shaders;
+
+
+	public:
 		CMRProgram();
 
-		~CMRProgram();
+		virtual ~CMRProgram();
 
 		void CompileAndAttachAllShaders(GLuint programObject);
 
@@ -33,10 +37,13 @@ namespace MR
 		void SetShaderSet(const CMRShader::ShaderSet& shaderSet);
 
 		void Accept(CMRUniformRef& uniform);
+
+		void ClearShaderSet();
+
+
 	protected:
 		bool m_bReady;
 		GLuint m_programObject;
-		typedef CMRShader::ShaderSet  Shaders;
 		Shaders m_shaders;
 	};
 }

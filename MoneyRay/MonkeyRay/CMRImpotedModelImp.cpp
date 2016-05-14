@@ -162,11 +162,6 @@ bool MR::CMRImpotedModelImp::_InitMaterials(const aiScene* pScene, const string&
 	return Ret;
 }
 
-void MR::CMRImpotedModelImp::DrawImplemention()
-{
-	Render();
-}
-
 MR::CMRImpotedModelImp::MeshEntry::MeshEntry()
 {
 	VB = INVALIDE_OGL_VALUE;

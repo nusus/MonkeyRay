@@ -1,4 +1,5 @@
 #include "CMRRenderLeaf.h"
+#include "CMRProgram.h"
 
 using namespace MR;
 
@@ -28,7 +29,7 @@ CMRDrawable* MR::CMRRenderLeaf::GetDrawable() const
 	return m_spDrawable.Get();
 }
 
-void MR::CMRRenderLeaf::Draw()
+void MR::CMRRenderLeaf::Draw(CMRProgram* program)
 {
-	m_spDrawable->Draw();
+	m_spDrawable->Draw(program);
 }

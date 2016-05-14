@@ -21,7 +21,6 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{AC081877-D117-4C66-9B9C-0E9C74942A77}</ProjectGuid>
     <RootNamespace>MonkeyRay</RootNamespace>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -74,15 +73,17 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>DEBUG;_DEBUG;WIN32;TEST1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(ProjectDir)thirdparty/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;DEBUG;_WINDOWS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProjectDir)thirdparty\include;$(ProjectDir)thirdparty\include\nedmalloc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MinimalRebuild>false</MinimalRebuild>
     </ClCompile>
     <Lib>
       <TargetMachine>MachineX86</TargetMachine>
     </Lib>
     <Link>
-      <AdditionalDependencies>glfw3dll.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)\$(ProjectName)\thirdparty\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glew32.lib;glfw3dll.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)thirdparty\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -90,7 +91,14 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(ProjectDir)thirdparty\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WINDOWS;WIN32;_WIN32;DEBUG;_DEBUG;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
     </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(ProjectDir)thirdparty\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glew32.lib;glfw3dll.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -121,6 +129,7 @@
   <ItemGroup>
     <ClInclude Include="CMRCallback.h" />
     <ClInclude Include="CMRCamera.h" />
+    <ClInclude Include="CMRCloth.h" />
     <ClInclude Include="CMRConfig.h" />
     <ClInclude Include="CMRContainerConfig.h" />
     <ClInclude Include="CMRDatabasePager.h" />
@@ -130,6 +139,7 @@
     <ClInclude Include="CMRFrameStamp.h" />
     <ClInclude Include="CMRGLConfig.h" />
     <ClInclude Include="CMRGraphicsContext.h" />
+    <ClInclude Include="CMRGraphicsWindow.h" />
     <ClInclude Include="CMRImage.h" />
     <ClInclude Include="CMRImageLoader.h" />
     <ClInclude Include="CMRImagePager.h" />
@@ -143,6 +153,7 @@
     <ClInclude Include="CMRMemoryAllocatorConfig.h" />
     <ClInclude Include="CMRMemoryNedPooling.h" />
     <ClInclude Include="CMRNode.h" />
+    <ClInclude Include="CMRNodeVisitor.h" />
     <ClInclude Include="CMRObject.h" />
     <ClInclude Include="CMROperationThread.h" />
     <ClInclude Include="CMRProgram.h" />
@@ -167,11 +178,8 @@
     <ClInclude Include="CMRStdConfig.h" />
     <ClInclude Include="CMRThirdPartyConfig.h" />
     <ClInclude Include="CMRView.h" />
-    <ClInclude Include="CMRViewBase.h" />
     <ClInclude Include="CMRViewport.h" />
-    <ClInclude Include="malloc.c.h" />
     <ClInclude Include="MonkeyRay.h" />
-    <ClInclude Include="nedmalloc.h" />
     <ClInclude Include="Reflection.h" />
     <ClInclude Include="SmartPtr.h" />
     <ClInclude Include="vmath.h" />
@@ -180,6 +188,7 @@
   <ItemGroup>
     <ClCompile Include="CMRCallback.cpp" />
     <ClCompile Include="CMRCamera.cpp" />
+    <ClCompile Include="CMRCloth.cpp" />
     <ClCompile Include="CMRDirector.cpp" />
     <ClCompile Include="CMRDrawable.cpp" />
     <ClCompile Include="CMRFile.cpp" />
@@ -193,6 +202,7 @@
     <ClCompile Include="CMRMemManager.cpp" />
     <ClCompile Include="CMRMemoryNedPooling.cpp" />
     <ClCompile Include="CMRNode.cpp" />
+    <ClCompile Include="CMRNodeVisitor.cpp" />
     <ClCompile Include="CMRProgram.cpp" />
     <ClCompile Include="CMRRef.cpp" />
     <ClCompile Include="CMRObject.cpp" />
@@ -202,16 +212,29 @@
     <ClCompile Include="CMRRenderStage.cpp" />
     <ClCompile Include="CMRScene.cpp" />
     <ClCompile Include="CMRShader.cpp" />
+    <ClCompile Include="CMRStateGraph.cpp" />
     <ClCompile Include="CMRStateGraphNode.cpp" />
     <ClCompile Include="CMRTexture.cpp" />
     <ClCompile Include="CMRTGAImageLoader.cpp" />
     <ClCompile Include="CMRTimer.cpp" />
     <ClCompile Include="CMRUniform.cpp" />
     <ClCompile Include="CMRView.cpp" />
-    <ClCompile Include="CMRViewBase.cpp" />
     <ClCompile Include="CMRViewport.cpp" />
-    <ClCompile Include="nedmalloc.c" />
     <ClCompile Include="test1.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\Resource\logs\mesh_info.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Resource\models\box.3DS" />
+    <None Include="..\Resource\shaders\ocean.frag" />
+    <None Include="..\Resource\shaders\ocean.vert" />
+    <None Include="..\Resource\shaders\test1.fs" />
+    <None Include="..\Resource\shaders\test1.vs" />
+    <None Include="ocean.frag.vsspell" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\Resource\textures\bricks.tga" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

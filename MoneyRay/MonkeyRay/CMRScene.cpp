@@ -54,15 +54,3 @@ const CMRNode* MR::CMRScene::GetSceneData() const
 	return m_spSceneData.Get();
 
 }
-
-CMRSceneSingletonCache::value_type* MR::CMRSceneSingletonCache::Get(CMRNode* node)
-{
-	for (auto x : m_cache)
-	{
-		if (x && x->GetSceneData() == node)
-		{
-			return x;
-		}
-	}
-	return 0;
-}

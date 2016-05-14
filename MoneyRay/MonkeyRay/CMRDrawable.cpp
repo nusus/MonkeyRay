@@ -26,12 +26,12 @@ MR::CMRDrawable::CMRDrawable()
 
 }
 
-void MR::CMRDrawable::Draw()
+void MR::CMRDrawable::Draw(CMRProgram* program)
 {
-	DrawImplemention();
+	DrawImplemention(program);
 }
 
-void MR::CMRDrawable::DrawImplemention()
+void MR::CMRDrawable::DrawImplemention(CMRProgram* program)
 {
 
 }
@@ -56,7 +56,46 @@ void MR::CMRDrawable::AddShader(CMRShader* pShader)
 	m_shaderSet.insert(pShader);
 }
 
+void MR::CMRDrawable::AddUniform(CMRUniformRef* pUniform)
+{
+	m_uniformList.push_back(pUniform);
+}
+
+void MR::CMRDrawable::Update()
+{
+	for (auto& x : m_uniformList)
+	{
+		if (x->GetUniformName() == "iGlobalTime")
+		{
+			CMRUniform1fv* pUniform = dynamic_cast<CMRUniform1fv*>(x.Get());
+			if (pUniform != NULL)
+			{
+				GLfloat data[1] = { 0 };
+				data[0] = CMRTimer::Instance()->TimeS();
+				pUniform->SetData(data);
+			}
+		}
+	}
+}
+
 MR::CMRDrawable::~CMRDrawable()
 {
 
+}
+
+void MR::CMRDrawable::_ApplyUniform(CMRProgram* program)
+{
+	for (auto& x: m_uniformList)
+	{
+		program->Accept(*(x.Get()));
+	}
+}
+
+void MR::CMRDrawable::Ascend(CMRNodeVisitor& nv)
+{
+}
+
+void MR::CMRDrawable::Traverse(CMRNodeVisitor& nv)
+{
+	Accept(nv);
 }

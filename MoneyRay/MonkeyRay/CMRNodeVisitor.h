@@ -2,6 +2,7 @@
 #define CMRNodeVisitor_h__
 
 #include "CMRObject.h"
+#include "CMRNode.h"
 namespace MR
 {
 	class CMRNodeVisitor : public virtual CMRObject
@@ -9,24 +10,14 @@ namespace MR
 	public:
 		enum TraversalMode
 		{
-			TRAVERSE_NONE,
-			TRAVERSE_PARENTS,
-			TRAVERSE_ALL_CHILDREN,
-			TRAVERSE_ACTIVE_CHILDREN
+			T
 		};
+	public:
+		virtual void Traverse(CMRNode& node);
 
-		enum VisitorType
-		{
-			NODE_VISITOR = 0,
-			UPDATE_VISITOR,
-			EVENT_VISITOR,
-			COLLECT_OCCLUDER_VISITOR,
-			CULL_VISITOR,
-			INTERSECTION_VISITOR
-		};
-
-	protected:
-	private:
+		virtual void Apply(CMRNode& node);
+		virtual void Apply(CMRCamera& node);
+		virtual void Apply(CMRDrawable& node);
 	};
 }
 #endif // CMRNodeVisitor_h__

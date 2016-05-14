@@ -10,6 +10,45 @@ Timer_t MR::CMRView::GetStartTick() const
 	return m_startTick;
 }
 
+void MR::CMRView::SetCamera(CMRCamera* camera)
+{
+	if (m_spCamera.Valid())
+	{
+		m_spCamera->SetView(nullptr);
+	}
+	m_spCamera = camera;
+	if (m_spCamera.Valid())
+	{
+		m_spCamera->SetView(this);
+		m_spCamera->SetRender(_CreateRender(camera));
+	}
+}
+
+CMRCamera* MR::CMRView::GetCamera()
+{
+	return m_spCamera.Get();
+}
+
+void MR::CMRView::SetFrameStamp(CMRFrameStamp* fs)
+{
+	m_spFrameStamp = fs;
+}
+
+const CMRCamera* MR::CMRView::GetCamera() const
+{
+	return m_spCamera.Get();
+}
+
+CMRFrameStamp* MR::CMRView::GetFrameStamp()
+{
+	return m_spFrameStamp.Get();
+}
+
+const CMRFrameStamp* MR::CMRView::GetFrameStamp() const
+{
+	return m_spFrameStamp.Get();
+}
+
 const CMRScene* MR::CMRView::GetScene() const
 {
 	return m_spScene.Get();
@@ -87,23 +126,21 @@ CMRNode* MR::CMRView::GetSceneData()
 
 
 MR::CMRView::CMRView()
-	:CMRViewBase()
-	,m_startTick(0)
+	:CMRGraphicsWindow(),
+	m_startTick(0)
 {
-	m_spFrameStamp = new CMRFrameStamp;
-	m_spFrameStamp->SetFrameNumber(0);
-	m_spFrameStamp->SetReferenceTime(0);
-	m_spFrameStamp->SetSimulationTime(0);
-
-	m_spScene = new CMRScene;
-
-	GetCamera()->SetRender(_CreateRender(GetCamera()));
+	Init();
 
 }
 
 CMRView* MR::CMRView::AsView()
 {
 	return this;
+}
+
+void MR::CMRView::SetDirector(CMRDirector* pDirector)
+{
+	m_pDirector = pDirector;
 }
 
 CMRDirector* MR::CMRView::GetDirector() const
@@ -113,7 +150,14 @@ CMRDirector* MR::CMRView::GetDirector() const
 
 void MR::CMRView::Take(CMRView& view)
 {
-	CMRViewBase::Take(view);
+	m_spCamera = view.m_spCamera;
+	if (m_spCamera.Valid())
+	{
+		m_spCamera->SetView(this);
+	}
+	view.m_spCamera = nullptr;
+
+
 	CMRView* pView = dynamic_cast<CMRView*>(&view);
 	if (pView)
 	{
@@ -138,11 +182,45 @@ void MR::CMRView::SetStartTick(Timer_t startTick)
 
 void MR::CMRView::Init()
 {
+	m_spCamera = new CMRCamera;
+	m_spCamera->SetView(this);
+
+	m_spFrameStamp = new CMRFrameStamp;
+	m_spFrameStamp->SetFrameNumber(0);
+	m_spFrameStamp->SetReferenceTime(0);
+	m_spFrameStamp->SetSimulationTime(0);
+
+	m_spScene = new CMRScene;
+
+	GetCamera()->SetRender(_CreateRender(GetCamera()));
+
+	if (m_spCamera.Valid())
+	{
+		m_spCamera->SetGraphicsContext(CMRGraphicsContext::Instance(GetFullScreen(), GetWindowName(), GetWidth(), GetHeight()));
+		m_spCamera->SetViewport(GetScreenX(), GetScreenY(), GetWidth(), GetHeight());
+	}
+	else
+	{
+		m_spCamera = new CMRCamera;
+		m_spCamera->SetGraphicsContext(CMRGraphicsContext::Instance(GetFullScreen(), GetWindowName(), GetWidth(), GetHeight()));
+		m_spCamera->SetViewport(GetScreenX(), GetScreenY(), GetWidth(), GetHeight());
+	}
+}
+
+MR::CMRView::CMRView(int x, int y, int width, int height, bool bFullScreen, string windowName)
+	:CMRGraphicsWindow(x, y, width, height, bFullScreen, windowName),
+	m_startTick(0)
+{
+	Init();
 }
 
 MR::CMRView::~CMRView()
 {
-
+	if (m_spCamera.Valid())
+	{
+		m_spCamera->SetView(nullptr);
+	}
+	m_spCamera = nullptr;
 }
 
 CMROperation* MR::CMRView::_CreateRender(CMRCamera* pCamera)
@@ -151,3 +229,5 @@ CMROperation* MR::CMRView::_CreateRender(CMRCamera* pCamera)
 	return pRender;
 
 }
+
+

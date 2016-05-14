@@ -2,9 +2,9 @@
 
 using namespace MR;
 
-CMRGraphicsContext* MR::CMRGraphicsContext::CreateDefaultGraphicsContext()
+CMRGraphicsContext* MR::CMRGraphicsContext::Instance(bool bScreen, string strWindowName, int nWidth, int nHeight)
 {
-	static CMRGraphicsContext context(CMRGraphicsContext::Traits::GetFullScreenTraits());
+	static CMRGraphicsContext context(CMRGraphicsContext::Traits::GetSpecifiedTraits(bScreen, strWindowName, nWidth, nHeight));
 	return &context;
 }
 
@@ -20,11 +20,6 @@ bool MR::CMRGraphicsContext::IsRealized() const
 
 void MR::CMRGraphicsContext::Realize()
 {
-	if (!glfwInit())
-	{
-		m_bRealized = false;
-		return;
-	}
 	glfwWindowHint(GLFW_RED_BITS, m_traits.rebBits);
 	glfwWindowHint(GLFW_GREEN_BITS, m_traits.greenBits);
 	glfwWindowHint(GLFW_BLUE_BITS, m_traits.blueBits);
@@ -39,6 +34,15 @@ void MR::CMRGraphicsContext::Realize()
 
 	glfwMakeContextCurrent(m_pWindow);
 
+	GLenum err = glewInit();
+	if (GLEW_OK != err)
+	{
+		std::cout << "Error initializing GLEW: " << glewGetErrorString(err) << std::endl;
+		exit(EXIT_FAILURE);
+	}
+
+	m_bRealized = true;
+
 	//TODO: event settings;
 }
 
@@ -51,7 +55,7 @@ void MR::CMRGraphicsContext::DestroyWindow()
 MR::CMRGraphicsContext::CMRGraphicsContext(Traits traits) :
 	m_bRealized(false),
 	m_traits(traits),
-	m_pWindow(false)
+	m_pWindow(nullptr)
 {
 
 }
@@ -63,17 +67,44 @@ MR::CMRGraphicsContext::~CMRGraphicsContext()
 
 MR::CMRGraphicsContext::Traits MR::CMRGraphicsContext::Traits::GetFullScreenTraits(string strName /*= "MonkeyRay"*/)
 {
-	GLFWmonitor* monitor = glfwGetPrimaryMonitor();
-	const GLFWvidmode* mode = glfwGetVideoMode(monitor);
-	return Traits(true, strName, mode->width, mode->height, mode->redBits, mode->greenBits, mode->blueBits, mode->refreshRate, monitor);
+	Traits ret;
+	ret.SetFullScreen(true);
+	ret.SetWindowName(strName);
+	return ret;
 }
 
 MR::CMRGraphicsContext::Traits MR::CMRGraphicsContext::Traits::GetSpecifiedTraits(bool bScreen, string strWindowName, int nWidth, int nHeight)
 {
+	Traits ret;
+	if (!bScreen)
+	{
+		ret.SetMonitor(nullptr);
+	}
+	ret.SetFullScreen(bScreen);
+	ret.SetWindowName(strWindowName);
+	ret.SetWidth(nWidth);
+	ret.SetHeight(nHeight);
+	return ret;
+}
+
+void MR::CMRGraphicsContext::Traits::Init()
+{
+	if (!glfwInit())
+	{
+		CMR_STD_OUT << "glfw initialize failed" << CMR_STD_ENDL;
+		return;
+	}
 	GLFWmonitor* monitor = glfwGetPrimaryMonitor();
 	const GLFWvidmode* mode = glfwGetVideoMode(monitor);
-	GLFWmonitor* ret_monitor = bScreen ? monitor : nullptr;
-	return Traits(bScreen, strWindowName, nWidth, nHeight, mode->redBits, mode->greenBits, mode->blueBits, mode->refreshRate, ret_monitor);
+	SetFullScreen(false);
+	SetWindowName("MonkeyRay");
+	SetWidth(mode->width);
+	SetHeight(mode->height);
+	SetRebBits(mode->redBits);
+	SetGreenBits(mode->greenBits);
+	SetBlueBits(mode->blueBits);
+	SetRefreshRate(mode->refreshRate);
+	SetMonitor(monitor);
 }
 
 MR::CMRGraphicsContext::Traits::Traits(bool bFullScreen, string strWindowName, int nWidth, int nHeight, int red, int green, int blue, int rate, GLFWmonitor* pMonitor) :
@@ -94,13 +125,5 @@ MR::CMRGraphicsContext::Traits::Traits() :
 	windowName("MonkeyRay"),
 	fullScreen(true)
 {
-	GLFWmonitor* monitor = glfwGetPrimaryMonitor();
-	const GLFWvidmode* mode = glfwGetVideoMode(monitor);
-	width = mode->width;
-	height = mode->height;
-	rebBits = mode->redBits;
-	greenBits = mode->greenBits;
-	blueBits = mode->blueBits;
-	refreshRate = mode->refreshRate;
-	m_pMonitor = monitor;
+	Init();
 }

@@ -121,7 +121,7 @@ namespace MR
 			T* tmp_ptr = m_ptr;
 			m_ptr = rp.m_ptr;
 			if (m_ptr) m_ptr->Retain();
-			if (tmpm_ptr) tmpm_ptr->Release();
+			if (tmp_ptr) tmp_ptr->Release();
 		}
 
 		template<class Other> friend class SmartPtr;

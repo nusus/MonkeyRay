@@ -17,7 +17,7 @@ MR::CMRProgram::~CMRProgram()
 
 void MR::CMRProgram::CompileAndAttachAllShaders(GLuint programObject)
 {
-	for (auto shader : m_shaders)
+	for (auto& shader : m_shaders)
 	{
 		if (shader.Valid() && !shader->IsCompiled())
 		{
@@ -41,7 +41,7 @@ bool MR::CMRProgram::InitProgram()
 	if (!m_programObject)
 	{
 		CMR_STD_ERROR << "Error : create program failed" << CMR_STD_ENDL;
-		exit(1);
+		assert(false);
 	}
 	CompileAndAttachAllShaders(m_programObject);
 
@@ -62,6 +62,7 @@ bool MR::CMRProgram::InitProgram()
 			CMR_STD_ERROR << "Program log : " << CMR_STD_ENDL;
 			CMR_STD_ERROR << szLog << CMR_STD_ENDL;
 		}
+		//assert(false);
 	}
 	else
 	{
@@ -82,8 +83,14 @@ bool MR::CMRProgram::IsReady() const
 
 void MR::CMRProgram::DestroyProgram()
 {
-	glDeleteProgram(m_programObject);
+	ClearShaderSet();
+	if (m_programObject != 0)
+	{
+		glDeleteProgram(m_programObject);
+	}
+	m_programObject = 0;
 	glUseProgram(0);
+	m_bReady = false;
 }
 
 GLuint MR::CMRProgram::GetProgramObject() const
@@ -104,4 +111,13 @@ void MR::CMRProgram::SetShaderSet(const CMRShader::ShaderSet& shaderSet)
 void MR::CMRProgram::Accept(CMRUniformRef& uniform)
 {
 	uniform.Apply(this);
+}
+
+void MR::CMRProgram::ClearShaderSet()
+{
+	for (auto& shader : m_shaders)
+	{
+		shader->DestroyShader();
+	}
+	m_shaders.clear();
 }

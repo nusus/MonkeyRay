@@ -16,6 +16,7 @@ MR::CMRDirector::CMRDirector(CMRView* pView)
 CMRDirector* MR::CMRDirector::Instance(CMRView* pView)
 {
 	static CMRDirector ret(pView);
+	pView->SetDirector(&ret);
 	return &ret;
 }
 
@@ -114,11 +115,12 @@ int MR::CMRDirector::Run()
 	{
 		Frame();
 	}
+	return EXIT_SUCCESS;
 }
 
 bool MR::CMRDirector::CheckEvents()
 {
-
+	return true;
 }
 
 void MR::CMRDirector::Frame()
@@ -325,6 +327,6 @@ void MR::CMRDirector::_DirectorConstructorInit()
 
 void MR::CMRDirector::_DirectorInit()
 {
-	m_spView->Init();
+	//m_spView->Init();
 }
 

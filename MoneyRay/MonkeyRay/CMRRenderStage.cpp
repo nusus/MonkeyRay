@@ -1,5 +1,6 @@
 #include "CMRRenderStage.h"
 #include "CMRStateGraph.h"
+#include "CMRProgram.h"
 
 using namespace MR;
 
@@ -18,7 +19,11 @@ void MR::CMRRenderStage::Reset()
 
 void MR::CMRRenderStage::Draw() const
 {
-	for (int i = 0; i < GetNumRenderBinChildren(); ++i)
+	if (!m_bInitialized)
+	{
+		CMR_STD_OUT << "render stage initialize failed" << CMR_STD_ENDL;
+	}
+	for (unsigned int i = 0; i < GetNumRenderBinChildren(); ++i)
 	{
 		CMRRenderBin* pBin = GetRenderBinChild(i);
 		pBin->Draw();
@@ -40,7 +45,7 @@ void MR::CMRRenderStage::Init(CMRStateGraph* pStateGraph)
 		m_shaderStack.pop_back();
 	}
 
-	m_bInitialized = false;
+	m_bInitialized = true;
 }
 
 void MR::CMRRenderStage::Apply(CMRStateGraphNode& node)
@@ -57,6 +62,7 @@ void MR::CMRRenderStage::Apply(CMRStateGraphNode& node)
 		{
 			pRenderBin->AddRenderLeaf(leaf.Get());
 		}
+		AddRenderBin(pRenderBin.Get());
 	}
 	if (node.GetNumChildren() <= 0)
 	{

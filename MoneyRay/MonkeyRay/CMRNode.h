@@ -15,14 +15,19 @@ namespace MR
 	{
 	public:
 		typedef vector<SmartPtr<CMRNode>> NodeList;
+		typedef vector<CMRNode*> ParentList;
+
 
 	public:
 		CMRNode();
+
+
 	public:
 		virtual CMRNode* AsNode() override;
 		virtual const CMRNode* AsNode() const override;
+
+
 	public:
-		typedef vector<CMRNode*> ParentList;
 		const ParentList& GetParents() const;
 		ParentList& GetParents();
 		CMRNode* GetParent(unsigned int index);
@@ -57,6 +62,12 @@ namespace MR
 
 		vmath::mat4 GetTransform() const;
 
+		virtual void Accept(CMRNodeVisitor& nv);
+
+		virtual void Ascend(CMRNodeVisitor& nv);
+
+		virtual void Traverse(CMRNodeVisitor& nv);
+
 	public:
 		virtual bool AddChild(CMRNode* child);
 		template<typename T> bool AddChild(const SmartPtr<T>& child);
@@ -84,12 +95,16 @@ namespace MR
 
 		unsigned int GetChildIndex(CMRNode* pNode) const;
 
+
 	protected:
 		CMRNode(const CMRNode& node);
 		virtual ~CMRNode();
 
+
+	protected:
 		void AddParent(CMRNode* parent);
 		void RemoveParent(CMRNode* parent);
+
 
 	protected:
 		ParentList m_parents;

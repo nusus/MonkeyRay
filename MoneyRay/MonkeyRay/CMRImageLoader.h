@@ -9,8 +9,10 @@ namespace MR
 	{
 	public:
 		virtual CMRImage::ImageEntity* LoadImage(const string& name) = 0;
+
+		static CMRImageLoader* GetImageLoader(const string& strName);
 	};
 
-	CMRImageLoader* GetImageLoader(const string& strName);
+	
 }
 #endif // CMRImageLoader_h__

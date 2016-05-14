@@ -5,17 +5,22 @@
 #include "SmartPtr.h"
 #include "CMRRenderLeaf.h"
 #include "CMRShader.h"
+#include "CMRNodeVisitor.h"
 namespace MR
 {
-	class CMRStateGraphNode : public CMRRef
+	class CMRStateGraphNode : public CMRNodeVisitor
 	{
 	public:
 		typedef map<const CMRShader*, SmartPtr<CMRStateGraphNode> > ChildrenList ;
 		typedef vector<SmartPtr<CMRRenderLeaf> > LeafList;
+
+
 	public:
 		CMRStateGraphNode();
 		CMRStateGraphNode(CMRStateGraphNode* pParent, const CMRShader* pShader);
 
+
+	public:
 		CMRStateGraphNode* AddShader(const CMRShader* pShader);
 
 		CMRShader* GetShader() const;
@@ -33,6 +38,14 @@ namespace MR
 		LeafList& GetRenderLeafList();
 
 		unsigned int GetNumChildren() const;
+
+
+	protected:
+		CMRStateGraphNode(const CMRStateGraphNode& rhs) = delete;
+		CMRStateGraphNode& operator=(const CMRStateGraphNode& rhs) = delete;
+		virtual ~CMRStateGraphNode() {}
+
+
 	protected:
 		CMRStateGraphNode* m_pParent;
 		ChildrenList m_children;

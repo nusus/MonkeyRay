@@ -25,6 +25,7 @@ bool MR::CMRCallback::Traverse(CMRObject* pObject)
 	{
 		return m_spNestedCallback->Run(pObject);
 	}
+	return false;
 }
 
 void MR::CMRCallback::AddNestedCallback(CMRCallback* pc)

@@ -20,7 +20,7 @@ namespace MR
 
 		CMRDrawable* GetDrawable() const;
 
-		void Draw();
+		void Draw(CMRProgram* program);
 	protected:
 		vmath::mat4 m_mvpwMatrix;
 		SmartPtr<CMRDrawable> m_spDrawable;

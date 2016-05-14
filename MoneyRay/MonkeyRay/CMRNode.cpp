@@ -1,8 +1,12 @@
 #include "CMRNode.h"
+#include "CMRNodeVisitor.h"
 
 using namespace MR;
 
-MR::CMRNode::CMRNode()
+MR::CMRNode::CMRNode() :
+	m_parents(),
+	m_children(),
+	m_matTransform(vmath::mat4::identity())
 {
 	m_spEventCallback = new CMRCallback();
 	m_spUpdateCallback = new CMRCallback();
@@ -125,7 +129,7 @@ const CMRNode* MR::CMRNode::GetParent(unsigned int index) const
 	{
 		return m_parents[index];
 	}
-
+	return nullptr;
 }
 
 CMRNode::ParentList& MR::CMRNode::GetParents()
@@ -167,6 +171,21 @@ vmath::mat4 MR::CMRNode::GetTransform() const
 	return m_matTransform;
 }
 
+void MR::CMRNode::Accept(CMRNodeVisitor& nv)
+{
+	nv.Apply(*this);
+}
+
+void MR::CMRNode::Ascend(CMRNodeVisitor& nv)
+{
+
+}
+
+void MR::CMRNode::Traverse(CMRNodeVisitor& nv)
+{
+	Accept(nv);
+}
+
 template<typename T>
 bool MR::CMRNode::AddChild(const SmartPtr<T>& child)
 {
@@ -179,6 +198,11 @@ bool MR::CMRNode::AddChild(CMRNode* child)
 	{
 		m_children.push_back(child);
 		child->AddParent(this);
+		return true;
+	}
+	else
+	{
+		return false;
 	}
 
 }
@@ -202,7 +226,9 @@ bool MR::CMRNode::InsertChild(unsigned int index, CMRNode* child)
 		{
 			m_children.insert(m_children.begin() + index, child);
 		}
+		return true;
 	}
+	return false;
 }
 
 bool MR::CMRNode::RemoveChild(unsigned int pos, unsigned int numChildrenToRemove /*= 1*/)
@@ -226,7 +252,9 @@ bool MR::CMRNode::RemoveChildren(unsigned int pos, unsigned int numChildrenToRem
 		{
 			m_children.erase(m_children.begin() + pos, m_children.begin() + pos + numChildrenToRemove);
 		}
+		return true;
 	}
+	return false;
 }
 
 template<typename T, typename R>
@@ -248,6 +276,11 @@ bool MR::CMRNode::SetChild(unsigned int index, CMRNode* newChild)
 		origNode->RemoveParent(this);
 		m_children[index] = newChild;
 		newChild->AddParent(this);
+		return true;
+	}
+	else
+	{
+		return false;
 	}
 
 }
@@ -309,7 +342,7 @@ bool MR::CMRNode::ContainsNode(const CMRNode* pNode) const
 
 unsigned int MR::CMRNode::GetChildIndex(CMRNode* pNode) const
 {
-	for (int i = 0; i < m_children.size(); ++i)
+	for (unsigned int i = 0; i < m_children.size(); ++i)
 	{
 		if (m_children[i].Get() == pNode)
 		{
@@ -365,7 +398,7 @@ void MR::CMRNode::AddEventCallback(const SmartPtr<T>& cb)
 template<typename T>
 void MR::CMRNode::SetEventCallback(const SmartPtr<T>& cb)
 {
-	SetEventCallback(cb->Get());
+	SetEventCallback(cb.Get());
 
 }
 

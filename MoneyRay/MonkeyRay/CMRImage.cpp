@@ -1,5 +1,6 @@
 #include "CMRImage.h"
 #include "CMRImagePager.h"
+#include "CMRFile.h"
 
 using namespace MR;
 

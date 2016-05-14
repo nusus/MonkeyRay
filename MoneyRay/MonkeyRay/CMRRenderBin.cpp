@@ -63,7 +63,7 @@ void MR::CMRRenderBin::Draw() const
 	{
 		SmartPtr<CMRUniformRef> pUniform = new CMRUniformMatrix4fv("uni_mvpw_matrix", leaf->GetMVPWMatrix());
 		m_spProgram->Accept(*pUniform);
-		leaf->Draw();
+		leaf->Draw(m_spProgram.Get());
 	}
 	m_spProgram->DestroyProgram();
 }

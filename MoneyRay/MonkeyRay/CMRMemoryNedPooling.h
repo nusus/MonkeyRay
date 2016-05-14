@@ -59,5 +59,6 @@ namespace MR
 	private:
 
 	};
+
 }
 #endif // CMRMemoryNedPooling_h__

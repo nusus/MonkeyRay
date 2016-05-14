@@ -3,7 +3,7 @@
 #include "CMROperationThread.h"
 #include "SmartPtr.h"
 #include "CMRObject.h"
-
+#include "CMRScene.h"
 namespace MR
 {
 	class CMRCamera;
@@ -19,8 +19,6 @@ namespace MR
 		void CullDraw();
 
 		void Draw();
-
-		virtual void operator()(CMRObject* obj) override;
 
 	protected:
 		CMRCamera* m_wpCamera;

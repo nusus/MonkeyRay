@@ -17,7 +17,7 @@ namespace MR
 	public:
 		void LoadMesh();
 
-		virtual void DrawImplemention() override;
+		virtual void DrawImplemention(CMRProgram* program) override;
 
 	protected:
 		bool m_bLoaded;

@@ -1,49 +1,51 @@
-﻿  test1.cpp
-  CMRViewBase.cpp
-f:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\cmrobject.h(42): error C2143: 语法错误: 缺少“;”(在“}”的前面)
-f:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\cmrgraphicsthread.h(7): error C2504: “CMROperation”: 未定义基类
-f:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\cmrcamera.h(9): error C2143: 语法错误: 缺少“;”(在“*”的前面)
-f:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\cmrcamera.h(9): error C4430: 缺少类型说明符 - 假定为 int。注意: C++ 不支持默认 int
-f:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\cmrcamera.h(10): error C2334: “{”的前面有意外标记；跳过明显的函数体
-f:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\cmrcamera.h(27): error C2143: 语法错误: 缺少“;”(在“*”的前面)
-f:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\cmrcamera.h(27): error C4430: 缺少类型说明符 - 假定为 int。注意: C++ 不支持默认 int
-f:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\cmrcamera.h(28): error C2334: “{”的前面有意外标记；跳过明显的函数体
-f:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\cmrcamera.h(33): error C2061: 语法错误: 标识符“MR”
-f:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\cmrviewbase.cpp(9): error C2660: “MR::CMRCamera::SetView”: 函数不接受 1 个参数
+﻿  CMRCamera.cpp
+  CMRDirector.cpp
+  CMRDrawable.cpp
+  CMRImportedMesh.cpp
+d:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\vmath.h(1046): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据 (编译源文件 CMRCamera.cpp)
+d:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\vmath.h(1046): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据 (编译源文件 CMRImportedMesh.cpp)
+d:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\vmath.h(1046): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据 (编译源文件 CMRDirector.cpp)
+d:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\cmrdrawable.h(53): warning C4244: “=”: 从“double”转换到“GLfloat”，可能丢失数据 (编译源文件 CMRImportedMesh.cpp)
+d:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\cmrcamera.cpp(140): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+d:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\cmrcamera.cpp(146): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+d:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\vmath.h(1046): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据 (编译源文件 CMRDrawable.cpp)
+d:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\vmath.h(988): warning C4244: “参数”: 从“double”转换到“const float”，可能丢失数据 (编译源文件 CMRCamera.cpp)
+  d:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\vmath.h(979): note: 编译类 模板 成员函数“bool vmath::Tmat4<float>::GetViewMatrixAsLookAt(vmath::vec3 &,vmath::vec3 &,vmath::vec3 &,double) const”时 (编译源文件 CMRCamera.cpp)
+  d:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\cmrcamera.cpp(44): note: 参见对正在编译的函数 模板 实例化“bool vmath::Tmat4<float>::GetViewMatrixAsLookAt(vmath::vec3 &,vmath::vec3 &,vmath::vec3 &,double) const”的引用
+  d:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\vmath.h(1020): note: 参见对正在编译的类 模板 实例化“vmath::Tmat4<float>”的引用 (编译源文件 CMRCamera.cpp)
+d:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\cmrdirector.cpp(156): warning C4244: “参数”: 从“double”转换到“unsigned int”，可能丢失数据
+d:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\cmrdrawable.h(53): warning C4244: “=”: 从“double”转换到“GLfloat”，可能丢失数据 (编译源文件 CMRDrawable.cpp)
+  CMRImpotedModelImp.cpp
+  CMRNode.cpp
+  CMRNodeVisitor.cpp
+  CMRProgram.cpp
+d:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\vmath.h(1046): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据 (编译源文件 CMRImpotedModelImp.cpp)
+d:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\vmath.h(1046): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据 (编译源文件 CMRNode.cpp)
+d:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\cmrdrawable.h(53): warning C4244: “=”: 从“double”转换到“GLfloat”，可能丢失数据 (编译源文件 CMRImpotedModelImp.cpp)
+d:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\vmath.h(1046): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据 (编译源文件 CMRNodeVisitor.cpp)
+  CMRRender.cpp
+  CMRRenderBin.cpp
+  CMRRenderLeaf.cpp
+  CMRRenderStage.cpp
+d:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\vmath.h(1046): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据 (编译源文件 CMRRender.cpp)
+d:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\vmath.h(1046): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据 (编译源文件 CMRRenderBin.cpp)
+d:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\cmrdrawable.h(53): warning C4244: “=”: 从“double”转换到“GLfloat”，可能丢失数据 (编译源文件 CMRRenderBin.cpp)
+d:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\cmrdrawable.h(53): warning C4244: “=”: 从“double”转换到“GLfloat”，可能丢失数据 (编译源文件 CMRRender.cpp)
+d:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\vmath.h(1046): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据 (编译源文件 CMRRenderLeaf.cpp)
+d:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\cmrdrawable.h(53): warning C4244: “=”: 从“double”转换到“GLfloat”，可能丢失数据 (编译源文件 CMRRenderLeaf.cpp)
+d:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\vmath.h(1046): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据 (编译源文件 CMRRenderStage.cpp)
+d:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\cmrdrawable.h(53): warning C4244: “=”: 从“double”转换到“GLfloat”，可能丢失数据 (编译源文件 CMRRenderStage.cpp)
+  CMRStateGraph.cpp
+  CMRStateGraphNode.cpp
+  CMRUniform.cpp
   CMRView.cpp
-f:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\cmrdatabasepager.h(9): error C2061: 语法错误: 标识符“CMRFrameStamp”
-f:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\cmrdatabasepager.h(12): error C2039: “logic_error”: 不是“std”的成员
-  f:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\predefined c++ types (compiler internal)(208): note: 参见“std”的声明
-f:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\cmrdatabasepager.h(12): error C3861: “logic_error”: 找不到标识符
-f:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\cmrimagepager.h(9): error C2061: 语法错误: 标识符“CMRFrameStamp”
-f:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\cmrimagepager.h(12): error C2039: “logic_error”: 不是“std”的成员
-  f:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\predefined c++ types (compiler internal)(208): note: 参见“std”的声明
-f:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\cmrimagepager.h(12): error C3861: “logic_error”: 找不到标识符
-f:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\cmrscene.h(15): error C2143: 语法错误: 缺少“;”(在“*”的前面)
-f:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\cmrscene.h(15): error C4430: 缺少类型说明符 - 假定为 int。注意: C++ 不支持默认 int
-f:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\cmrscene.h(16): error C2334: “{”的前面有意外标记；跳过明显的函数体
-f:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\cmrscene.h(24): error C2039: “logic_error”: 不是“std”的成员
-  f:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\predefined c++ types (compiler internal)(208): note: 参见“std”的声明
-f:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\cmrscene.h(24): error C3861: “logic_error”: 找不到标识符
-f:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\cmrscene.h(30): error C2039: “logic_error”: 不是“std”的成员
-  f:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\predefined c++ types (compiler internal)(208): note: 参见“std”的声明
-f:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\cmrscene.h(30): error C3861: “logic_error”: 找不到标识符
-f:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\cmrcameramanipulator.h(9): error C2061: 语法错误: 标识符“CMRCamera”
-f:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\cmrcameramanipulator.h(12): error C2039: “logic_error”: 不是“std”的成员
-  f:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\predefined c++ types (compiler internal)(208): note: 参见“std”的声明
-f:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\cmrcameramanipulator.h(12): error C3861: “logic_error”: 找不到标识符
-f:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\cmrmemoryallocatorconfig.h(69): error C2988: 不可识别的模板声明/定义
-  f:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\cmrmemoryallocatorconfig.h(100): note: 参见对正在编译的类 模板 实例化“MR::CMRObjectFactory<AllocPolicy>”的引用
-f:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\cmrmemoryallocatorconfig.h(69): error C2143: 语法错误: 缺少“;”(在“<”的前面)
-f:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\cmrmemoryallocatorconfig.h(69): error C4430: 缺少类型说明符 - 假定为 int。注意: C++ 不支持默认 int
-f:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\cmrmemoryallocatorconfig.h(69): error C2238: 意外的标记位于“;”之前
-f:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\cmrmemoryallocatorconfig.h(69): error C2059: 语法错误:“<”
-f:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\cmrmemoryallocatorconfig.h(78): error C2334: “{”的前面有意外标记；跳过明显的函数体
-f:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\cmrmemoryallocatorconfig.h(86): error C2988: 不可识别的模板声明/定义
-f:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\cmrmemoryallocatorconfig.h(86): error C2059: 语法错误:“return”
-f:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\cmrmemoryallocatorconfig.h(86): error C2238: 意外的标记位于“;”之前
-f:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\cmrmemoryallocatorconfig.h(89): error C2144: 语法错误:“void”的前面应有“;”
-f:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\cmrmemoryallocatorconfig.h(74): fatal error C1903: 无法从以前的错误中恢复；正在停止编译
-  “C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe”中的内部编译器错误
-    请选择 Visual C++ 
-  “帮助”菜单上的“技术支持”命令，或打开技术支持帮助文件来获得详细信息
+d:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\vmath.h(1046): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据 (编译源文件 CMRStateGraph.cpp)
+d:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\vmath.h(1046): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据 (编译源文件 CMRStateGraphNode.cpp)
+d:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\cmrdrawable.h(53): warning C4244: “=”: 从“double”转换到“GLfloat”，可能丢失数据 (编译源文件 CMRStateGraph.cpp)
+d:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\cmrdrawable.h(53): warning C4244: “=”: 从“double”转换到“GLfloat”，可能丢失数据 (编译源文件 CMRStateGraphNode.cpp)
+d:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\vmath.h(1046): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据 (编译源文件 CMRView.cpp)
+  test1.cpp
+d:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\vmath.h(1046): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据 (编译源文件 test1.cpp)
+d:\vsworkspace\vs2015workspace\monkeyray\moneyray\monkeyray\cmrdrawable.h(53): warning C4244: “=”: 从“double”转换到“GLfloat”，可能丢失数据 (编译源文件 test1.cpp)
+  MonkeyRay.vcxproj -> D:\VSWorkspace\VS2015Workspace\MonkeyRay\MoneyRay\Debug\MonkeyRay.exe
+  MonkeyRay.vcxproj -> D:\VSWorkspace\VS2015Workspace\MonkeyRay\MoneyRay\Debug\MonkeyRay.pdb (Partial PDB)

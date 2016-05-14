@@ -1,4 +1,5 @@
 #include "CMRImagePager.h"
+#include "CMRImageLoader.h"
 
 using namespace MR;
 
@@ -17,7 +18,7 @@ CMRImage::ImageEntity* MR::CMRImagePager::GetImageEntity(const string& strFileNa
 	}
 	else
 	{
-		m_map[strFileName] = GetImageLoader(strFileName)->LoadImage(strFileName);
+		m_map[strFileName] = CMRImageLoader::GetImageLoader(strFileName)->LoadImage(strFileName);
 		return m_map[strFileName].Release();
 	}
 }

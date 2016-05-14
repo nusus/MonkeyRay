@@ -7,8 +7,11 @@ MR::CMRTGAImageLoader::CMRTGAImageLoader()
 
 }
 
-CMRImage::ImageEntity* MR::CMRTGAImageLoader::LoadImage(const string& name)
+CMRImage::ImageEntity* MR::CMRTGAImageLoader::LoadImage(const string& strName)
 {
+	string name = strName;
+	std::transform(name.begin(), name.end(), name.begin(), ::tolower);
+	name = CMRConfig::Instance()->s_strTextureDir + name;
 	SmartPtr<CMRImage::ImageEntity> retImageEntity = new CMRImage::ImageEntity;
 	retImageEntity->width = 0;
 	retImageEntity->height = 0;
@@ -26,7 +29,8 @@ CMRImage::ImageEntity* MR::CMRTGAImageLoader::LoadImage(const string& name)
 	FILE* pFile = fopen(name.c_str(), "rb");
 	if (pFile == NULL)
 	{
-		CMR_STD_OUT << "Can not open TGA file" << name << CMR_STD_ENDL;
+		CMR_STD_OUT << "Can not open TGA file: " << name << CMR_STD_ENDL;
+		assert(false);
 		return retImageEntity.Release();
 	}
 	size_t temp_int = sizeof(TGAHeader);
@@ -39,6 +43,7 @@ CMRImage::ImageEntity* MR::CMRTGAImageLoader::LoadImage(const string& name)
 	if (sDepth != 1 && sDepth != 3 && sDepth != 4)
 	{
 		CMR_STD_OUT << "TGA file" << name << "image depth is not valid." << CMR_STD_ENDL;
+		assert(false);
 		return retImageEntity.Release();
 	}
 
@@ -47,6 +52,7 @@ CMRImage::ImageEntity* MR::CMRTGAImageLoader::LoadImage(const string& name)
 	if (pBits == NULL)
 	{
 		CMR_STD_OUT << "malloc memory failed when load TGA file" << name << CMR_STD_ENDL;
+		assert(false);
 		return retImageEntity.Release();
 	}
 	if (fread(pBits, lImageSize, 1, pFile) != 1)

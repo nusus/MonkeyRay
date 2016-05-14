@@ -2,70 +2,54 @@
 
 using namespace MR;
 
+CMRUniformRef& MR::CMRUniformRef::operator=(const CMRUniformRef& rhs)
+{
+	if (this == &rhs)
+	{
+		return *this;
+	}
+	m_strUniformName = rhs.m_strUniformName;
+	return *this;
+}
+
+MR::CMRUniformRef::CMRUniformRef(const string& name) :
+	m_strUniformName(name)
+{
+
+}
+
+MR::CMRUniformRef::CMRUniformRef(const CMRUniformRef& rhs) :m_strUniformName(rhs.m_strUniformName)
+{
+
+}
+
 void MR::CMRUniformRef::Apply(const CMRProgram* pProgram)
 {
 	GLint uni_loc = glGetUniformLocation(pProgram->GetProgramObject(), m_strUniformName.c_str());
 	ApplyImpl(uni_loc);
 }
 
-template<typename T, const size_t N, const size_t count /*= 1 */>
-T* MR::CMRUniformBase<T, N, count>::GetData() const
-{
-	return &m_val[0];
-}
+ void MR::aux_glUniform1fv(GLint location, GLsizei count, const GLfloat* value)
+ {
+	 glUniform1fv(location, count, value);
+ }
 
-template<typename T, const size_t N, const size_t count /*= 1 */>
-void MR::CMRUniformBase<T, N, count>::SetData(value_type val)
-{
-	memcpy(m_val, val, sizeof(T) * N * count);
-}
+ void MR::aux_glUniform2fv(GLint location, GLsizei count, const GLfloat* value)
+ {
+	 glUniform2fv(location, count, value);
+ }
 
-template<typename T, const size_t N, const size_t count /*= 1 */>
-MR::CMRUniformBase<T, N, count>::CMRUniformBase(const string& strName, value_type val) :
-	m_strUniformName(strName)
-{
-	memcpy(m_val, val, sizeof(T) * N * count);
-}
+ void MR::aux_glUniform3fv(GLint location, GLsizei count, const GLfloat* value)
+ {
+	 glUniform3fv(location, count, value);
+ }
 
-template<typename T, const size_t N, const size_t count /*= 1 */>
-MR::CMRUniformBase<T, N, count>::CMRUniformBase(const string& strName) :
-	m_strUniformName(strName)
-{
-	memset(m_val, 0, sizeof(T) * N * count);
-}
+ void MR::aux_glUniform1iv(GLint location, GLsizei count, const GLint* value)
+ {
+	 glUniform1iv(location, count, value);
+ }
 
-template<typename T, const size_t N, void M(GLint, GLsizei, const T*), const size_t count /*= 1 */>
-void MR::CMRUniformfi<T, N, M, count>::ApplyImpl( GLint uni_loc )
-{
-	M(uni_loc, count, m_val);
-}
-
-template<typename T, const size_t N, void M(GLint, GLsizei, const T*), const size_t count /*= 1 */ >
- MR::CMRUniformfi<T, N, M, count>::CMRUniformfi( const string& strName, value_type val ) :
-			CMRUniformBase(strName, val)
-{
-
-}
-
-template<typename T, const size_t N, void M(GLint, GLsizei, const T*), const size_t count /*= 1 */ >
- MR::CMRUniformfi<T, N, M, count>::CMRUniformfi( const string& strName ) :CMRUniformBase(strName)
-{
-
-}
-
-template<typename T, const size_t N, void M(GLint, GLsizei, GLboolean, const T*), const size_t count /*= 1 */ >
-void MR::CMRUniformMatrix<T, N, M, count>::ApplyImpl( GLint uni_loc )
-{
-	M(uni_loc, count, false, m_val);
-}
-
-template<typename T, const size_t N, void M(GLint, GLsizei, GLboolean, const T*), const size_t count /*= 1 */ >
- MR::CMRUniformMatrix<T, N, M, count>::CMRUniformMatrix( const string& strName, value_type val ) :CMRUniformBase(strName, val)
-{
-
-}
-
-template<typename T, const size_t N, void M(GLint, GLsizei, GLboolean, const T*), const size_t count /*= 1 */ >
- MR::CMRUniformMatrix<T, N, M, count>::CMRUniformMatrix( const string& strName ) :CMRUniformBase(strName)
-{
-}
+ void MR::aux_glUniformMatrix4fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value)
+ {
+	 glUniformMatrix4fv(location, count, transpose, value);
+ }

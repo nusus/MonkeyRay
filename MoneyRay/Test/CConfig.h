@@ -7,4 +7,6 @@
 #define TEST3 OFF
 #define TEST4 OFF
 #define TEST5 OFF
-#define TEST6 ON
+#define TEST6 OFF
+#define TEST7 OFF
+#define TEST8 ON

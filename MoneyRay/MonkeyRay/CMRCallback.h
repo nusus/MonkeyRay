@@ -2,6 +2,7 @@
 #define CMRCallback_h__
 
 #include "CMRObject.h"
+#include "SmartPtr.h"
 
 namespace MR
 {

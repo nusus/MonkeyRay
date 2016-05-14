@@ -10,12 +10,12 @@ const vmath::mat4& MR::CMRCamera::GetProjectionMatrix() const
 
 bool MR::CMRCamera::GetProjectionMatrixAsFrustum(double& left, double& right, double& bottom, double& top, double& zNear, double& zFar) const
 {
-	m_matProjectionMatrix.GetProjectionMatrixAsFrustum(left, right, bottom, top, zNear, zFar);
+	return m_matProjectionMatrix.GetProjectionMatrixAsFrustum(left, right, bottom, top, zNear, zFar);
 }
 
 bool MR::CMRCamera::GetProjectionMatrixAsPerspective(double& fovy, double& aspectRatio, double& zNear, double& zFar) const
 {
-	m_matProjectionMatrix.GetProjectionMatrixAsPerspective(fovy, aspectRatio, zNear, zFar);
+	return m_matProjectionMatrix.GetProjectionMatrixAsPerspective(fovy, aspectRatio, zNear, zFar);
 }
 
 vmath::mat4& MR::CMRCamera::GetProjectionMatrix()
@@ -46,7 +46,7 @@ void MR::CMRCamera::GetViewMatrixAsLookAt(vmath::vec3& eye, vmath::vec3& center,
 
 vmath::mat4 MR::CMRCamera::GetInverseViewMatrix() const
 {
-
+	return vmath::mat4();
 }
 
 const vmath::mat4& MR::CMRCamera::GetViewMatrix() const
@@ -109,12 +109,12 @@ CMRCamera* MR::CMRCamera::AsCamera()
 	return this;
 }
 
-void MR::CMRCamera::SetView(CMRViewBase* pView)
+void MR::CMRCamera::SetView(CMRView* pView)
 {
 	m_pView = pView;
 }
 
-const CMRViewBase* MR::CMRCamera::GetView() const
+const CMRView* MR::CMRCamera::GetView() const
 {
 	return m_pView;
 }
@@ -166,7 +166,7 @@ void MR::CMRCamera::SetViewport(int x, int y, int width, int height)
 
 }
 
-CMRViewBase* MR::CMRCamera::GetView()
+CMRView* MR::CMRCamera::GetView()
 {
 	return m_pView;
 }

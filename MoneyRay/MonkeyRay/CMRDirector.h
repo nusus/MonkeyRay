@@ -85,7 +85,7 @@ namespace MR
 	protected:
 		CMRDirector(CMRView* pView);
 		CMRDirector(const CMRDirector& rhs) {}
-		CMRDirector& operator=(const CMRDirector& rhs) { return *this; }
+		CMRDirector& operator=(const CMRDirector& rhs);
 
 
 	protected:
@@ -104,8 +104,6 @@ namespace MR
 		CMRGraphicsContext*		m_wpCurrentContext;
 
 
-	private:
-		CMRDirector& operator = (const CMRDirector&);	
 	};
 }
 #endif // CMRDirector_h__

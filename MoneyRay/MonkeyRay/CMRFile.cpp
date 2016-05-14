@@ -29,6 +29,7 @@ MR::string MR::CMRFile::ReadFile(const string& name)
 	if (!in.is_open())
 	{
 		CMR_STD_OUT << "can not open file " << name << CMR_STD_ENDL;
+		assert(false);
 		return string();
 	}
 	std::istreambuf_iterator<char> beg(in), end;

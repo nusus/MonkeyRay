@@ -77,6 +77,12 @@
     <ClCompile Include="test6.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="test7.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="test8.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\Resource\textures\bricks.tga">

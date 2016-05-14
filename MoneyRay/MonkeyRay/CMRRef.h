@@ -23,9 +23,9 @@ namespace MR
 		static std::mutex* GetGlobalReferenceMutex();
 #endif
 
-		inline int Retain() const;
+		int Retain() const;
 
-		inline int Release() const;
+		int Release() const;
 
 		int ReleaseNoDelete() const;
 

@@ -986,6 +986,7 @@ namespace vmath
 			eye = e;
 			up = vmath::cross(n, u);
 			center = eye - n * lookDistance;
+			return true;
 		}
 	};
 
@@ -1042,7 +1043,7 @@ namespace vmath
 
 	static inline mat4 perspective(float fovy, float aspect, float n, float f)
 	{
-		float q = 1.0f / tan(radians(0.5f * fovy));
+		float q = 1.0 / tan(radians(0.5f * fovy));
 		float A = q / aspect;
 		float B = (n + f) / (n - f);
 		float C = (2.0f * n * f) / (n - f);
