@@ -21,6 +21,10 @@ namespace MR
 
 		virtual void ReleaseOperation() {}
 
+		void Test()
+		{
+
+		}
 	protected:
 		CMROperation() :m_bKeep(false) {}
 		CMROperation(const CMROperation& op)

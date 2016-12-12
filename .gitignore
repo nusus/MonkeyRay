@@ -31,6 +31,8 @@
 *.pdb
 *.tlog
 *.suo
+*.db
+*.opendb
 MoneyRay/MoneyRay.sdf
 *.sdf
 MoneyRay/MoneyRay.sdf

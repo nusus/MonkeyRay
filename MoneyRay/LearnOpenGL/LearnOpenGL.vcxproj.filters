@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\thirdparty\GLFW\glfw3.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\thirdparty\GLFW\glfw3native.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Application.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\thirdparty\GL\eglew.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\thirdparty\GL\glew.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\thirdparty\GL\glxew.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\thirdparty\GL\wglew.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GraphicsWindows.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\config\ConfigParser.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="test\ConfigParserTest.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\event\UserInput.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\event\EventManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="test\FunctorTest.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\RenderJob.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\RenderManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\shader\Shader.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\shader\ShaderProgram.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\event\Event.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\thirdparty\SOIL\image_DXT.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\thirdparty\SOIL\image_helper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\thirdparty\SOIL\SOIL.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\thirdparty\SOIL\stb_image_aug.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\thirdparty\SOIL\stbi_DDS_aug.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\thirdparty\SOIL\stbi_DDS_aug_c.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\texture\Texture.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Application.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GraphicsWindows.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\config\ConfigParser.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RenderJob.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\shader\ShaderProgram.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\event\EventManager.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="libs\thirdparty\x86\debug\glfw3_debug_32_s.lib" />
+    <Library Include="libs\thirdparty\x86\debug\glew_debug_32_s.lib" />
+    <Library Include="libs\thirdparty\x86\debug\SOIL_debug_32_s.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="config\GraphicsWindowsConfig.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="shader\first.vs" />
+    <None Include="shader\first.fs" />
+  </ItemGroup>
+</Project>
